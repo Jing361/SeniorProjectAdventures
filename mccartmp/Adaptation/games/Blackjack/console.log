@@ -1,0 +1,546 @@
+//-------------------------- 1/21/2014 -- 01:58:47 -----
+Processor Init:
+   Intel Pentium III, ~3.20 Ghz
+     (timed at roughly 3.19 Ghz)
+   FPU detected
+   MMX detected
+   SSE detected
+ 
+Math Init:
+   Installing Standard C extensions
+   Installing Assembly extensions
+   Installing FPU extensions
+   Installing MMX extensions
+   Installing SSE extensions
+ 
+Input Init:
+   DirectInput enabled.
+
+Initializing chunk mappings...
+   o 'TEXT' maps to TextChunk
+   o 'SCHK' maps to UnknownChunk
+   o 'SCHK' maps to SimChunk
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/main.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/main.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/main.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/main.cs.
+ % - Initializing Common
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/preferences/defaultPrefs.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/preferences/defaultPrefs.cs.
+Reading Display Device information...
+   Primary Display Device Found:
+      Vendor Id: VEN_0000
+      Device Id: DEV_0000
+
+Using OpenGL rendering. Fullscreen: 0
+
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/xml.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/xml.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/properties.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/properties.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/common.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/common.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/audio.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/audio.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/canvas.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/canvas.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/cursor.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/cursor.cs.
+Video Init:
+   Accelerated OpenGL display device detected.
+   Accelerated D3D device detected.
+   Voodoo 2 display device not detected.
+
+Activating the OpenGL display device...
+Activating the OpenGL display device...
+Setting screen mode to 320x320x32 (w)...
+Creating a new window...
+Acquiring a new device context...
+Pixel format set:
+  32 color bits, 24 depth bits, 8 stencil bits
+Creating a new rendering context...
+Making the new rendering context current...
+OpenGL driver information:
+  Vendor: ATI Technologies Inc.
+  Renderer: ATI Radeon HD 4800 Series        
+  Version: 3.3.10750 Compatibility Profile Context
+OpenGL Init: Enabled Extensions
+  ARB_multitexture (Max Texture Units: 8)
+  EXT_blend_color
+  EXT_blend_minmax
+  EXT_compiled_vertex_array
+  EXT_texture_env_combine
+  EXT_packed_pixels
+  EXT_fog_coord
+  ARB_texture_compression
+  EXT_texture_compression_s3tc
+  (ARB|EXT)_texture_env_add
+  EXT_texture_filter_anisotropic (Max anisotropy: 16)
+  WGL_EXT_swap_control
+OpenGL Init: Disabled Extensions
+  EXT_paletted_texture
+  NV_vertex_array_range
+  3DFX_texture_compression_FXT1
+
+Max Texture Size reported as: 8192
+Setting screen mode to 800x600x32 (w)...
+OpenAL Driver Init:
+   Vendor: Creative Labs Inc.
+   Version: OpenAL 1.0
+   Renderer: Software
+   Extensions: EAX 2.0, EAX 3.0, EAX Unified, and EAX-AC3
+
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/profiles.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/profiles.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/cursors.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/cursors.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/messageBoxOk.gui...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/messageBoxOk.gui.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/messageBoxYesNo.gui...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/messageBoxYesNo.gui.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/messageBoxYesNoCancel.gui...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/messageBoxYesNoCancel.gui.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/messageBoxOKCancel.gui...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/messageBoxOKCancel.gui.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/messageBoxOKCancelDetailsDlg.gui...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/messageBoxOKCancelDetailsDlg.gui.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/messagePopup.gui...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/messagePopup.gui.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/options.gui...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/options.gui.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/remap.gui...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/remap.gui.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/console.gui...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/console.gui.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/NetworkMenu.gui...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/NetworkMenu.gui.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/startServer.gui...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/startServer.gui.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/joinServer.gui...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/joinServer.gui.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/waitingForServer.gui...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/waitingForServer.gui.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/helpDlg.gui...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/helpDlg.gui.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/messageBox.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/messageBox.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/help.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/help.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/chatGui.gui...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gui/chatGui.gui.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/screenshot.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/screenshot.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/metrics.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/metrics.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/Gui/FrameOverlayGui.gui...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/Gui/FrameOverlayGui.gui.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/scriptDoc.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/scriptDoc.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/keybindings.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/keybindings.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/options.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/options.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/levelManagement.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/levelManagement.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/projectManagement.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/projectManagement.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/projectResources.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/projectResources.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/align.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/common/gameScripts/align.cs.
+
+Torque Game Builder (v1.7.6) initialized...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/managed/datablocks.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/managed/datablocks.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/managed/persistent.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/managed/persistent.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/managed/brushes.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/managed/brushes.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/datablocks.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/datablocks.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/guiProfiles.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/guiProfiles.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gui/mainScreen.gui...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gui/mainScreen.gui.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/game.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/game.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/GUI_Main.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/GUI_Main.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/gui/guiDatablocks.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/gui/guiDatablocks.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/gui/guiButtonBase.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/gui/guiButtonBase.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/gui/guiAnimatedButton.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/gui/guiAnimatedButton.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/gui/guiSpriteButton.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/gui/guiSpriteButton.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/gui/guiCheckBox.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/gui/guiCheckBox.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/gui/guiSlider.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/gui/guiSlider.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/gui/guiSelectionList.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/gui/guiSelectionList.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/gui/guiSelectionListText.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/gui/guiSelectionListText.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/gui/guiTextPopup.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/gui/guiTextPopup.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/animations/animations.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/animations/animations.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/animations/buttonBaseAnim.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/animations/buttonBaseAnim.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/animations/flyInText.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/GUI_Manager/animations/flyInText.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/card.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/card.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/cardStack.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/cardStack.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/cardGraphics.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/cardGraphics.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/fireworks.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/fireworks.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/blackjack.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/blackjack.cs.
+Activating DirectInput...
+DirectInput joystick failed to enable!
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/data/levels/blackjack.t2d...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/data/levels/blackjack.t2d.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/blackjackGUI.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Blackjack/game/gameScripts/blackjackGUI.cs.
+%percentOfTotal = 0.05
+totalAmount = 10000
+amount = 500
+numchips = 3
+numStacks = 1
+oldAmount = 500
+new amount = 300
+adding stack numStacks = 1 chipType = 100 chipsToAdd 3
+total number of stacks = 1
+wallet has: 9500
+lastSelListVal: 500, lastUsedBet: 500
+Credit is 10000 and adjust by 500
+Credit is now 10500 which is $10500
+wallet has: 10500
+lastSelListVal: 500, lastUsedBet: 500
+wallet has: 10500
+lastSelListVal: 500, lastUsedBet: 500
+%percentOfTotal = 0.952381
+totalAmount = 10500
+amount = 10000
+numchips = 58
+numStacks = 6
+oldAmount = 10000
+new amount = 5800
+adding stack numStacks = 6 chipType = 100 chipsToAdd 10
+adding stack numStacks = 6 chipType = 100 chipsToAdd 10
+adding stack numStacks = 6 chipType = 100 chipsToAdd 10
+adding stack numStacks = 6 chipType = 100 chipsToAdd 10
+adding stack numStacks = 6 chipType = 100 chipsToAdd 10
+adding stack numStacks = 6 chipType = 100 chipsToAdd 8
+total number of stacks = 6
+wallet has: 500
+lastSelListVal: 10000, lastUsedBet: 10000
+Credit is 10500 and adjust by -10000
+Credit is now 500 which is $500
+wallet has: 500
+lastSelListVal: 500, lastUsedBet: 10000
+%percentOfTotal = 1
+totalAmount = 500
+amount = 500
+numchips = 60
+numStacks = 6
+adding stack numStacks = 6 chipType = 25 chipsToAdd 10
+adding stack numStacks = 6 chipType = 5 chipsToAdd 10
+adding stack numStacks = 6 chipType = 5 chipsToAdd 10
+adding stack numStacks = 6 chipType = 5 chipsToAdd 10
+adding stack numStacks = 6 chipType = 5 chipsToAdd 10
+adding stack numStacks = 6 chipType = 5 chipsToAdd 10
+total number of stacks = 6
+wallet has: 0
+lastSelListVal: 500, lastUsedBet: 500
+Credit is 500 and adjust by -500
+Credit is now 0 which is $0
+wallet has: 0
+lastSelListVal: 0, lastUsedBet: 500
+Credit is 0 and adjust by 3630
+Credit is now 3630 which is $3630
+wallet has: 3630
+50 500 600 2000 3000 3630
+lastSelListVal: 0, lastUsedBet: 500
+%percentOfTotal = 0.137741
+totalAmount = 3630
+amount = 500
+numchips = 9
+numStacks = 1
+adding stack numStacks = 1 chipType = 100 chipsToAdd 3
+adding stack numStacks = 1 chipType = 25 chipsToAdd 8
+total number of stacks = 2
+wallet has: 3130
+lastSelListVal: 500, lastUsedBet: 500
+Credit is 3630 and adjust by -500
+Credit is now 3130 which is $3130
+wallet has: 3130
+lastSelListVal: 500, lastUsedBet: 500
+wallet has: 3130
+lastSelListVal: 500, lastUsedBet: 500
+%percentOfTotal = 0.319489
+totalAmount = 3130
+amount = 1000
+numchips = 20
+numStacks = 2
+adding stack numStacks = 2 chipType = 100 chipsToAdd 6
+adding stack numStacks = 2 chipType = 25 chipsToAdd 10
+adding stack numStacks = 2 chipType = 25 chipsToAdd 6
+total number of stacks = 3
+wallet has: 2130
+lastSelListVal: 1000, lastUsedBet: 1000
+Credit is 3130 and adjust by -1000
+Credit is now 2130 which is $2130
+wallet has: 2130
+lastSelListVal: 1000, lastUsedBet: 1000
+%percentOfTotal = 0.469484
+totalAmount = 2130
+amount = 1000
+numchips = 29
+numStacks = 3
+adding stack numStacks = 3 chipType = 100 chipsToAdd 3
+adding stack numStacks = 3 chipType = 25 chipsToAdd 10
+adding stack numStacks = 3 chipType = 25 chipsToAdd 10
+adding stack numStacks = 3 chipType = 25 chipsToAdd 8
+total number of stacks = 4
+wallet has: 1130
+lastSelListVal: 1000, lastUsedBet: 1000
+Credit is 2130 and adjust by -1000
+Credit is now 1130 which is $1130
+wallet has: 1130
+lastSelListVal: 1000, lastUsedBet: 1000
+%percentOfTotal = 0.884956
+totalAmount = 1130
+amount = 1000
+numchips = 54
+numStacks = 6
+adding stack numStacks = 6 chipType = 25 chipsToAdd 10
+adding stack numStacks = 6 chipType = 25 chipsToAdd 10
+adding stack numStacks = 6 chipType = 25 chipsToAdd 10
+adding stack numStacks = 6 chipType = 25 chipsToAdd 6
+adding stack numStacks = 6 chipType = 5 chipsToAdd 10
+adding stack numStacks = 6 chipType = 5 chipsToAdd 10
+total number of stacks = 6
+wallet has: 130
+lastSelListVal: 1000, lastUsedBet: 1000
+Credit is 1130 and adjust by -1000
+Credit is now 130 which is $130
+wallet has: 130
+lastSelListVal: 130, lastUsedBet: 1000
+%percentOfTotal = 1
+totalAmount = 130
+amount = 130
+numchips = 60
+numStacks = 6
+adding stack numStacks = 6 chipType = 5 chipsToAdd 10
+adding stack numStacks = 6 chipType = 5 chipsToAdd 7
+adding stack numStacks = 6 chipType = 1 chipsToAdd 10
+adding stack numStacks = 6 chipType = 1 chipsToAdd 10
+adding stack numStacks = 6 chipType = 1 chipsToAdd 10
+adding stack numStacks = 6 chipType = 1 chipsToAdd 10
+adding stack numStacks = 6 chipType = 1 chipsToAdd 5
+total number of stacks = 7
+wallet has: 0
+lastSelListVal: 130, lastUsedBet: 130
+Credit is 130 and adjust by -130
+Credit is now 0 which is $0
+wallet has: 0
+lastSelListVal: 0, lastUsedBet: 130
+Credit is 0 and adjust by 3489
+Credit is now 3489 which is $3489
+wallet has: 3489
+50 130 600 2000 3000 3489
+lastSelListVal: 0, lastUsedBet: 130
+%percentOfTotal = 0.03726
+totalAmount = 3489
+amount = 130
+numchips = 3
+numStacks = 1
+adding stack numStacks = 1 chipType = 100 chipsToAdd 1
+adding stack numStacks = 1 chipType = 25 chipsToAdd 1
+adding stack numStacks = 1 chipType = 5 chipsToAdd 1
+total number of stacks = 3
+wallet has: 3359
+lastSelListVal: 130, lastUsedBet: 130
+wallet has: 3359
+lastSelListVal: 130, lastUsedBet: 130
+%percentOfTotal = 0.57323
+totalAmount = 3489
+amount = 2000
+numchips = 35
+numStacks = 4
+adding stack numStacks = 4 chipType = 100 chipsToAdd 10
+adding stack numStacks = 4 chipType = 100 chipsToAdd 5
+adding stack numStacks = 4 chipType = 25 chipsToAdd 10
+adding stack numStacks = 4 chipType = 25 chipsToAdd 10
+total number of stacks = 4
+wallet has: 1359
+lastSelListVal: 2000, lastUsedBet: 2000
+Credit is 3489 and adjust by -130
+Credit is now 3359 which is $3359
+Credit is 3359 and adjust by -2000
+Credit is now 1359 which is $1359
+wallet has: 1359
+lastSelListVal: 1359, lastUsedBet: 2000
+%percentOfTotal = 1
+totalAmount = 1359
+amount = 1359
+numchips = 60
+numStacks = 6
+adding stack numStacks = 6 chipType = 100 chipsToAdd 10
+adding stack numStacks = 6 chipType = 100 chipsToAdd 3
+adding stack numStacks = 6 chipType = 5 chipsToAdd 3
+adding stack numStacks = 6 chipType = 1 chipsToAdd 10
+adding stack numStacks = 6 chipType = 1 chipsToAdd 10
+adding stack numStacks = 6 chipType = 1 chipsToAdd 10
+adding stack numStacks = 6 chipType = 1 chipsToAdd 10
+adding stack numStacks = 6 chipType = 1 chipsToAdd 4
+total number of stacks = 8
+wallet has: 0
+lastSelListVal: 1359, lastUsedBet: 1359
+Credit is 1359 and adjust by 1359
+Credit is now 2718 which is $2718
+wallet has: 2718
+lastSelListVal: 0, lastUsedBet: 1359
+%percentOfTotal = 0.5
+totalAmount = 2718
+amount = 1359
+numchips = 30
+numStacks = 3
+adding stack numStacks = 3 chipType = 100 chipsToAdd 10
+adding stack numStacks = 3 chipType = 100 chipsToAdd 3
+adding stack numStacks = 3 chipType = 25 chipsToAdd 1
+adding stack numStacks = 3 chipType = 5 chipsToAdd 4
+adding stack numStacks = 3 chipType = 1 chipsToAdd 10
+adding stack numStacks = 3 chipType = 1 chipsToAdd 4
+total number of stacks = 6
+wallet has: 1359
+lastSelListVal: 1359, lastUsedBet: 1359
+Credit is 2718 and adjust by 1359
+Credit is now 4077 which is $4077
+wallet has: 4077
+lastSelListVal: 1359, lastUsedBet: 1359
+%percentOfTotal = 0.333333
+totalAmount = 4077
+amount = 1359
+numchips = 20
+numStacks = 2
+adding stack numStacks = 2 chipType = 100 chipsToAdd 10
+adding stack numStacks = 2 chipType = 100 chipsToAdd 3
+adding stack numStacks = 2 chipType = 25 chipsToAdd 2
+adding stack numStacks = 2 chipType = 5 chipsToAdd 1
+adding stack numStacks = 2 chipType = 1 chipsToAdd 4
+total number of stacks = 5
+wallet has: 2718
+lastSelListVal: 1359, lastUsedBet: 1359
+Credit is 4077 and adjust by 1359
+Credit is now 5436 which is $5436
+wallet has: 5436
+lastSelListVal: 1359, lastUsedBet: 1359
+%percentOfTotal = 0.25
+totalAmount = 5436
+amount = 1359
+numchips = 15
+numStacks = 2
+adding stack numStacks = 2 chipType = 100 chipsToAdd 10
+adding stack numStacks = 2 chipType = 100 chipsToAdd 3
+adding stack numStacks = 2 chipType = 25 chipsToAdd 2
+adding stack numStacks = 2 chipType = 5 chipsToAdd 1
+adding stack numStacks = 2 chipType = 1 chipsToAdd 4
+total number of stacks = 5
+wallet has: 4077
+lastSelListVal: 1359, lastUsedBet: 1359
+Credit is 5436 and adjust by 1359
+Credit is now 6795 which is $6795
+wallet has: 6795
+lastSelListVal: 1359, lastUsedBet: 1359
+wallet has: 6795
+lastSelListVal: 1359, lastUsedBet: 1359
+%percentOfTotal = 0.294334
+totalAmount = 6795
+amount = 2000
+numchips = 18
+numStacks = 2
+oldAmount = 2000
+new amount = 1800
+adding stack numStacks = 2 chipType = 100 chipsToAdd 10
+adding stack numStacks = 2 chipType = 100 chipsToAdd 8
+total number of stacks = 2
+wallet has: 4795
+lastSelListVal: 2000, lastUsedBet: 2000
+Credit is 6795 and adjust by -2000
+Credit is now 4795 which is $4795
+wallet has: 4795
+lastSelListVal: 2000, lastUsedBet: 2000
+%percentOfTotal = 0.417101
+totalAmount = 4795
+amount = 2000
+numchips = 26
+numStacks = 3
+adding stack numStacks = 3 chipType = 100 chipsToAdd 10
+adding stack numStacks = 3 chipType = 100 chipsToAdd 8
+adding stack numStacks = 3 chipType = 25 chipsToAdd 8
+total number of stacks = 3
+wallet has: 2795
+lastSelListVal: 2000, lastUsedBet: 2000
+Credit is 4795 and adjust by -2000
+Credit is now 2795 which is $2795
+wallet has: 2795
+lastSelListVal: 2000, lastUsedBet: 2000
+%percentOfTotal = 0.715564
+totalAmount = 2795
+amount = 2000
+numchips = 43
+numStacks = 5
+adding stack numStacks = 5 chipType = 100 chipsToAdd 10
+adding stack numStacks = 5 chipType = 100 chipsToAdd 2
+adding stack numStacks = 5 chipType = 25 chipsToAdd 10
+adding stack numStacks = 5 chipType = 25 chipsToAdd 10
+adding stack numStacks = 5 chipType = 25 chipsToAdd 10
+adding stack numStacks = 5 chipType = 25 chipsToAdd 2
+total number of stacks = 6
+wallet has: 795
+lastSelListVal: 2000, lastUsedBet: 2000
+Credit is 2795 and adjust by 2000
+Credit is now 4795 which is $4795
+wallet has: 4795
+lastSelListVal: 795, lastUsedBet: 2000
+%percentOfTotal = 0.417101
+totalAmount = 4795
+amount = 2000
+numchips = 26
+numStacks = 3
+adding stack numStacks = 3 chipType = 100 chipsToAdd 10
+adding stack numStacks = 3 chipType = 100 chipsToAdd 8
+adding stack numStacks = 3 chipType = 25 chipsToAdd 8
+total number of stacks = 3
+wallet has: 2795
+lastSelListVal: 2000, lastUsedBet: 2000
+%percentOfTotal = 0.417101
+totalAmount = 4795
+amount = 2000
+numchips = 26
+numStacks = 3
+adding stack numStacks = 3 chipType = 100 chipsToAdd 10
+adding stack numStacks = 3 chipType = 100 chipsToAdd 8
+adding stack numStacks = 3 chipType = 25 chipsToAdd 8
+total number of stacks = 3
+wallet has: 795
+lastSelListVal: 2000, lastUsedBet: 2000
+Credit is 4795 and adjust by -2000
+Credit is now 2795 which is $2795
+Credit is 2795 and adjust by -2000
+Credit is now 795 which is $795
+wallet has: 795
+lastSelListVal: 795, lastUsedBet: 2000
+DirectInput deactivated.
+game/gameScripts/GUI_Manager/animations/animations.cs (32): Unable to find object: '1329' attempting to call function 'clear'
+game/gameScripts/GUI_Manager/animations/animations.cs (33): Unable to find object: '1329' attempting to call function 'delete'
+Shutting down the OpenGL display device...
+Making the GL rendering context not current...
+Deleting the GL rendering context...
+Releasing the device context...

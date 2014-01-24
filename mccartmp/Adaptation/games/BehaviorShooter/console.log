@@ -1,0 +1,466 @@
+//-------------------------- 1/21/2014 -- 10:10:11 -----
+Processor Init:
+   Intel Pentium III, ~3.15 Ghz
+     (timed at roughly 3.17 Ghz)
+   FPU detected
+   MMX detected
+   SSE detected
+ 
+Math Init:
+   Installing Standard C extensions
+   Installing Assembly extensions
+   Installing FPU extensions
+   Installing MMX extensions
+   Installing SSE extensions
+ 
+Input Init:
+   DirectInput enabled.
+
+Initializing chunk mappings...
+   o 'TEXT' maps to TextChunk
+   o 'SCHK' maps to UnknownChunk
+   o 'SCHK' maps to SimChunk
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/main.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/main.cs.
+ % - Initializing Common
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/preferences/defaultPrefs.cs.
+Reading Display Device information...
+   Primary Display Device Found:
+      Vendor Id: VEN_0000
+      Device Id: DEV_0000
+
+Using OpenGL rendering. Fullscreen: 0
+
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gameScripts/xml.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gameScripts/properties.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gameScripts/common.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gameScripts/audio.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gameScripts/canvas.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gameScripts/cursor.cs.
+Video Init:
+   Accelerated OpenGL display device detected.
+   Accelerated D3D device detected.
+   Voodoo 2 display device not detected.
+
+Activating the OpenGL display device...
+Activating the OpenGL display device...
+Setting screen mode to 320x320x32 (w)...
+Creating a new window...
+Acquiring a new device context...
+Pixel format set:
+  32 color bits, 24 depth bits, 8 stencil bits
+Creating a new rendering context...
+Making the new rendering context current...
+OpenGL driver information:
+  Vendor: ATI Technologies Inc.
+  Renderer: ATI Radeon HD 4800 Series        
+  Version: 3.3.10750 Compatibility Profile Context
+OpenGL Init: Enabled Extensions
+  ARB_multitexture (Max Texture Units: 8)
+  EXT_blend_color
+  EXT_blend_minmax
+  EXT_compiled_vertex_array
+  EXT_texture_env_combine
+  EXT_packed_pixels
+  EXT_fog_coord
+  ARB_texture_compression
+  EXT_texture_compression_s3tc
+  (ARB|EXT)_texture_env_add
+  EXT_texture_filter_anisotropic (Max anisotropy: 16)
+  WGL_EXT_swap_control
+OpenGL Init: Disabled Extensions
+  EXT_paletted_texture
+  NV_vertex_array_range
+  3DFX_texture_compression_FXT1
+
+Max Texture Size reported as: 8192
+Setting screen mode to 800x600x32 (w)...
+OpenAL Driver Init:
+   Vendor: Creative Labs Inc.
+   Version: OpenAL 1.0
+   Renderer: Software
+   Extensions: EAX 2.0, EAX 3.0, EAX Unified, and EAX-AC3
+
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gui/profiles.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gui/cursors.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gui/messageBoxOk.gui.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gui/messageBoxYesNo.gui.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gui/messageBoxYesNoCancel.gui.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gui/messageBoxOKCancel.gui.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gui/messageBoxOKCancelDetailsDlg.gui.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gui/messagePopup.gui.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gui/options.gui.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gui/remap.gui.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gui/console.gui.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gui/NetworkMenu.gui.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gui/startServer.gui.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gui/joinServer.gui.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gui/waitingForServer.gui.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gui/helpDlg.gui.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gui/messageBox.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gui/help.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gui/chatGui.gui.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gameScripts/screenshot.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gameScripts/metrics.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/Gui/FrameOverlayGui.gui.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gameScripts/scriptDoc.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gameScripts/keybindings.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gameScripts/options.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gameScripts/levelManagement.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gameScripts/projectManagement.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gameScripts/projectResources.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/common/gameScripts/align.cs.
+
+Torque Game Builder (v1.7.6) initialized...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/managed/datablocks.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/managed/persistent.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/managed/brushes.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/gameScripts/datablocks.cs.
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/physics/rigidBody.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/thrusterControls.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/tankControls.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/shooterControls.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/mouseDraggable.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/mouseDownVelocity.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/mouseDownScale.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/mouseDownRotate.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/mouseDownExplode.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/mouseDownConstantForce.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/genericInputAction.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/followMouseEx.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/followMouse.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/fleeMouse.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/faceMouse.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/asteroidsControls.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/alignToJoystick.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/gui/objectOverlay.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/gui/mouseOverGrow.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/gui/genericButton.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/game/worldLimitWrap.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/game/template.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/game/takesDamageAdv.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/game/shootsAdv.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/game/shoots.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/game/scoreShowHighest.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/game/scoreOnEvent.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/game/scoreBoard.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/game/dealsDamageAdv.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/effects/worldLimitParticles.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/effects/swapImageOnCollision.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/effects/selfDestruct.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/effects/fadeMask.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/effects/contrail.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/effects/collisionParticles.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/effects/cameraMove.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/ai/timerShootsAdv.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/ai/timerShoots.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/ai/spawnOnRemove.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/ai/spawnGroup.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/ai/spawnArea.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/ai/randomVelocity.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/ai/moveWave.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/ai/moveToward.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/ai/moveForward.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/ai/mountToOnAdd.cs...
+Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/ai/faceObject.cs...
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/physics/rigidBody.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/thrusterControls.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/tankControls.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/shooterControls.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/mouseDraggable.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/mouseDownVelocity.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/mouseDownScale.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/mouseDownRotate.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/mouseDownExplode.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/mouseDownConstantForce.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/genericInputAction.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/followMouseEx.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/followMouse.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/fleeMouse.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/faceMouse.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/asteroidsControls.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/input/alignToJoystick.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/gui/objectOverlay.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/gui/mouseOverGrow.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/gui/genericButton.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/game/worldLimitWrap.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/game/template.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/game/takesDamageAdv.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/game/shootsAdv.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/game/shoots.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/game/scoreShowHighest.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/game/scoreOnEvent.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/game/scoreBoard.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/game/dealsDamageAdv.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/effects/worldLimitParticles.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/effects/swapImageOnCollision.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/effects/selfDestruct.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/effects/fadeMask.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/effects/contrail.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/effects/collisionParticles.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/effects/cameraMove.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/ai/timerShootsAdv.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/ai/timerShoots.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/ai/spawnOnRemove.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/ai/spawnGroup.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/ai/spawnArea.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/ai/randomVelocity.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/ai/moveWave.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/ai/moveToward.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/ai/moveForward.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/ai/mountToOnAdd.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/behaviors/ai/faceObject.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/gameScripts/guiProfiles.cs.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/gui/mainScreen.gui.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/gameScripts/game.cs.
+Activating DirectInput...
+DirectInput joystick failed to enable!
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/data/levels/desertLevel.t2d.
+t2dSceneGraph::addToScene() - Object '1545' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1550' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1556' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1562' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1568' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1574' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1580' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1586' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1589' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1592' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1595' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1598' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1601' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1604' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1610' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1616' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1622' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1628' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1634' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1640' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1643' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1646' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1649' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1652' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1655' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1661' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1664' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1667' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1670' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1673' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1676' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1679' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1682' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1685' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1688' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1691' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (1691)
+t2dSceneGraph::addToScene() - Object '1697' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1700' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (1700)
+t2dSceneGraph::addToScene() - Object '1706' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1709' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1715' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1718' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (1718)
+t2dSceneGraph::addToScene() - Object '1724' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1727' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (1727)
+t2dSceneGraph::addToScene() - Object '1733' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1736' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1739' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1742' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (1742)
+t2dSceneGraph::addToScene() - Object '1748' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1751' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (1751)
+t2dSceneGraph::addToScene() - Object '1757' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1760' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1763' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (1763)
+t2dSceneGraph::addToScene() - Object '1769' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1772' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (1772)
+t2dSceneGraph::addToScene() - Object '1778' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1781' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (1781)
+t2dSceneGraph::addToScene() - Object '1787' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1790' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (1790)
+t2dSceneGraph::addToScene() - Object '1796' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1799' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1802' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (1802)
+t2dSceneGraph::addToScene() - Object '1808' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1811' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (1811)
+t2dSceneGraph::addToScene() - Object '1817' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1820' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1823' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1826' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1829' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1835' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1841' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1847' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1853' is already in a SceneGraph!.
+t2dVectorAdd() - Invalid number of parameters!
+t2dSceneObject::moveTo() - Invalid number of parameters!
+t2dSceneGraph::addToScene() - Object '1859' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1862' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (1862)
+t2dSceneGraph::addToScene() - Object '1868' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1871' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1874' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1877' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1880' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1883' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1886' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (1886)
+t2dSceneGraph::addToScene() - Object '1892' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1895' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (1895)
+t2dSceneGraph::addToScene() - Object '1901' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1904' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1907' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1910' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1913' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1916' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1919' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1922' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1925' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1928' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1931' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1934' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1937' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1940' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1943' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1946' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1949' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1952' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1955' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1958' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1961' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1964' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1967' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1970' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1973' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1976' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (1976)
+t2dSceneGraph::addToScene() - Object '1982' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (1982)
+t2dSceneGraph::addToScene() - Object '1988' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1991' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '1994' is already in a SceneGraph!.
+Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/BehaviorShooter/game/data/levels/desertLevel.t2d.
+t2dSceneGraph::addToScene() - Object '2142' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2147' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2153' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2159' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2165' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2171' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2177' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2183' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2186' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2189' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2195' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2198' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2204' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2210' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2216' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2222' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2228' is already in a SceneGraph!.
+t2dVectorAdd() - Invalid number of parameters!
+t2dSceneObject::moveTo() - Invalid number of parameters!
+t2dSceneGraph::addToScene() - Object '2231' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2234' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2237' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2240' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2246' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2249' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2252' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2255' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2258' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2261' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2264' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2267' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2270' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2273' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2276' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (2276)
+t2dSceneGraph::addToScene() - Object '2282' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2285' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (2285)
+t2dSceneGraph::addToScene() - Object '2291' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2294' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2297' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2300' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2303' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2309' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2312' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2315' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2318' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2321' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2324' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2327' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2330' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2333' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (2333)
+t2dSceneGraph::addToScene() - Object '2339' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2342' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (2342)
+t2dSceneGraph::addToScene() - Object '2348' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2351' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2354' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2360' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2366' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2372' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2378' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2384' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2387' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2390' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2393' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2396' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2399' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (2399)
+t2dSceneGraph::addToScene() - Object '2405' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2408' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (2408)
+t2dSceneGraph::addToScene() - Object '2414' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2417' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2420' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (2420)
+t2dSceneGraph::addToScene() - Object '2426' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2429' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (2429)
+t2dSceneGraph::addToScene() - Object '2435' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2438' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2441' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2444' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2447' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (2447)
+t2dSceneGraph::addToScene() - Object '2453' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2456' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2459' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2462' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (2462)
+t2dSceneGraph::addToScene() - Object '2468' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2471' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (2471)
+t2dSceneGraph::addToScene() - Object '2477' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2480' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (2480)
+t2dSceneGraph::addToScene() - Object '2486' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2489' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (2489)
+t2dSceneGraph::addToScene() - Object '2495' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (2495)
+t2dSceneGraph::addToScene() - Object '2501' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2504' is already in a SceneGraph!.
+t2dSceneContainer::removeSceneObject() - Object 'Always Scope' but not in Scope-List! (2504)
+t2dSceneGraph::addToScene() - Object '2510' is already in a SceneGraph!.
+DirectInput deactivated.
+t2dSceneGraph::addToScene() - Object '2513' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2516' is already in a SceneGraph!.
+t2dSceneGraph::addToScene() - Object '2519' is already in a SceneGraph!.
+Shutting down the OpenGL display device...
+Making the GL rendering context not current...
+Deleting the GL rendering context...
+Releasing the device context...

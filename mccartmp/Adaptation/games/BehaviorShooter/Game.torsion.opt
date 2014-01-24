@@ -1,0 +1,29 @@
+<TorsionProjectOptions>
+<Address>127.0.0.1</Address>
+<Password>password</Password>
+<Port>6060</Port>
+<LastConfig>Release</LastConfig>
+<Breakpoints>
+<Breakpoint>
+<File>game\behaviors\game\dealsDamageAdv.cs</File>
+<Line>27</Line>
+<Pass>0</Pass>
+<Condition/>
+<Enabled/>
+</Breakpoint>
+</Breakpoints>
+<Bookmarks/>
+<OpenFiles>
+<File ScrollX="0" ScrollY="0">behaviors\game\takesDamageAdv.cs</File>
+<File ScrollX="0" ScrollY="1">behaviors\game\dealsDamageAdv.cs</File>
+<File ScrollX="0" ScrollY="0">behaviors\effects\fadeMask.cs</File>
+<File ScrollX="0" ScrollY="0">behaviors\ai\spawnOnRemove.cs</File>
+<File ScrollX="0" ScrollY="15">behaviors\effects\selfDestruct.cs</File>
+<File ScrollX="0" ScrollY="7">behaviors\game\scoreOnEvent.cs</File>
+<File ScrollX="0" ScrollY="0">behaviors\ai\mountToOnAdd.cs</File>
+<File ScrollX="0" ScrollY="0">gameScripts\game.cs</File>
+<File ScrollX="0" ScrollY="15">data\levels\desertLevel.t2d</File>
+<File ScrollX="0" ScrollY="0">behaviors\ai\faceObject.cs</File>
+<File ScrollX="0" ScrollY="0" Active="true">..\..\..\..\My Documents\MyGames\MutantButterflies\main.cs</File>
+</OpenFiles>
+</TorsionProjectOptions>
