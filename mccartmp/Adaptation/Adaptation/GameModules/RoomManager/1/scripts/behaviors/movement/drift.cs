@@ -22,7 +22,7 @@ if (!isObject(DriftBehavior))
 
   function DriftBehavior::recycle(%this)
   {
-      %this.owner.setPosition(getRandom(-320, 320), 240);
+      %this.owner.setPosition(getRandom(-320, 320), 40);
       %this.owner.setLinearVelocityX( 0 );
       %this.owner.setLinearVelocityY( -getRandom(%this.minSpeed, %this.maxSpeed) );
   }

@@ -2,9 +2,9 @@
 // Basic menu controls and listeners
 //-----------------------------------------------------------------------------
 
-if (!isObject(MenuControl))
+if (!isObject(MenuControlBehavior))
 {
-    %template = new BehaviorTemplate(MenuControl);
+    %template = new BehaviorTemplate(MenuControlBehavior);
 
     %template.friendlyName = "Menu Controls";
     %template.behaviorType = "Input";
@@ -13,7 +13,7 @@ if (!isObject(MenuControl))
     %template.addBehaviorField(enterKey, "Key to bind to next room", keybind, "keyboard enter");
 }
 
-function MenuControl::onBehaviorAdd(%this)
+function MenuControlBehavior::onBehaviorAdd(%this)
 {
     if (!isObject(GlobalActionMap))
        return;
@@ -21,7 +21,7 @@ function MenuControl::onBehaviorAdd(%this)
     GlobalActionMap.bindObj(getWord(%this.enterKey, 0), getWord(%this.enterKey, 1), "changeRoom", %this);
 }
 
-function MenuControl::onBehaviorRemove(%this)
+function MenuControlBehavior::onBehaviorRemove(%this)
 {
     if (!isObject(GlobalActionMap))
        return;
@@ -31,12 +31,11 @@ function MenuControl::onBehaviorRemove(%this)
     GlobalActionMap.unbindObj(getWord(%this.enterKey, 0), getWord(%this.enterKey, 1), %this);
 }
 
-
-
-function MenuControl::changeRoom(%this, %val)
+function MenuControlBehavior::changeRoom(%this, %val)
 {
-	new Scene(arenaScene);
-	buildArena(arenaScene);
-    mainWindow.setScene(arenaScene);
-    GlobalActionMap.unbindObj(getWord(%this.enterKey, 0), getWord(%this.enterKey, 1), %this);
+	if(%this.owner.myManager != 0)
+	{
+		%this.owner.myManager.changeToArena();
+		GlobalActionMap.unbindObj(getWord(%this.enterKey, 0), getWord(%this.enterKey, 1), %this);
+	}
 }

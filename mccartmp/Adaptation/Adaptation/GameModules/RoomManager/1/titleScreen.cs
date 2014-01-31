@@ -1,5 +1,10 @@
 
-function openTitleScreen(%scene){
+function TitleScreen::onAdd(%this)
+{
+}
+
+function TitleScreen::openTitleScreen(%this, %scene)
+{
 	// Background
     %background = new Sprite();
     %background.setBodyType( "static" );
@@ -11,13 +16,9 @@ function openTitleScreen(%scene){
     %background.setSceneLayer(30);
     %scene.add( %background );
 	
-	exec("./scripts/behaviors/menus/menuControls.cs");
-
-	%menuController = new Sprite();
+	exec("./scripts/behaviors/menus/MenuControls.cs");
 	
-	%controls = MenuControl.createInstance();
+	%controls = MenuControlBehavior.createInstance();
 	%controls.enterKey = "keyboard enter";
-	%menuController.addBehavior(%controls);
-	
-    mainScene.add( %menuController ); 
+	%this.addBehavior(%controls);
 }

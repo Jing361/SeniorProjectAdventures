@@ -1,7 +1,7 @@
-//-------------------------- 1/21/2014 -- 02:04:19 -----
+//-------------------------- 1/24/2014 -- 13:51:16 -----
 Processor Init:
-   Intel Pentium III, ~3.20 Ghz
-     (timed at roughly 3.20 Ghz)
+   Intel Pentium III, ~2.27 Ghz
+     (timed at roughly 2.26 Ghz)
    FPU detected
    MMX detected
    SSE detected
@@ -20,13 +20,10 @@ Initializing chunk mappings...
    o 'TEXT' maps to TextChunk
    o 'SCHK' maps to UnknownChunk
    o 'SCHK' maps to SimChunk
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/main.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/main.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/main.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/main.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/main.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/main.cs.
  % - Initializing Common
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/preferences/defaultPrefs.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/preferences/defaultPrefs.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/preferences/defaultPrefs.cs.
 Reading Display Device information...
    Primary Display Device Found:
       Vendor Id: VEN_0000
@@ -34,23 +31,17 @@ Reading Display Device information...
 
 Using OpenGL rendering. Fullscreen: 0
 
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/xml.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/xml.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/properties.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/properties.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/common.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/common.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/audio.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/audio.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/canvas.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/canvas.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/cursor.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/cursor.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/xml.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/properties.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/common.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/audio.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/canvas.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/cursor.cs.
 Binding server port to default IP
 UDP initialized on port 0
 Video Init:
    Accelerated OpenGL display device detected.
-   Accelerated D3D device detected.
+   Accelerated D3D device not detected.
    Voodoo 2 display device not detected.
 
 Activating the OpenGL display device...
@@ -63,14 +54,15 @@ Pixel format set:
 Creating a new rendering context...
 Making the new rendering context current...
 OpenGL driver information:
-  Vendor: ATI Technologies Inc.
-  Renderer: ATI Radeon HD 4800 Series        
-  Version: 3.3.10750 Compatibility Profile Context
+  Vendor: NVIDIA Corporation
+  Renderer: GeForce GT 130M/PCIe/SSE2
+  Version: 3.3.0
 OpenGL Init: Enabled Extensions
-  ARB_multitexture (Max Texture Units: 8)
+  ARB_multitexture (Max Texture Units: 4)
   EXT_blend_color
   EXT_blend_minmax
   EXT_compiled_vertex_array
+  NV_vertex_array_range
   EXT_texture_env_combine
   EXT_packed_pixels
   EXT_fog_coord
@@ -81,126 +73,79 @@ OpenGL Init: Enabled Extensions
   WGL_EXT_swap_control
 OpenGL Init: Disabled Extensions
   EXT_paletted_texture
-  NV_vertex_array_range
   3DFX_texture_compression_FXT1
 
 Max Texture Size reported as: 8192
 Setting screen mode to 800x600x32 (w)...
 OpenAL Driver Init:
+ Missing OpenAL Extension function 'EAXSet'
+ Missing OpenAL Extension function 'EAXGet'
    Vendor: Creative Labs Inc.
-   Version: OpenAL 1.0
+   Version: 1.1
    Renderer: Software
-   Extensions: EAX 2.0, EAX 3.0, EAX Unified, and EAX-AC3
+   Extensions: EAX EAX2.0 EAX3.0 EAX4.0 EAX5.0 EAX3.0EMULATED EAX4.0EMULATED AL_EXT_OFFSET AL_EXT_LINEAR_DISTANCE AL_EXT_EXPONENT_DISTANCE
 
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/profiles.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/profiles.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/cursors.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/cursors.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/messageBoxOk.gui...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/messageBoxOk.gui.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/messageBoxYesNo.gui...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/messageBoxYesNo.gui.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/messageBoxYesNoCancel.gui...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/messageBoxYesNoCancel.gui.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/messageBoxOKCancel.gui...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/messageBoxOKCancel.gui.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/messageBoxOKCancelDetailsDlg.gui...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/messageBoxOKCancelDetailsDlg.gui.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/messagePopup.gui...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/messagePopup.gui.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/options.gui...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/options.gui.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/remap.gui...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/remap.gui.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/console.gui...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/console.gui.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/NetworkMenu.gui...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/NetworkMenu.gui.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/startServer.gui...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/startServer.gui.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/joinServer.gui...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/joinServer.gui.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/waitingForServer.gui...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/waitingForServer.gui.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/helpDlg.gui...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/helpDlg.gui.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/messageBox.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/messageBox.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/help.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/help.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/chatGui.gui...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gui/chatGui.gui.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/screenshot.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/screenshot.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/metrics.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/metrics.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/Gui/FrameOverlayGui.gui...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/Gui/FrameOverlayGui.gui.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/scriptDoc.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/scriptDoc.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/keybindings.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/keybindings.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/options.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/options.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/levelManagement.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/levelManagement.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/projectManagement.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/projectManagement.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/projectResources.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/projectResources.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/align.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/align.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/client/client.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/client/client.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/client/message.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/client/message.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/client/serverConnection.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/client/serverConnection.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/client/chatClient.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/client/chatClient.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/server/server.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/server/server.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/server/message.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/server/message.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/server/clientConnection.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/server/clientConnection.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/server/kickban.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/server/kickban.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/server/chatServer.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/common/gameScripts/server/chatServer.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/profiles.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/cursors.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/messageBoxOk.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/messageBoxYesNo.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/messageBoxYesNoCancel.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/messageBoxOKCancel.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/messageBoxOKCancelDetailsDlg.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/messagePopup.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/options.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/remap.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/console.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/NetworkMenu.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/startServer.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/joinServer.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/waitingForServer.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/helpDlg.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/messageBox.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/help.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/chatGui.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/screenshot.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/metrics.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/Gui/FrameOverlayGui.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/scriptDoc.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/keybindings.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/options.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/levelManagement.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/projectManagement.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/projectResources.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/align.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/client/client.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/client/message.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/client/serverConnection.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/client/chatClient.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/server/server.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/server/message.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/server/clientConnection.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/server/kickban.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/server/chatServer.cs.
 
 Torque Game Builder (v1.7.6) initialized...
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/managed/datablocks.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/managed/datablocks.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/managed/persistent.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/managed/persistent.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/managed/brushes.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/managed/brushes.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/gameScripts/datablocks.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/gameScripts/datablocks.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/behaviors/input/genericInputAction.cs...
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/behaviors/gui/genericEvalButton.cs...
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/behaviors/game/template.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/behaviors/game/template.cs.
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/behaviors/gui/genericEvalButton.cs.
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/behaviors/input/genericInputAction.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/gameScripts/guiProfiles.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/gameScripts/guiProfiles.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/gui/mainScreen.gui...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/gui/mainScreen.gui.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/gameScripts/game.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/gameScripts/game.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/gameScripts/piece.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/gameScripts/piece.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/gameScripts/board.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/gameScripts/board.cs.
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/gameScripts/audioDatablocks.cs...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/gameScripts/audioDatablocks.cs.
-Missing file: C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/gameScripts/GenericImageButton.cs!
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/managed/datablocks.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/managed/persistent.cs.
+Compiling C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/managed/brushes.cs...
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/managed/brushes.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/gameScripts/datablocks.cs.
+Compiling C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/behaviors/input/genericInputAction.cs...
+Compiling C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/behaviors/gui/genericEvalButton.cs...
+Compiling C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/behaviors/game/template.cs...
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/behaviors/input/genericInputAction.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/behaviors/gui/genericEvalButton.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/behaviors/game/template.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/gameScripts/guiProfiles.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/gui/mainScreen.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/gameScripts/game.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/gameScripts/piece.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/gameScripts/board.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/gameScripts/audioDatablocks.cs.
+Missing file: C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/gameScripts/GenericImageButton.cs!
 Activating DirectInput...
 DirectInput joystick failed to enable!
-Compiling C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/data/levels/game.t2d...
-Loading compiled script C:/Program Files/Torque/Torque 2D 1.7.6/games/Reactor/game/data/levels/game.t2d.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/data/levels/game.t2d.
 Con::execute - 0 has no namespace: onRemoveFromScene
 t2dSceneObject::setLayer() - Invalid Layer '1326' (0-31).
 Con::execute - 0 has no namespace: onRemoveFromScene

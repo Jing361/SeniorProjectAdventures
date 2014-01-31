@@ -2,9 +2,9 @@
 // Basic player controls & behaviors
 //-----------------------------------------------------------------------------
 
-if (!isObject(ShooterControlsBehavior))
+if (!isObject(PlayerMovementControlsBehavior))
 {
-    %template = new BehaviorTemplate(ShooterControlsBehavior);
+    %template = new BehaviorTemplate(PlayerMovementControlsBehavior);
 
     %template.friendlyName = "Shooter Controls";
     %template.behaviorType = "Input";
@@ -14,12 +14,9 @@ if (!isObject(ShooterControlsBehavior))
     %template.addBehaviorField(downKey, "Key to bind to downward movement", keybind, "keyboard down");
     %template.addBehaviorField(leftKey, "Key to bind to left movement", keybind, "keyboard left");
     %template.addBehaviorField(rightKey, "Key to bind to right movement", keybind, "keyboard right");
-
-    %template.addBehaviorField(verticalSpeed, "Speed when moving vertically", float, 60.0);
-    %template.addBehaviorField(horizontalSpeed, "Speed when moving horizontally", float, 60.0);
 }
 
-function ShooterControlsBehavior::onBehaviorAdd(%this)
+function PlayerMovementControlsBehavior::onBehaviorAdd(%this)
 {
     if (!isObject(GlobalActionMap))
        return;
@@ -35,7 +32,7 @@ function ShooterControlsBehavior::onBehaviorAdd(%this)
     %this.right = 0;
 }
 
-function ShooterControlsBehavior::onBehaviorRemove(%this)
+function PlayerMovementControlsBehavior::onBehaviorRemove(%this)
 {
     if (!isObject(GlobalActionMap))
        return;
@@ -53,7 +50,7 @@ function ShooterControlsBehavior::onBehaviorRemove(%this)
     %this.right = 0;
 }
 
-function ShooterControlsBehavior::onCollision(%this, %object, %collisionDetails)
+function PlayerMovementControlsBehavior::onCollision(%this, %object, %collisionDetails)
 {
 	if(%object.class $= "FishFoodClass")
 	{
@@ -69,31 +66,31 @@ function ShooterControlsBehavior::onCollision(%this, %object, %collisionDetails)
 	}
 }
   
-function ShooterControlsBehavior::updateMovement(%this)
+function PlayerMovementControlsBehavior::updateMovement(%this)
 {	 
-    %this.owner.setLinearVelocityX((%this.right - %this.left) * %this.horizontalSpeed);
-    %this.owner.setLinearVelocityY((%this.up - %this.down) * %this.verticalSpeed);
+    %this.owner.setLinearVelocityX((%this.right - %this.left) * %this.owner.horizontalSpeed);
+    %this.owner.setLinearVelocityY((%this.up - %this.down) * %this.owner.verticalSpeed);
 }
 
-function ShooterControlsBehavior::moveUp(%this, %val)
+function PlayerMovementControlsBehavior::moveUp(%this, %val)
 {
     %this.up = %val;
     %this.updateMovement();
 }
 
-function ShooterControlsBehavior::moveDown(%this, %val)
+function PlayerMovementControlsBehavior::moveDown(%this, %val)
 {
     %this.down = %val;
     %this.updateMovement();
 }
 
-function ShooterControlsBehavior::moveLeft(%this, %val)
+function PlayerMovementControlsBehavior::moveLeft(%this, %val)
 {
     %this.left = %val;
     %this.updateMovement();
 }
 
-function ShooterControlsBehavior::moveRight(%this, %val)
+function PlayerMovementControlsBehavior::moveRight(%this, %val)
 {
     %this.right = %val;
     %this.updateMovement();

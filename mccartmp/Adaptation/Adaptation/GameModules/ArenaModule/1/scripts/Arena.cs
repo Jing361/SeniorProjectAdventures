@@ -2,14 +2,14 @@
 // Room setup and wall collisions
 //-----------------------------------------------------------------------------
 
-function getAnimationList()
-{
+function Arena::getAnimationList(%this)
+{		
    %list = "GameAssets:playerbaseAnim" @ "," @ "GameAssets:seahorseAnim" ;
 }
 
 //-----------------------------------------------------------------------------
 
-function getAnimationSize(%anim)
+function Arena::getAnimationSize(%this, %anim)
 {
     switch$(%anim)
     {
@@ -26,7 +26,7 @@ function getAnimationSize(%anim)
 
 //-----------------------------------------------------------------------------
 
-function buildArena(%scene)
+function Arena::buildArena(%this, %scene)
 {
     // A pre-built Arena of size 100x75, with background.
     // Triggers will be provide around the edges to let the developer know when objects in the
@@ -56,15 +56,16 @@ function buildArena(%scene)
     
     addArenaBoundaries( %scene, 640, 480 );
 	
-	RoomManager.spawnPlayer();
+	%player = %this.spawnPlayer(%scene, -25, 0);
 	
-	for (%i = 0; %i < 2; %i++)
-      RoomManager.spawnFishFood();
+	//for (%i = 0; %i < 2; %i++)
+    //  RoomManager.spawnFishFood();
 }
+
 
 //-----------------------------------------------------------------------------
 
-function addArenaBoundaries(%scene, %width, %height)
+function Arena::addArenaBoundaries(%this, %scene, %width, %height)
 {
     // add boundaries on all sides of the Arena a bit outside of the border of the screen.
     // The triggers allow for onCollision to be sent to any fish or other object that touches the edges.
@@ -84,7 +85,7 @@ function addArenaBoundaries(%scene, %width, %height)
 
 //-----------------------------------------------------------------------------
 
-function createOneArenaBoundary(%side, %position, %size)
+function Arena::createOneArenaBoundary(%this, %side, %position, %size)
 {
     %boundary = new SceneObject() { class = "ArenaBoundary"; };
     
@@ -101,5 +102,24 @@ function createOneArenaBoundary(%side, %position, %size)
     %boundary.setCollisionShapeIsSensor(0, true);
     return %boundary;
 }
+
+//-----------------------------------------------------------------------------
+
+function Arena::spawnPlayer(%this, %scene, %width, %height)
+{
+    // add a Player object to the Arena
+	%newPlayer = new CompositeSprite()
+	{
+		class = "Player";
+		//verticalSpeed = 60.0;
+		//horizontalSpeed = 60.0;
+	};
+	
+    %scene.add( %newPlayer );
+	
+	%newPlayer.setPostion(%width, %height);
+
+	return %newPlayer;
+} 
 
 //-----------------------------------------------------------------------------
