@@ -1,6 +1,6 @@
 #include "Genotype.h"
 
-using namespace DarwinCharles;
+using namespace Evolution;
 
 
 	Genotype::Genotype()
@@ -9,10 +9,24 @@ using namespace DarwinCharles;
 		rFitness = 0;
 		cFitness = 0;
 	}
-			
-	vector<int> Genotype::spliceGene (int *, int *)
+	
+	//			A	  B
+	//point -- [XXX[P)XX)
+	//
+	void Genotype::assignGene ( vector<int> a, vector<int> b )
 	{
+		gene.assign(a.begin(), a.end());
+		gene.insert(gene.end(), b.begin(), b.end());
+	}
+	
+	vector<int> Genotype::spliceGene (int a, int b)
+	{
+		std::vector<int>::iterator firstIterator = gene.begin() + a;
+		std::vector<int>::iterator nextIterator = gene.begin() + b;
 
+		vector<int> v; 
+		v.assign(firstIterator, nextIterator);
+		return v;
 	}
 
 	void Genotype::genePushBack( int g )
@@ -21,9 +35,9 @@ using namespace DarwinCharles;
 		return;
 	}
 
-	vector<int> Genotype::getGene()			//return a pointer?
+	vector<int>* Genotype::getGene()			
 	{
-		return gene;
+		return &gene;
 	}
 			
 	double Genotype::getFitness()
@@ -41,8 +55,9 @@ using namespace DarwinCharles;
 		return cFitness;
 	}
 
-	void Genotype::setGene()
+	void Genotype::setGene(vector <int> g)
 	{
+		gene = g;
 		return;
 	}
 
