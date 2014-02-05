@@ -1,0 +1,665 @@
+//-------------------------- 1/24/2014 -- 13:51:16 -----
+Processor Init:
+   Intel Pentium III, ~2.27 Ghz
+     (timed at roughly 2.26 Ghz)
+   FPU detected
+   MMX detected
+   SSE detected
+ 
+Math Init:
+   Installing Standard C extensions
+   Installing Assembly extensions
+   Installing FPU extensions
+   Installing MMX extensions
+   Installing SSE extensions
+ 
+Input Init:
+   DirectInput enabled.
+
+Initializing chunk mappings...
+   o 'TEXT' maps to TextChunk
+   o 'SCHK' maps to UnknownChunk
+   o 'SCHK' maps to SimChunk
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/main.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/main.cs.
+ % - Initializing Common
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/preferences/defaultPrefs.cs.
+Reading Display Device information...
+   Primary Display Device Found:
+      Vendor Id: VEN_0000
+      Device Id: DEV_0000
+
+Using OpenGL rendering. Fullscreen: 0
+
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/xml.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/properties.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/common.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/audio.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/canvas.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/cursor.cs.
+Binding server port to default IP
+UDP initialized on port 0
+Video Init:
+   Accelerated OpenGL display device detected.
+   Accelerated D3D device not detected.
+   Voodoo 2 display device not detected.
+
+Activating the OpenGL display device...
+Activating the OpenGL display device...
+Setting screen mode to 320x320x32 (w)...
+Creating a new window...
+Acquiring a new device context...
+Pixel format set:
+  32 color bits, 24 depth bits, 8 stencil bits
+Creating a new rendering context...
+Making the new rendering context current...
+OpenGL driver information:
+  Vendor: NVIDIA Corporation
+  Renderer: GeForce GT 130M/PCIe/SSE2
+  Version: 3.3.0
+OpenGL Init: Enabled Extensions
+  ARB_multitexture (Max Texture Units: 4)
+  EXT_blend_color
+  EXT_blend_minmax
+  EXT_compiled_vertex_array
+  NV_vertex_array_range
+  EXT_texture_env_combine
+  EXT_packed_pixels
+  EXT_fog_coord
+  ARB_texture_compression
+  EXT_texture_compression_s3tc
+  (ARB|EXT)_texture_env_add
+  EXT_texture_filter_anisotropic (Max anisotropy: 16)
+  WGL_EXT_swap_control
+OpenGL Init: Disabled Extensions
+  EXT_paletted_texture
+  3DFX_texture_compression_FXT1
+
+Max Texture Size reported as: 8192
+Setting screen mode to 800x600x32 (w)...
+OpenAL Driver Init:
+ Missing OpenAL Extension function 'EAXSet'
+ Missing OpenAL Extension function 'EAXGet'
+   Vendor: Creative Labs Inc.
+   Version: 1.1
+   Renderer: Software
+   Extensions: EAX EAX2.0 EAX3.0 EAX4.0 EAX5.0 EAX3.0EMULATED EAX4.0EMULATED AL_EXT_OFFSET AL_EXT_LINEAR_DISTANCE AL_EXT_EXPONENT_DISTANCE
+
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/profiles.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/cursors.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/messageBoxOk.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/messageBoxYesNo.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/messageBoxYesNoCancel.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/messageBoxOKCancel.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/messageBoxOKCancelDetailsDlg.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/messagePopup.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/options.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/remap.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/console.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/NetworkMenu.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/startServer.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/joinServer.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/waitingForServer.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/helpDlg.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/messageBox.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/help.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gui/chatGui.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/screenshot.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/metrics.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/Gui/FrameOverlayGui.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/scriptDoc.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/keybindings.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/options.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/levelManagement.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/projectManagement.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/projectResources.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/align.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/client/client.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/client/message.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/client/serverConnection.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/client/chatClient.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/server/server.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/server/message.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/server/clientConnection.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/server/kickban.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/common/gameScripts/server/chatServer.cs.
+
+Torque Game Builder (v1.7.6) initialized...
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/managed/datablocks.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/managed/persistent.cs.
+Compiling C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/managed/brushes.cs...
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/managed/brushes.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/gameScripts/datablocks.cs.
+Compiling C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/behaviors/input/genericInputAction.cs...
+Compiling C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/behaviors/gui/genericEvalButton.cs...
+Compiling C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/behaviors/game/template.cs...
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/behaviors/input/genericInputAction.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/behaviors/gui/genericEvalButton.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/behaviors/game/template.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/gameScripts/guiProfiles.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/gui/mainScreen.gui.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/gameScripts/game.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/gameScripts/piece.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/gameScripts/board.cs.
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/gameScripts/audioDatablocks.cs.
+Missing file: C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/gameScripts/GenericImageButton.cs!
+Activating DirectInput...
+DirectInput joystick failed to enable!
+Loading compiled script C:/Users/Mike McC/Documents/SeniorProjectAdventures/mccartmp/Adaptation/games/Reactor/game/data/levels/game.t2d.
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1326' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1329' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1332' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1335' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1338' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1341' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1344' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1347' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1350' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1353' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1356' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1359' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1362' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1365' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1368' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1371' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1374' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1377' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1380' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1383' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1386' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1389' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1392' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1395' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1398' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1401' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1404' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1407' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1410' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1413' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1416' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1419' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1422' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1425' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1428' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1431' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1434' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1437' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1440' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1443' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1446' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1449' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1452' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1455' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1458' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1461' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1464' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1467' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1470' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1473' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1476' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1479' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1482' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1485' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1488' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1491' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1494' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1497' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1500' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1503' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1506' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1509' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1512' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1515' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1518' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1521' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1524' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1527' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1530' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1533' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1536' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1539' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1542' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1545' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1548' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1551' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1554' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1557' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1560' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1563' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1566' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1569' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1572' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1575' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1578' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1581' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1584' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1587' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1590' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1593' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1596' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1599' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1602' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1605' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1608' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1611' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1614' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1617' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1620' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1623' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1626' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1629' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1632' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1635' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1638' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1641' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1644' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1647' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1650' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1653' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1656' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1659' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1662' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1665' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1668' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1671' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1674' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1677' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1680' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1683' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1686' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1689' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1692' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1695' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1698' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1701' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1704' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1707' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1710' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1713' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1716' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1719' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1722' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1725' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1728' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1731' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1734' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1737' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1740' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1743' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1746' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1749' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1752' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1755' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1758' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1761' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1764' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1767' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1770' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1773' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1776' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1779' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1782' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1785' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1788' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1791' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1794' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1797' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1800' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1803' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1806' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1809' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1812' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1815' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1818' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1821' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1824' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1827' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1830' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1833' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1836' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1839' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1842' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1845' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1848' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1851' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1854' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1857' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1860' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1863' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1866' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1869' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1872' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1875' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1878' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1881' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1884' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1887' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1890' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1893' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1896' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1899' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1902' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1905' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1908' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1911' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1914' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1917' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1920' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1923' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1926' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1929' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1932' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1935' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1938' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1941' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1944' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1947' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1950' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1953' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1956' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1959' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1962' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1965' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1968' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1971' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1974' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1977' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1980' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1983' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1986' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1989' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1992' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1995' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '1998' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2001' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2004' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2007' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2010' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2013' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2016' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2019' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2022' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2025' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2028' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2031' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2034' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2037' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2040' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2043' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2046' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2049' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2052' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2055' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2058' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2061' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2064' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2067' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2070' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2073' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2076' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2079' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2082' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2085' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2088' (0-31).
+Con::execute - 0 has no namespace: onRemoveFromScene
+t2dSceneObject::setLayer() - Invalid Layer '2091' (0-31).
+DirectInput deactivated.
+Shutting down the OpenGL display device...
+Making the GL rendering context not current...
+Deleting the GL rendering context...
+Releasing the device context...
