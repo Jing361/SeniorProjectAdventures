@@ -21,6 +21,8 @@ function PlayerMovementControlsBehavior::onBehaviorAdd(%this)
     if (!isObject(GlobalActionMap))
        return;
 
+	//new ActionMap(playerControls);
+	
     GlobalActionMap.bindObj(getWord(%this.upKey, 0), getWord(%this.upKey, 1), "moveUp", %this);
     GlobalActionMap.bindObj(getWord(%this.downKey, 0), getWord(%this.downKey, 1), "moveDown", %this);
     GlobalActionMap.bindObj(getWord(%this.leftKey, 0), getWord(%this.leftKey, 1), "moveLeft", %this);
@@ -52,7 +54,7 @@ function PlayerMovementControlsBehavior::onBehaviorRemove(%this)
 
 function PlayerMovementControlsBehavior::onCollision(%this, %object, %collisionDetails)
 {
-	if(%object.class $= "FishFoodClass")
+	if(%object.class $= "EnemyUnit")
 	{
 		%object.recycle(%object.side);
 	}
@@ -68,8 +70,8 @@ function PlayerMovementControlsBehavior::onCollision(%this, %object, %collisionD
   
 function PlayerMovementControlsBehavior::updateMovement(%this)
 {	 
-    %this.owner.setLinearVelocityX((%this.right - %this.left) * %this.owner.horizontalSpeed);
-    %this.owner.setLinearVelocityY((%this.up - %this.down) * %this.owner.verticalSpeed);
+    %this.owner.setLinearVelocityX((%this.right - %this.left) * %this.owner.walkSpeed);
+    %this.owner.setLinearVelocityY((%this.up - %this.down) * %this.owner.walkSpeed);
 }
 
 function PlayerMovementControlsBehavior::moveUp(%this, %val)

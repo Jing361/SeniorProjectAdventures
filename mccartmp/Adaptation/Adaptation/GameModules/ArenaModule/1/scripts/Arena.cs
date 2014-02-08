@@ -56,7 +56,14 @@ function Arena::buildArena(%this, %scene)
     
     addArenaBoundaries( %scene, 640, 480 );
 	
-	%player = %this.spawnPlayer(%scene, -25, 0);
+	%this.player = %this.spawnPlayer(%scene, -25, 0);
+	
+	%enemyList.add(%this.spawnEnemyUnit(%scene, getRandom(-320,320), 200));
+	%enemyList.add(%this.spawnEnemyUnit(%scene, getRandom(-320,320), 200));
+	%enemyList.add(%this.spawnEnemyUnit(%scene, getRandom(-320,320), 200));
+	%enemyList.add(%this.spawnEnemyUnit(%scene, getRandom(-320,320), 200));
+	
+	
 	
 	//for (%i = 0; %i < 2; %i++)
     //  RoomManager.spawnFishFood();
@@ -105,21 +112,34 @@ function Arena::createOneArenaBoundary(%this, %side, %position, %size)
 
 //-----------------------------------------------------------------------------
 
-function Arena::spawnPlayer(%this, %scene, %width, %height)
+function Arena::spawnPlayer(%this, %scene, %xPos, %yPos)
 {
     // add a Player object to the Arena
 	%newPlayer = new CompositeSprite()
 	{
 		class = "Player";
-		//verticalSpeed = 60.0;
-		//horizontalSpeed = 60.0;
 	};
 	
     %scene.add( %newPlayer );
 	
-	%newPlayer.setPostion(%width, %height);
+	%newPlayer.setPosition(%xPos, %yPos);
 
 	return %newPlayer;
 } 
 
 //-----------------------------------------------------------------------------
+
+function Arena::spawnEnemyUnit(%this, %scene, %xPos, %yPos)
+{
+    // add a Player object to the Arena
+	%newEnemy = new CompositeSprite()
+	{
+		class = "EnemyUnit";
+	};
+	
+    %scene.add( %newEnemy );
+	
+	%newEnemy.setPosition(%xPos, %yPos);
+
+	return %newEnemy;
+} 

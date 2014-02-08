@@ -1,3 +1,7 @@
+//-----------------------------------------------------------------------------
+// Basic EnemyUnit movement behavior
+//-----------------------------------------------------------------------------
+
 if (!isObject(DriftBehavior))
   {
       %template = new BehaviorTemplate(DriftBehavior);

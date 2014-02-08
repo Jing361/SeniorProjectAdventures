@@ -11,8 +11,11 @@ function Player::onAdd( %this )
 
 function Player::initialize(%this)
 {
-	%this.verticalSpeed = 60.0;
-	%this.horizontalSpeed = 60.0;
+	%this.setSceneGroup(5);			//0: Player sceneGroup
+	%this.setSceneLayer(5);
+	%this.fixedAngle = true;
+	
+	%this.walkSpeed = 80.0;
 	%this.health = 100;
 	%this.setPostion(0, 25);
 	
@@ -20,10 +23,10 @@ function Player::initialize(%this)
 	%this.setupControls();
 
 	
-    %this.createPolygonBoxCollisionShape("74 78");
+    %this.createPolygonBoxCollisionShape(%this.getWidth(), %this.getHeight());
     %this.setCollisionShapeIsSensor(0, true);
     %this.setCollisionGroups( "10 15" );
-	
+	%this.setCollisionCallback(true);
 }
 
 //-----------------------------------------------------------------------------
@@ -32,7 +35,7 @@ function Player::setupSprite( %this )
 {
 	%this.addSprite("0 0");
 	%this.setSpriteAnimation("GameAssets:playerbaseAnim", 0);
-	%this.setSpriteSize(100, 100);
+	%this.setSpriteSize(53, 70);
 }
 
 //-----------------------------------------------------------------------------
