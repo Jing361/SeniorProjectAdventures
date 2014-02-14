@@ -25,34 +25,17 @@ using std::endl;
 using std::string;
 using std::iterator;
 using std::list;
+using std::vector;
 
-namespace DarwinCharles {
+namespace Evolution {
 
 	class GeneticAlgorithm
 	{
-		#define POPSIZE 30
-		#define MAXGENS 10
+		#define POPSIZE 100
+		#define MAXGENS 30
 		#define NTOOLS 7
 		#define PXOVER 0.8
 		#define PMUTATION 0.15
-		//
-		//  Each GENOTYPE is a member of the population, with
-		//  gene: a string of variables,
-		//  fitness: the fitness
-		//  upper: the variable upper bounds,
-		//  lower: the variable lower bounds,
-		//  rfitness: the relative fitness,
-		//  cfitness: the cumulative fitness.
-		//
-		/*struct genotype
-		{
-		  std::list<int> gene;
-		  double fitness;
-		  //double upper[NVARS];
-		  //double lower[NVARS];
-		  double rfitness;
-		  double cfitness;
-		};*/
 
 		struct {
 			bool operator()(Genotype &a, Genotype &b)
@@ -61,9 +44,10 @@ namespace DarwinCharles {
 			}   
 		} compareFitness;
 
-		std::vector<Genotype> population;//[POPSIZE+1];
-		Genotype newpopulation[POPSIZE+1];
+		vector<Genotype> population;
+		vector<Genotype> newPopulation;
 
+		int pointLimit;
 		double rangedPercent;
 		double meleePercent;
 		double blockPercent;
@@ -75,16 +59,15 @@ namespace DarwinCharles {
 		int run();
 
 		void crossover ( );
-		void elitist ( );
+		void elitist ( Genotype );
 		void evaluate ( );
-		void initialize ( string file_in_name );
-		void keep_the_best ( );
+		void initialize ( char* );
+		void sortPopulation ( );
 		void mutate ( );
-		void r8_swap ( int *, int *, int*, int* );
 		int randval ( int );
-		void report ( int generation );
 		void selector ( );
-		void Xover ( int, int, int, int );
+		void verifyAndPush( Genotype );
+		void Xover ( int, int );
 
 	
 	};

@@ -25,7 +25,7 @@ using std::string;
 using std::iterator;
 using std::vector;
 
-namespace DarwinCharles {
+namespace Evolution {
 
 
 	class Genotype
@@ -38,13 +38,14 @@ namespace DarwinCharles {
 
 		public:
 			Genotype();
-			vector<int> spliceGene (int *, int *);
+			void assignGene ( vector<int>, vector<int> );
+			vector<int> spliceGene (int, int);
 			void genePushBack( int );
-			vector<int> getGene();
+			vector<int>* getGene();
 			double getFitness();
 			double getRFitness();
 			double getCFitness();
-			void setGene();
+			void setGene(vector <int>);
 			void setFitness(double);
 			void setRFitness(double);
 			void setCFitness(double);

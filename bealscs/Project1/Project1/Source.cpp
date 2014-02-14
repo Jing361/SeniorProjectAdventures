@@ -1,6 +1,6 @@
 #include "GeneticAlgorithm.h"
 
-using namespace DarwinCharles;
+using namespace Evolution;
 
 int main() 
 {
