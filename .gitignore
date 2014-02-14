@@ -44,6 +44,7 @@ linkmap.txt
 *.unsuccessfulbuild
 *.manifest
 *.tlog
+*.dso
 
 # Logs and databases #
 ######################

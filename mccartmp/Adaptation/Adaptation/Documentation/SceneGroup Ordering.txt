@@ -4,5 +4,6 @@
 ----------------------------------------------------
  0: default
  5: Player
+ 6: PlayerShots
 10: Enemies
 15: Walls/Obsticals

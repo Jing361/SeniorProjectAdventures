@@ -1,6 +1,11 @@
 //-----------------------------------------------------------------------------
-// PlayerModule: player class and functions
+// Initial setup
 //-----------------------------------------------------------------------------
+
+//globals
+$roomWidth = 1280;
+$roomHeight = 960;
+
 
 function ArenaModule::create( %this )
 {

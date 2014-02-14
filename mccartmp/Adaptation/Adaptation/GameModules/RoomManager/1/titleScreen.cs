@@ -9,7 +9,7 @@ function TitleScreen::openTitleScreen(%this, %scene)
     %background = new Sprite();
     %background.setBodyType( "static" );
     %background.setImage( "GameAssets:menu_titleScreenBkgrd" );
-    %background.setSize( 640, 480 );
+    %background.setSize( $roomWidth, $roomHeight );
     %background.setCollisionSuppress();
     %background.setAwake( false );
     %background.setActive( false );

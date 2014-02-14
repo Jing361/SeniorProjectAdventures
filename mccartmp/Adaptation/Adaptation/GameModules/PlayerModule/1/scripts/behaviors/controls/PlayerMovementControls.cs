@@ -10,6 +10,7 @@ if (!isObject(PlayerMovementControlsBehavior))
     %template.behaviorType = "Input";
     %template.description  = "Shooter style movement control";
 
+    %template.addBehaviorField(walkSpeed, "Speed of travel", float, 0.0);
     %template.addBehaviorField(upKey, "Key to bind to upward movement", keybind, "keyboard up");
     %template.addBehaviorField(downKey, "Key to bind to downward movement", keybind, "keyboard down");
     %template.addBehaviorField(leftKey, "Key to bind to left movement", keybind, "keyboard left");
@@ -27,6 +28,7 @@ function PlayerMovementControlsBehavior::onBehaviorAdd(%this)
     GlobalActionMap.bindObj(getWord(%this.downKey, 0), getWord(%this.downKey, 1), "moveDown", %this);
     GlobalActionMap.bindObj(getWord(%this.leftKey, 0), getWord(%this.leftKey, 1), "moveLeft", %this);
     GlobalActionMap.bindObj(getWord(%this.rightKey, 0), getWord(%this.rightKey, 1), "moveRight", %this);
+    GlobalActionMap.bindObj("keyboard", "space", "pressSpace", %this);
 
     %this.up = 0;
     %this.down = 0;
@@ -39,7 +41,7 @@ function PlayerMovementControlsBehavior::onBehaviorRemove(%this)
     if (!isObject(GlobalActionMap))
        return;
 
-    %this.owner.disableUpdateCallback();
+    //%this.owner.disableUpdateCallback();
 
     GlobalActionMap.unbindObj(getWord(%this.upKey, 0), getWord(%this.upKey, 1), %this);
     GlobalActionMap.unbindObj(getWord(%this.downKey, 0), getWord(%this.downKey, 1), %this);
@@ -70,8 +72,8 @@ function PlayerMovementControlsBehavior::onCollision(%this, %object, %collisionD
   
 function PlayerMovementControlsBehavior::updateMovement(%this)
 {	 
-    %this.owner.setLinearVelocityX((%this.right - %this.left) * %this.owner.walkSpeed);
-    %this.owner.setLinearVelocityY((%this.up - %this.down) * %this.owner.walkSpeed);
+    %this.owner.setLinearVelocityX((%this.right - %this.left) * %this.walkSpeed);
+    %this.owner.setLinearVelocityY((%this.up - %this.down) * %this.walkSpeed);
 }
 
 function PlayerMovementControlsBehavior::moveUp(%this, %val)
@@ -97,4 +99,20 @@ function PlayerMovementControlsBehavior::moveRight(%this, %val)
     %this.right = %val;
     %this.updateMovement();
 }
+
+function PlayerMovementControlsBehavior::pressSpace(%this, %val)
+{
+	if(%val == 1)
+	{
+		// add a bullet to the arena
+		%newBullet = new CompositeSprite()
+		{
+			class = "PlayerBullet";
+		};
+		
+		arenaScene.add( %newBullet );
+		
+		%newBullet.setPosition(%this.owner.getPosition());
+	}
+} 
 

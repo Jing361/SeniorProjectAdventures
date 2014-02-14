@@ -13,19 +13,16 @@ function RoomManager::create( %this )
     mainWindow.setScene(mainScene);
     mainWindow.setCameraPosition( 0, 0 );
 	
+	mainScene.layerSortMode0 = "Newest";
+	
     mainScene.setDebugOn( "aabb" );			//bound boxes visible
 	
-    mainWindow.setCameraSize( 640, 480 );	//zoomed out...
-    //mainWindow.setCameraSize( 100, 75 );
+    mainWindow.setCameraSize( $roomWidth, $roomHeight );
+    //mainWindow.setCameraSize( $roomWidth*1.2, $roomHeight*1.2 );	//zoomed out cam
 
-/*	
-	echo("Mikey man");
-	enableXInput();  
-	$enableDirectInput = true;  
-	activateDirectInput();  
-	echoInputState();
-	echo("Mikey man");
-	*/
+	enableXinput();
+	$enableDirectInput=true;
+	activateDirectInput();
 	
     // load some scripts and variables
     //exec("./scripts/arena.cs");
@@ -38,7 +35,7 @@ function RoomManager::create( %this )
 		class = "TitleScreen";
 		myManager = %this;
 	};
-		
+		 
 	%gui_titleScreen.openTitleScreen(mainScene);
 }
     
@@ -50,9 +47,11 @@ function RoomManager::create( %this )
 	{
 		class = "Arena";
 	};
-	%arenaScene = new Scene();
-	%gameArena.buildArena( %arenaScene );
-    mainWindow.setScene( %arenaScene );
+	new Scene(arenaScene);
+	arenaScene.setDebugOn( "aabb" );	
+	arenaScene.layerSortMode0 = "X";
+	%gameArena.buildArena( );
+    mainWindow.setScene( arenaScene );
   }
   
 //-----------------------------------------------------------------------------

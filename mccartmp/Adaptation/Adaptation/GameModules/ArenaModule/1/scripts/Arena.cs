@@ -26,7 +26,7 @@ function Arena::getAnimationSize(%this, %anim)
 
 //-----------------------------------------------------------------------------
 
-function Arena::buildArena(%this, %scene)
+function Arena::buildArena(%this)
 {
     // A pre-built Arena of size 100x75, with background.
     // Triggers will be provide around the edges to let the developer know when objects in the
@@ -36,32 +36,30 @@ function Arena::buildArena(%this, %scene)
     %background = new Sprite();
     %background.setBodyType( "static" );
     %background.setImage( "GameAssets:background" );
-    %background.setSize( 640, 480 );
+    %background.setSize( $roomWidth, $roomHeight );
     %background.setCollisionSuppress();
     %background.setAwake( false );
     %background.setActive( false );
     %background.setSceneLayer(30);
-    %scene.add( %background );
+    arenaScene.add( %background );
     
     // Arena Edges
     %roomEdges = new Sprite();
     %roomEdges.setBodyType( "static" );
     %roomEdges.setImage( "GameAssets:backgroundedging" );
-    %roomEdges.setSize( 640, 480 );
+    %roomEdges.setSize( $roomWidth, $roomHeight );
     %roomEdges.setCollisionSuppress();
     %roomEdges.setAwake( false );
     %roomEdges.setActive( false );
-    %roomEdges.setSceneLayer(10);
-    %scene.add( %roomEdges ); 
+    %roomEdges.setSceneLayer(2);
+    arenaScene.add( %roomEdges ); 
     
-    addArenaBoundaries( %scene, 640, 480 );
+    %this.addArenaBoundaries( $roomWidth, $roomHeight );
 	
-	%this.player = %this.spawnPlayer(%scene, -25, 0);
+	%this.player = %this.spawnPlayer(-25, 0);
 	
-	%enemyList.add(%this.spawnEnemyUnit(%scene, getRandom(-320,320), 200));
-	%enemyList.add(%this.spawnEnemyUnit(%scene, getRandom(-320,320), 200));
-	%enemyList.add(%this.spawnEnemyUnit(%scene, getRandom(-320,320), 200));
-	%enemyList.add(%this.spawnEnemyUnit(%scene, getRandom(-320,320), 200));
+	//%enemyList.add(%this.spawnEnemyUnit(%scene, getRandom(-320,320), 200));
+	%this.spawnEnemyUnit(getRandom(-$roomWidth/2, $roomWidth/2), $roomHeight/2);
 	
 	
 	
@@ -72,7 +70,7 @@ function Arena::buildArena(%this, %scene)
 
 //-----------------------------------------------------------------------------
 
-function Arena::addArenaBoundaries(%this, %scene, %width, %height)
+function Arena::addArenaBoundaries(%this, %width, %height)
 {
     // add boundaries on all sides of the Arena a bit outside of the border of the screen.
     // The triggers allow for onCollision to be sent to any fish or other object that touches the edges.
@@ -81,13 +79,13 @@ function Arena::addArenaBoundaries(%this, %scene, %width, %height)
 
     // Calculate a width and height to use for the bounds.
     // They should be bigger than the Arena itself.
-    %wrapWidth = %width * 1.1;
-    %wrapHeight = %height * 1.1;
+    %wrapWidth = %width * 1.0;
+    %wrapHeight = %height * 1.0;	//1.1
 
-    %scene.add( createOneArenaBoundary( "left",   -%wrapWidth/2 SPC 0,  5 SPC %wrapHeight) );
-    %scene.add( createOneArenaBoundary( "right",  %wrapWidth/2 SPC 0,   5 SPC %wrapHeight) );
-    %scene.add( createOneArenaBoundary( "top",    0 SPC -%wrapHeight/2, %wrapWidth SPC 5 ) );
-    %scene.add( createOneArenaBoundary( "bottom", 0 SPC %wrapHeight/2,  %wrapWidth SPC 5 ) );
+    arenaScene.add( %this.createOneArenaBoundary( "left",   -%wrapWidth/2 SPC 0,  5 SPC %wrapHeight) );
+    arenaScene.add( %this.createOneArenaBoundary( "right",  %wrapWidth/2 SPC 0,   5 SPC %wrapHeight) );
+    arenaScene.add( %this.createOneArenaBoundary( "top",    0 SPC -%wrapHeight/2, %wrapWidth SPC 5 ) );
+    arenaScene.add( %this.createOneArenaBoundary( "bottom", 0 SPC %wrapHeight/2,  %wrapWidth SPC 5 ) );
 }
 
 //-----------------------------------------------------------------------------
@@ -112,24 +110,24 @@ function Arena::createOneArenaBoundary(%this, %side, %position, %size)
 
 //-----------------------------------------------------------------------------
 
-function Arena::spawnPlayer(%this, %scene, %xPos, %yPos)
+function Arena::spawnPlayer(%this, %xPos, %yPos)
 {
     // add a Player object to the Arena
-	%newPlayer = new CompositeSprite()
+	new CompositeSprite(mainPlayer)
 	{
 		class = "Player";
 	};
 	
-    %scene.add( %newPlayer );
+    arenaScene.add( mainPlayer );
 	
-	%newPlayer.setPosition(%xPos, %yPos);
+	mainPlayer.setPosition(%xPos, %yPos);
 
-	return %newPlayer;
+	return mainPlayer;
 } 
 
 //-----------------------------------------------------------------------------
 
-function Arena::spawnEnemyUnit(%this, %scene, %xPos, %yPos)
+function Arena::spawnEnemyUnit(%this, %xPos, %yPos)
 {
     // add a Player object to the Arena
 	%newEnemy = new CompositeSprite()
@@ -137,7 +135,7 @@ function Arena::spawnEnemyUnit(%this, %scene, %xPos, %yPos)
 		class = "EnemyUnit";
 	};
 	
-    %scene.add( %newEnemy );
+    arenaScene.add( %newEnemy );
 	
 	%newEnemy.setPosition(%xPos, %yPos);
 
