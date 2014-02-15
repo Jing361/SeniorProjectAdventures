@@ -29,6 +29,8 @@ linkmap.txt
     
 # Compiled source #
 ###################
+*.exe
+!Torque2D.exe
 *.com
 *.class
 *.o
