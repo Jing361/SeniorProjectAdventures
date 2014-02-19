@@ -89,6 +89,9 @@ function EnemyUnit::configureTools(%this, %chromosome)
 	%nextPosition = "";
 	
 	%this.configureSingleTool("Armor", %this.toolArmor_count);
+	%this.configureSingleTool("Parry", %this.toolParry_count);
+	%this.configureSingleTool("Acid", %this.toolAcid_count);
+	%this.configureSingleTool("Tar", %this.toolTar_count);
 	%this.configureSingleTool("Blade", %this.toolBlade_count);
 	%this.configureSingleTool("Shooter", %this.toolShooter_count);
 	

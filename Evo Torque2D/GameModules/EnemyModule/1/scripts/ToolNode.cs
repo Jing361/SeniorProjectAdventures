@@ -47,14 +47,23 @@ function ToolNode::setupSprites( %this )
 	if(%this.toolType $= "Blob") {
 		%this.setupSpriteBlob();
 	}
-	else if(%this.toolType $= "Shooter"){
-		%this.setupSpriteShooter();
+	else if(%this.toolType $= "Armor"){
+		%this.setupSpriteArmor();
+	}
+	else if(%this.toolType $= "Parry"){
+		%this.setupSpriteParry();
+	}
+	else if(%this.toolType $= "Acid"){
+		%this.setupSpriteAcid();
+	}
+	else if(%this.toolType $= "Tar"){
+		%this.setupSpriteTar();
 	}
 	else if(%this.toolType $= "Blade"){
 		%this.setupSpriteBlade();
 	}
-	else if(%this.toolType $= "Armor"){
-		%this.setupSpriteArmor();
+	else if(%this.toolType $= "Shooter"){
+		%this.setupSpriteShooter();
 	}
 	
 	%this.owner.setSpriteAngle(%this.orientation);
@@ -71,13 +80,39 @@ function ToolNode::setupSpriteBlob( %this )
 
 //-----------------------------------------------------------------------------
 
-function ToolNode::setupSpriteShooter( %this )
+function ToolNode::setupSpriteArmor( %this )
 {
-	%this.owner.setSpriteImage("GameAssets:tool_shooter_a", 0);
-	%this.owner.setSpriteSize(64 * %this.owner.sizeRatio, 64 * %this.owner.sizeRatio);
-	%this.sortLevel = 6;
+	%this.owner.setSpriteImage("GameAssets:tool_armor_a", 0);
+	%this.owner.setSpriteSize(80 * %this.owner.sizeRatio, 144 * %this.owner.sizeRatio);
+	%this.sortLevel = 1;
 }
 
+//-----------------------------------------------------------------------------
+
+function ToolNode::setupSpriteParry( %this )
+{
+	%this.owner.setSpriteImage("GameAssets:tool_parry_a", 0);
+	%this.owner.setSpriteSize(64 * %this.owner.sizeRatio, 64 * %this.owner.sizeRatio);
+	%this.sortLevel = 5;
+}
+
+//-----------------------------------------------------------------------------
+
+function ToolNode::setupSpriteAcid( %this )
+{
+	%this.owner.setSpriteImage("GameAssets:tool_acid_a", 0);
+	%this.owner.setSpriteSize(64 * %this.owner.sizeRatio, 64 * %this.owner.sizeRatio);
+	%this.sortLevel = 5;
+}
+
+//-----------------------------------------------------------------------------
+
+function ToolNode::setupSpriteTar( %this )
+{
+	%this.owner.setSpriteImage("GameAssets:tool_tar_a", 0);
+	%this.owner.setSpriteSize(64 * %this.owner.sizeRatio, 64 * %this.owner.sizeRatio);
+	%this.sortLevel = 5;
+}
 //-----------------------------------------------------------------------------
 
 function ToolNode::setupSpriteBlade( %this )
@@ -86,15 +121,15 @@ function ToolNode::setupSpriteBlade( %this )
 	%this.owner.setSpriteSize(64 * %this.owner.sizeRatio, 64 * %this.owner.sizeRatio);
 	%this.sortLevel = 5;
 }
-
 //-----------------------------------------------------------------------------
 
-function ToolNode::setupSpriteArmor( %this )
+function ToolNode::setupSpriteShooter( %this )
 {
-	%this.owner.setSpriteImage("GameAssets:tool_armor_a", 0);
-	%this.owner.setSpriteSize(80 * %this.owner.sizeRatio, 144 * %this.owner.sizeRatio);
-	%this.sortLevel = 1;
+	%this.owner.setSpriteImage("GameAssets:tool_shooter_a", 0);
+	%this.owner.setSpriteSize(64 * %this.owner.sizeRatio, 64 * %this.owner.sizeRatio);
+	%this.sortLevel = 6;
 }
+
 
 //-----------------------------------------------------------------------------
 

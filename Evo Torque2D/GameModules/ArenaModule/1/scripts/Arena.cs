@@ -137,7 +137,7 @@ function Arena::processRoomChromosomes(%this)
 {
 	%toolVarietyCount = 7;		//number of different tools available, length of local chromosomes
 	
-	%chromosome = "1 0 0 0 1 2 2" SPC "0 0 0 0 1 2 4" SPC "4 0 0 0 0 0 0";
+	%chromosome = "1 1 1 1 1 2 5" SPC "0 0 0 0 1 2 4" SPC "4 0 0 0 0 0 0";
 	
 	for(%i = 0; %i < getWordCount(%chromosome)/%toolVarietyCount; %i++)
 	{
