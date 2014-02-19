@@ -37,6 +37,6 @@ function MenuControlBehavior::changeRoom(%this, %val)
 	{
 		%this.owner.myManager.changeToArena();
 		GlobalActionMap.unbindObj(getWord(%this.enterKey, 0), getWord(%this.enterKey, 1), %this);
-		%this.safeDelete();
+		//%this.owner.safeDelete();
 	}
 }

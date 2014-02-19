@@ -22,18 +22,20 @@ function PlayerMovementControlsBehavior::onBehaviorAdd(%this)
     if (!isObject(GlobalActionMap))
        return;
 
-	//new ActionMap(playerControls);
-	
     GlobalActionMap.bindObj(getWord(%this.upKey, 0), getWord(%this.upKey, 1), "moveUp", %this);
     GlobalActionMap.bindObj(getWord(%this.downKey, 0), getWord(%this.downKey, 1), "moveDown", %this);
     GlobalActionMap.bindObj(getWord(%this.leftKey, 0), getWord(%this.leftKey, 1), "moveLeft", %this);
     GlobalActionMap.bindObj(getWord(%this.rightKey, 0), getWord(%this.rightKey, 1), "moveRight", %this);
     GlobalActionMap.bindObj("keyboard", "space", "pressSpace", %this);
 
-    %this.up = 0;
-    %this.down = 0;
-    %this.left = 0;
-    %this.right = 0;
+	%this.up = 0;
+	%this.down = 0;
+	%this.left = 0;
+	%this.right = 0;
+	
+	//shot barrel offset (instead of bullet coming out of center of player)	
+	%barrelXoffset = 42*%this.owner.sizeRatio;
+	%barrelYoffset = 55*%this.owner.sizeRatio;
 }
 
 function PlayerMovementControlsBehavior::onBehaviorRemove(%this)
@@ -42,16 +44,17 @@ function PlayerMovementControlsBehavior::onBehaviorRemove(%this)
        return;
 
     //%this.owner.disableUpdateCallback();
+    %this.owner.setUpdateCallback(true);
 
     GlobalActionMap.unbindObj(getWord(%this.upKey, 0), getWord(%this.upKey, 1), %this);
     GlobalActionMap.unbindObj(getWord(%this.downKey, 0), getWord(%this.downKey, 1), %this);
     GlobalActionMap.unbindObj(getWord(%this.leftKey, 0), getWord(%this.leftKey, 1), %this);
     GlobalActionMap.unbindObj(getWord(%this.rightKey, 0), getWord(%this.rightKey, 1), %this);
 
-    %this.up = 0;
-    %this.down = 0;
-    %this.left = 0;
-    %this.right = 0;
+	%this.up = 0;
+	%this.down = 0;
+	%this.left = 0;
+	%this.right = 0;
 }
 
 function PlayerMovementControlsBehavior::onCollision(%this, %object, %collisionDetails)
@@ -69,6 +72,8 @@ function PlayerMovementControlsBehavior::onCollision(%this, %object, %collisionD
 		%this.updateMovement();
 	}
 }
+
+//------------------------------------------------------------------------------------
   
 function PlayerMovementControlsBehavior::updateMovement(%this)
 {	 
@@ -99,6 +104,7 @@ function PlayerMovementControlsBehavior::moveRight(%this, %val)
     %this.right = %val;
     %this.updateMovement();
 }
+//------------------------------------------------------------------------------------
 
 function PlayerMovementControlsBehavior::pressSpace(%this, %val)
 {
@@ -108,11 +114,11 @@ function PlayerMovementControlsBehavior::pressSpace(%this, %val)
 		%newBullet = new CompositeSprite()
 		{
 			class = "PlayerBullet";
+			fireAngle = %this.owner.getAngle();
 		};
 		
 		arenaScene.add( %newBullet );
 		
-		%newBullet.setPosition(%this.owner.getPosition());
+		%newBullet.setPosition(%this.owner.getPosition() );
 	}
 } 
-

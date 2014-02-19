@@ -18,6 +18,8 @@ function EnemyUnit::initialize(%this)
 	
 	%this.setAngle(90);
 	
+	%this.sizeRatio = 0.8;
+	
 	//%this.setupSprite();
 	%this.setupBehaviors();
 
@@ -28,25 +30,8 @@ function EnemyUnit::initialize(%this)
     %this.setCollisionGroups( "5 15" );
 	//%this.CollisionCallback = true;
 	%this.setCollisionCallback(true);
-	
-	/*From Chris Beals
-	I added the one line and changed the input for configureTools. 
-	The idea is that you run it and it will output the best result string. 
-	Also I have it hard coded with a txt file path but ideally you would make one
-	that would have the info the algorithm needs. It needs:
-	the point limit for the next room
-	the ranged percent of the player
-	the melee percent of the player
-	the block percent of the player
-	the dash percent of the player
-	the enemy damage per swing average
-	the enemy damage per shot average
-	then the last room composition of tools
-	*/
-	
-	$evolution::ga = new GeneticAlgorithm();
 					
-	%this.configureTools($evolution::ga.run(""));		// ordering: shield/parry/acid/tar/blade/shooter/blob
+	%this.configureTools(%this.myChromosome);		// ordering: shield/parry/acid/tar/blade/shooter/blob (+1)
 }
 
 //-----------------------------------------------------------------------------
@@ -65,8 +50,8 @@ function EnemyUnit::setupBehaviors( %this )
 	exec("./behaviors/movement/Drift.cs");
 	exec("./behaviors/ai/faceObject.cs");
 	%driftMove = DriftBehavior.createInstance();
-	%driftMove.minSpeed = 300;
-	%driftMove.maxSpeed = 350;
+	%driftMove.minSpeed = %this.minSpeed;
+	%driftMove.maxSpeed = %this.maxSpeed;
 	%this.addBehavior(%driftMove);
 	
 	%faceObj = FaceObjectBehavior.createInstance();
@@ -177,9 +162,6 @@ function EnemyUnit::orderTools( %this )
 		}
 	}
 }
-
-
-
 
 //-----------------------------------------------------------------------------
 ///call this to add tools to body. ensures toolNode is tracked in grid
