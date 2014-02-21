@@ -26,7 +26,7 @@ function PlayerMovementControlsBehavior::onBehaviorAdd(%this)
     GlobalActionMap.bindObj(getWord(%this.downKey, 0), getWord(%this.downKey, 1), "moveDown", %this);
     GlobalActionMap.bindObj(getWord(%this.leftKey, 0), getWord(%this.leftKey, 1), "moveLeft", %this);
     GlobalActionMap.bindObj(getWord(%this.rightKey, 0), getWord(%this.rightKey, 1), "moveRight", %this);
-    GlobalActionMap.bindObj("keyboard", "space", "pressSpace", %this);
+    GlobalActionMap.bindObj("keyboard", "space", "pressFire", %this);
 
 	%this.up = 0;
 	%this.down = 0;
@@ -34,8 +34,8 @@ function PlayerMovementControlsBehavior::onBehaviorAdd(%this)
 	%this.right = 0;
 	
 	//shot barrel offset (instead of bullet coming out of center of player)	
-	%barrelXoffset = 42*%this.owner.sizeRatio;
-	%barrelYoffset = 55*%this.owner.sizeRatio;
+	%this.barrelXoffset = 55*%this.owner.sizeRatio;
+	%this.barrelYoffset = -42*%this.owner.sizeRatio;
 }
 
 function PlayerMovementControlsBehavior::onBehaviorRemove(%this)
@@ -106,7 +106,7 @@ function PlayerMovementControlsBehavior::moveRight(%this, %val)
 }
 //------------------------------------------------------------------------------------
 
-function PlayerMovementControlsBehavior::pressSpace(%this, %val)
+function PlayerMovementControlsBehavior::pressFire(%this, %val)
 {
 	if(%val == 1)
 	{
@@ -119,6 +119,6 @@ function PlayerMovementControlsBehavior::pressSpace(%this, %val)
 		
 		arenaScene.add( %newBullet );
 		
-		%newBullet.setPosition(%this.owner.getPosition() );
+		%newBullet.setPosition(%this.owner.getWorldPoint(%this.barrelXoffset, %this.barrelYoffset) );
 	}
 } 

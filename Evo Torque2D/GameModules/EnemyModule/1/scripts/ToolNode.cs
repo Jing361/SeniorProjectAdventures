@@ -27,10 +27,14 @@ function ToolNode::initialize(%this)
 
 function ToolNode::setupCollisionShape( %this )
 {
-	%shapePoints = %this.bodyPosX*%this.myWidth SPC %this.bodyPosY*%this.myHeight 
-		SPC (%this.bodyPosX + 1)*%this.myWidth SPC %this.bodyPosY*%this.myHeight 
-		SPC (%this.bodyPosX + 1)*%this.myWidth SPC (%this.bodyPosY + 1)*%this.myHeight
-		SPC %this.bodyPosX*%this.myWidth SPC (%this.bodyPosY + 1)*%this.myHeight;
+	%offsetX = %this.myWidth/2;
+	%offsetY = %this.myHeight/2;
+	
+	%shapePoints = 
+	%this.bodyPosX*%this.myWidth - %offsetX SPC %this.bodyPosY*%this.myHeight - %offsetY SPC 
+	(%this.bodyPosX + 1)*%this.myWidth - %offsetX SPC %this.bodyPosY*%this.myHeight - %offsetY SPC 
+	(%this.bodyPosX + 1)*%this.myWidth - %offsetX SPC (%this.bodyPosY + 1)*%this.myHeight - %offsetY SPC 
+	%this.bodyPosX*%this.myWidth - %offsetX SPC (%this.bodyPosY + 1)*%this.myHeight - %offsetY;
 		
 	%this.owner.createPolygonCollisionShape(%shapePoints);
 }
@@ -83,7 +87,7 @@ function ToolNode::setupSpriteBlob( %this )
 function ToolNode::setupSpriteArmor( %this )
 {
 	%this.owner.setSpriteImage("GameAssets:tool_armor_a", 0);
-	%this.owner.setSpriteSize(80 * %this.owner.sizeRatio, 144 * %this.owner.sizeRatio);
+	%this.owner.setSpriteSize(144 * %this.owner.sizeRatio, 80 * %this.owner.sizeRatio);
 	%this.sortLevel = 1;
 }
 
@@ -147,13 +151,12 @@ function ToolNode::getOpenSlots( %this )
 	if(%this.toolType !$= "Blob")
 		return "";
 		
-		
+	%left = (%this.bodyPosX - 1) SPC (%this.bodyPosY);
 	%down = (%this.bodyPosX) SPC (%this.bodyPosY - 1);
 	%right = (%this.bodyPosX + 1) SPC (%this.bodyPosY);
 	%up = (%this.bodyPosX) SPC (%this.bodyPosY + 1);
-	%left = (%this.bodyPosX - 1) SPC (%this.bodyPosY);
 	
-	return %down SPC %right SPC %up SPC %left;
+	return %left SPC %down SPC %right SPC %up;
 }
 //-----------------------------------------------------------------------------
 

@@ -3,5 +3,5 @@
     ImageFile="playerbase.png"
     CellCountX="2"
     CellCountY="1"
-    CellWidth="159"
-    CellHeight="210" />
+    CellWidth="210"
+    CellHeight="164" />

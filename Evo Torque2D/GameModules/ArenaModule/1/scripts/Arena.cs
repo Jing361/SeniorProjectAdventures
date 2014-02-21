@@ -137,7 +137,10 @@ function Arena::processRoomChromosomes(%this)
 {
 	%toolVarietyCount = 7;		//number of different tools available, length of local chromosomes
 	
-	%chromosome = "1 1 1 1 1 2 5" SPC "0 0 0 0 1 2 4" SPC "4 0 0 0 0 0 0";
+	$genAlg = new GeneticAgorithm();
+	
+	//%chromosome = "1 1 1 1 1 2 5" SPC "0 0 0 0 1 2 4" SPC "4 0 0 0 0 0 0" SPC "0 0 0 0 0 0 0";
+	%chromosome = $genAlg.run("");
 	
 	for(%i = 0; %i < getWordCount(%chromosome)/%toolVarietyCount; %i++)
 	{
@@ -145,21 +148,19 @@ function Arena::processRoomChromosomes(%this)
 		
 		echo(%subChromosome);
 		
-		%this.spawnEnemyUnit(%subChromosome, getRandom(-$roomWidth/2, $roomWidth/2), $roomHeight/2, 130);
+		%this.spawnEnemyUnit(%subChromosome, getRandom(-$roomWidth/2, $roomWidth/2), $roomHeight/2);
 	}
 	
 }
 
 //-----------------------------------------------------------------------------
 
-function Arena::spawnEnemyUnit(%this, %localChromosome, %xPos, %yPos, %speed)
+function Arena::spawnEnemyUnit(%this, %localChromosome, %xPos, %yPos)
 {
     // add a Player object to the Arena
 	%newEnemy = new CompositeSprite()
 	{
 		class = "EnemyUnit";
-		minSpeed = %speed;
-		maxSpeed = %speed;
 		myChromosome = %localChromosome;
 	};
 	

@@ -15,18 +15,18 @@ function EnemyUnit::initialize(%this)
 	%this.setSceneGroup(10);		//Enemy Unit sceneGroup
 
 	%this.health = 100;
-	
+	%this.walkSpeed = 10;
 	%this.setAngle(90);
 	
-	%this.sizeRatio = 0.8;
+	%this.sizeRatio = $pixelToWorldRatio;
 	
 	//%this.setupSprite();
 	%this.setupBehaviors();
 
 	%this.setSceneLayer(10);
 	
-    %this.createPolygonBoxCollisionShape(74, 78);
-    %this.setCollisionShapeIsSensor(0, true);
+    //%this.createPolygonBoxCollisionShape(74, 78);
+    //%this.setCollisionShapeIsSensor(0, true);
     %this.setCollisionGroups( "5 15" );
 	//%this.CollisionCallback = true;
 	%this.setCollisionCallback(true);
@@ -41,6 +41,19 @@ function EnemyUnit::setupSprite( %this )
 	%this.addSprite("0 0");
 	%this.setSpriteImage("GameAssets:basicenemy", 0);
 	%this.setSpriteSize(74, 78);
+	
+	%obj = new T2dShapeVector()   
+    {   
+        scenegraph = %this;   
+    };    
+    %obj.setPolyPrimitive( 4 );  
+    %obj.setPolyCustom( 4, "0 0 0 1 1 1 1 0" );  
+    %obj.setSize( 500, 300 );  
+    %obj.setLineColor( "0 0 0 1" );  
+    %obj.setFillMode( true );  
+    %obj.setFillColor( "1 0 0" );  
+    %obj.setFillAlpha( 0.6 );  
+    %obj.setLayer( 1 ); 
 }
 
 //-----------------------------------------------------------------------------
@@ -50,8 +63,7 @@ function EnemyUnit::setupBehaviors( %this )
 	exec("./behaviors/movement/Drift.cs");
 	exec("./behaviors/ai/faceObject.cs");
 	%driftMove = DriftBehavior.createInstance();
-	%driftMove.minSpeed = %this.minSpeed;
-	%driftMove.maxSpeed = %this.maxSpeed;
+	%driftMove.speed = %this.walkSpeed;
 	%this.addBehavior(%driftMove);
 	
 	%faceObj = FaceObjectBehavior.createInstance();
@@ -208,34 +220,34 @@ function EnemyUnit::findToolOrientation( %this, %posX, %posY)
 	if(isObject(%this.myBody[%posX, %posY - 1]))		//down
 	{
 		if(%this.myBody[%posX, %posY - 1].toolType $= "Blob")
-			return 0;
+			return 90;
 	}
 	if(isObject(%this.myBody[%posX + 1, %posY]))		//right
 	{
 		if(%this.myBody[%posX + 1, %posY].toolType $= "Blob")
-			return 90;
+			return 180;
 	}
 	if(isObject(%this.myBody[%posX, %posY + 1]))		//up
 	{
 		if(%this.myBody[%posX, %posY + 1].toolType $= "Blob")
-			return 180;
+			return 270;
 	}
 	if(isObject(%this.myBody[%posX - 1, %posY]))		//left
 	{
 		if(%this.myBody[%posX - 1, %posY].toolType $= "Blob")
-			return 270;
+			return 0;
 	}
 	return 0;
 }
 
 //-----------------------------------------------------------------------------
-///finds free body coordinate to add toolNode to
+///finds free body coordinate to add toolNode to (%positions is all possible positions in which to place new tool)
 
 function EnemyUnit::findViablePosition( %this, %positions , %flag)			
 {
 	for(%i = 0; %i < getWordCount(%positions) - 1; %i += 2)
 	{
-		%currPosition = getWord(%positions, %i) SPC getWord(%positions, %i + 1);
+		%currPosition = getWord(%positions, %i) SPC getWord(%positions, %i + 1);			//get first 
 		
 		if(!isObject(%this.myBody[getWord(%currPosition, 0), getWord(%currPosition, 1)]))
 		{

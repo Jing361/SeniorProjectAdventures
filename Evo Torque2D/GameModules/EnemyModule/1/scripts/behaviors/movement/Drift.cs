@@ -6,8 +6,7 @@ if (!isObject(DriftBehavior))
   %template.behaviorType = "Movement";
   %template.description  = "Drift Down.  Recycle Object At Bottom";
 
-  %template.addBehaviorField(minSpeed, "Minimum speed to fall", float, 350.0);
-  %template.addBehaviorField(maxSpeed, "Maximum speed to fall", float, 375.0);
+  %template.addBehaviorField(speed, "Minimum speed to fall", float, 10.0);
 }
 
 function DriftBehavior::onBehaviorAdd(%this)
@@ -32,5 +31,5 @@ function DriftBehavior::recycle(%this)
 {
   %this.owner.setPosition(getRandom(-$roomWidth/2, $roomWidth/2), $roomHeight/2);
   %this.owner.setLinearVelocityX( 0 );
-  %this.owner.setLinearVelocityY( -1000 );//-getRandom(%this.minSpeed, %this.maxSpeed) 
+  %this.owner.setLinearVelocityY( -%this.speed );
 }

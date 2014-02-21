@@ -4,9 +4,11 @@
 
 
 //globals
-$roomWidth = 1280;
-$roomHeight = 960;
-
+//$roomWidth = 1280;
+//$roomHeight = 960;
+$roomWidth = 160;
+$roomHeight = 120;
+$pixelToWorldRatio = $roomWidth/1600;
 
 function RoomManager::create( %this )
 {
@@ -37,9 +39,11 @@ function RoomManager::create( %this )
     mainWindow.setCameraSize( $roomWidth, $roomHeight );
     //mainWindow.setCameraSize( $roomWidth*1.2, $roomHeight*1.2 );	//zoomed out cam
 
-	/*enableXinput();
+	/*
+	mainScene.enableXinput();
 	$enableDirectInput=true;
-	activateDirectInput();*/
+	mainScene.activateDirectInput();
+	*/
 	
     // load some scripts and variables
     //exec("./scripts/arena.cs");
@@ -65,7 +69,7 @@ function RoomManager::changeToArena( %this )
 		class = "Arena";
 	};
 	new Scene(arenaScene);
-	arenaScene.setDebugOn( "aabb" );	
+	arenaScene.setDebugOn("collision");
 	arenaScene.layerSortMode0 = "X";
 	%gameArena.buildArena( );
 	mainWindow.setScene( arenaScene );
