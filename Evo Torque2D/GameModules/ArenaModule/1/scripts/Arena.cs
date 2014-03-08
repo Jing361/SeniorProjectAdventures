@@ -2,6 +2,23 @@
 // Room setup and wall collisions
 //-----------------------------------------------------------------------------
 
+function Arena::writeFile(%str)
+{
+%file = new FileObject();
+
+if(%file.openForWrite("~/data/test.txt"))
+{
+%file.writeLine(%str);
+echo("File Written");
+}
+else
+{
+error("File is not open for writing");
+}
+%file.close();
+%file.delete();
+}
+
 function Arena::getAnimationList(%this)
 {		
    %list = "GameAssets:playerbaseAnim" @ "," @ "GameAssets:seahorseAnim" ;
@@ -137,10 +154,14 @@ function Arena::processRoomChromosomes(%this)
 {
 	%toolVarietyCount = 7;		//number of different tools available, length of local chromosomes
 	
-	$genAlg = new GeneticAgorithm();
-	
+	$genAlg = new GeneticAlgorithm();
+
 	//%chromosome = "1 1 1 1 1 2 5" SPC "0 0 0 0 1 2 4" SPC "4 0 0 0 0 0 0" SPC "0 0 0 0 0 0 0";
 	%chromosome = $genAlg.run("");
+	%this.writeFile(%chromosome);
+	echo("chromosome:" SPC %chromosome);
+	
+	
 	
 	for(%i = 0; %i < getWordCount(%chromosome)/%toolVarietyCount; %i++)
 	{

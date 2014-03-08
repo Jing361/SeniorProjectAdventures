@@ -21,7 +21,8 @@ int GeneticAlgorithm::run ()
 		selector ( );
 		//elitist ( );
 		cout<< "Generation:  " << generation << "\n";
-		cout<< " Population    " << population.size() << "\n";
+		cout << "Best fitness = " << population[population.size()-1].getFitness() << "\n";
+		//cout<< " Population    " << population.size() << "\n";
 	}
 
 	cout << "\n";
@@ -33,17 +34,17 @@ int GeneticAlgorithm::run ()
 
 	for(int j = 0; j < POPSIZE; ++j)
 	{
-		cout << "var("  ") = " << "\n";
+		//cout << "var("  ") = " << "\n";
 
 		for(geneIterator = population[j].getGene()->begin(); geneIterator != population[j].getGene()->end(); ++geneIterator)
 		{
-			cout << *geneIterator << "  ";
+			//cout << *geneIterator << "  ";
 
 		}
 
-		cout << "\n";
+		//cout << "\n";
 
-		cout << population[j].getFitness() << "\n";
+		//cout << population[j].getFitness() << "\n";
 
 	}
 
@@ -167,7 +168,7 @@ void GeneticAlgorithm::initialize ( char* filename  )
 
 	file_in >> pointLimit >> rangedPercent >> meleePercent >> blockPercent >> dashPercent >> enemyDPSwing >> enemyDPShot;
 
-	cout<< pointLimit << endl;
+	//cout<< pointLimit << endl;
 
 	while (!file_in.eof())
 	{
@@ -359,7 +360,7 @@ void GeneticAlgorithm::selector ( )
 	{
 		population[i] = newPopulation[i]; 
 	}
-	cout<< newPopulation.size() << "\n";
+	//cout<< newPopulation.size() << "\n";
 	newPopulation.clear();
 	newPopulation.resize(POPSIZE);
 

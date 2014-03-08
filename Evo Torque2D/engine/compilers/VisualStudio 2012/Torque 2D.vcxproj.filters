@@ -2688,6 +2688,9 @@
     <ClInclude Include="..\..\source\evolution\Genotype.h">
       <Filter>evolution</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\evolution\GeneticAlgorithm_ScriptBinding.h">
+      <Filter>evolution</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="..\..\source\math\mMath_ASM.asm">
