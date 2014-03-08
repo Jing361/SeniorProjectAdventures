@@ -146,7 +146,7 @@ function EnemyUnit::configureTools(%this, %chromosome)
 	%this.configureSingleTool("Blade", %this.toolBlade_count);
 	%this.configureSingleTool("Shooter", %this.toolShooter_count);
 	
-	%this.checkLargeBodyBlobs();
+	//%this.checkLargeBodyBlobs();
 	
 	%this.initiateToolSprites();		//ensures proper sprite layering
 	
