@@ -808,6 +808,7 @@
     <ClInclude Include="..\..\source\delegates\delegateSignal.h" />
     <ClInclude Include="..\..\source\delegates\FastDelegate.h" />
     <ClInclude Include="..\..\source\evolution\GeneticAlgorithm.h" />
+    <ClInclude Include="..\..\source\evolution\GeneticAlgorithm_ScriptBinding.h" />
     <ClInclude Include="..\..\source\evolution\Genotype.h" />
     <ClInclude Include="..\..\source\game\defaultGame.h" />
     <ClInclude Include="..\..\source\game\gameInterface.h" />

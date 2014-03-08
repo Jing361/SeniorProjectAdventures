@@ -1,11 +1,19 @@
-//GeneticAlgorithm
-#if defined(TORQUE2D_DEBUG) || defined(TORQUE2D_RELEASE)
+/*//GeneticAlgorithm
+#if defined(TORQUE2D_RELEASE)
+#include "GeneticAlgorithm.h"
+#include "sim/simBase.h"
 
-ConsoleMethod( GeneticAlgorithm, run, string, 3, 3, "(string) Add the object to a scene.\n"
-                                                      "@param string the filepath you need to read from."
-                                                      "@return string The chromosome.")
+ConsoleMethod(GeneticAlgorithm, run, const char *, 3, 3, "() Gets the object's position.\n"
+                                                              "@return chromosome.")
 {
-    return object->run();
+	// Fetch result.  
+    string result = object->run(argv[2]);  
+    // Create Returnable Buffer.  
+	char* pBuffer = Con::getReturnBuffer(result.size()*sizeof(string));  
+
+	dSprintf(pBuffer, result.size()*sizeof(string), "%s", result);  
+
+	return pBuffer; 
 }
 
-#endif
+#endif*/

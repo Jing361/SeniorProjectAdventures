@@ -25,6 +25,7 @@ function AlignToJoystickBehavior::onBehaviorAdd(%this)
    GlobalActionMap.bindObj(getWord(%this.xAxis, 0), getWord(%this.xAxis, 1), "moveX", %this);
    GlobalActionMap.bindObj(getWord(%this.yAxis, 0), getWord(%this.yAxis, 1), "moveY", %this);
    
+   echo(GlobalActionMap);
    
    %this.xVal = 0;
    %this.yVal = 0;

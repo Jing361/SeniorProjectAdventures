@@ -32,5 +32,5 @@ function DriftBehavior::recycle(%this)
 {
   %this.owner.setPosition(getRandom(-$roomWidth/2, $roomWidth/2), $roomHeight/2);
   %this.owner.setLinearVelocityX( 0 );
-  %this.owner.setLinearVelocityY( -getRandom(%this.minSpeed, %this.maxSpeed) );
+  %this.owner.setLinearVelocityY( -1000 );//-getRandom(%this.minSpeed, %this.maxSpeed) 
 }

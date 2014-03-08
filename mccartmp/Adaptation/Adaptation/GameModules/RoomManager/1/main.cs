@@ -2,13 +2,30 @@
 // Room manager, sets up canvas and arena
 //-----------------------------------------------------------------------------
 
+
+//globals
+$roomWidth = 1280;
+$roomHeight = 960;
+
+
 function RoomManager::create( %this )
 {
-    new Scene(mainScene);
+    new Scene(mainScene)
+	{
+		class="defualtWindow";
+	};
 
-    new SceneWindow(mainWindow);
+    new SceneWindow(mainWindow)
+	{
+		useWindowMouseEvents = "1";
+	};
+	
     mainWindow.profile = new GuiControlProfile();
     Canvas.setContent(mainWindow);
+	
+	new ScriptObject(InputManager);
+	mainWindow.addInputListener(InputManager);
+
 
     mainWindow.setScene(mainScene);
     mainWindow.setCameraPosition( 0, 0 );
@@ -20,9 +37,9 @@ function RoomManager::create( %this )
     mainWindow.setCameraSize( $roomWidth, $roomHeight );
     //mainWindow.setCameraSize( $roomWidth*1.2, $roomHeight*1.2 );	//zoomed out cam
 
-	enableXinput();
+	/*enableXinput();
 	$enableDirectInput=true;
-	activateDirectInput();
+	activateDirectInput();*/
 	
     // load some scripts and variables
     //exec("./scripts/arena.cs");
@@ -41,8 +58,8 @@ function RoomManager::create( %this )
     
 //-----------------------------------------------------------------------------
   
-  function RoomManager::changeToArena( %this )
-  {
+function RoomManager::changeToArena( %this )
+{
 	%gameArena = new SceneObject()
 	{
 		class = "Arena";
@@ -51,9 +68,9 @@ function RoomManager::create( %this )
 	arenaScene.setDebugOn( "aabb" );	
 	arenaScene.layerSortMode0 = "X";
 	%gameArena.buildArena( );
-    mainWindow.setScene( arenaScene );
-  }
-  
+	mainWindow.setScene( arenaScene );
+}
+
 //-----------------------------------------------------------------------------
 
 function RoomManager::destroy( %this )

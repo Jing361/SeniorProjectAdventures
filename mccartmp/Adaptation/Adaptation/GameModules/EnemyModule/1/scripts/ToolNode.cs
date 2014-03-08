@@ -13,8 +13,8 @@ function ToolNode::initialize(%this)
 {	
 	%this.setSceneGroup(10);		//Enemy Unit sceneGroup
 
-	%this.myWidth = 64;
-	%this.myHeight = 64;
+	%this.myWidth = 64 * %this.owner.sizeRatio;
+	%this.myHeight = 64 * %this.owner.sizeRatio;
 
 	%this.setupBehaviors();
 	%this.setupCollisionShape();
@@ -65,7 +65,7 @@ function ToolNode::setupSprites( %this )
 function ToolNode::setupSpriteBlob( %this )
 {
 	%this.owner.setSpriteImage("GameAssets:tool_blob1x1_a", 0);
-	%this.owner.setSpriteSize(88, 88);
+	%this.owner.setSpriteSize(88 * %this.owner.sizeRatio, 88 * %this.owner.sizeRatio);
 	%this.sortLevel = 2;
 }
 
@@ -74,7 +74,7 @@ function ToolNode::setupSpriteBlob( %this )
 function ToolNode::setupSpriteShooter( %this )
 {
 	%this.owner.setSpriteImage("GameAssets:tool_shooter_a", 0);
-	%this.owner.setSpriteSize(64, 64);
+	%this.owner.setSpriteSize(64 * %this.owner.sizeRatio, 64 * %this.owner.sizeRatio);
 	%this.sortLevel = 6;
 }
 
@@ -83,7 +83,7 @@ function ToolNode::setupSpriteShooter( %this )
 function ToolNode::setupSpriteBlade( %this )
 {
 	%this.owner.setSpriteImage("GameAssets:tool_blade_a", 0);
-	%this.owner.setSpriteSize(64, 64);
+	%this.owner.setSpriteSize(64 * %this.owner.sizeRatio, 64 * %this.owner.sizeRatio);
 	%this.sortLevel = 5;
 }
 
@@ -92,7 +92,7 @@ function ToolNode::setupSpriteBlade( %this )
 function ToolNode::setupSpriteArmor( %this )
 {
 	%this.owner.setSpriteImage("GameAssets:tool_armor_a", 0);
-	%this.owner.setSpriteSize(80, 144);
+	%this.owner.setSpriteSize(80 * %this.owner.sizeRatio, 144 * %this.owner.sizeRatio);
 	%this.sortLevel = 1;
 }
 

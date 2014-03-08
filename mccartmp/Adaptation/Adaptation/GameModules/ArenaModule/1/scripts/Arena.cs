@@ -58,15 +58,21 @@ function Arena::buildArena(%this)
 	
 	%this.player = %this.spawnPlayer(-25, 0);
 	
-	//%enemyList.add(%this.spawnEnemyUnit(%scene, getRandom(-320,320), 200));
-	%this.spawnEnemyUnit(getRandom(-$roomWidth/2, $roomWidth/2), $roomHeight/2);
 	
 	
+	%this.processRoomChromosomes();
 	
-	//for (%i = 0; %i < 2; %i++)
-    //  RoomManager.spawnFishFood();
+	/*
+	//Enemy horse race creator (scrap)
+	%frac = $roomWidth/8.0;
+	%start = 100;
+	for(%i = 1; %i <= 8; %i++)
+	{
+		%this.spawnEnemyUnit((-$roomWidth/2 + %frac*%i), $roomHeight/2, %start+(10*%i));
+		echo(%i SPC ": " SPC %start+(10*%i));
+	}
+	*/
 }
-
 
 //-----------------------------------------------------------------------------
 
@@ -127,12 +133,34 @@ function Arena::spawnPlayer(%this, %xPos, %yPos)
 
 //-----------------------------------------------------------------------------
 
-function Arena::spawnEnemyUnit(%this, %xPos, %yPos)
+function Arena::processRoomChromosomes(%this)
+{
+	%toolVarietyCount = 7;		//number of different tools available, length of local chromosomes
+	
+	%chromosome = "1 0 0 0 1 2 2" SPC "0 0 0 0 1 2 4" SPC "4 0 0 0 0 0 0";
+	
+	for(%i = 0; %i < getWordCount(%chromosome)/%toolVarietyCount; %i++)
+	{
+		%subChromosome = getWords(%chromosome, %i*%toolVarietyCount, (%toolVarietyCount - 1) + %i*%toolVarietyCount);
+		
+		echo(%subChromosome);
+		
+		%this.spawnEnemyUnit(%subChromosome, getRandom(-$roomWidth/2, $roomWidth/2), $roomHeight/2, 130);
+	}
+	
+}
+
+//-----------------------------------------------------------------------------
+
+function Arena::spawnEnemyUnit(%this, %localChromosome, %xPos, %yPos, %speed)
 {
     // add a Player object to the Arena
 	%newEnemy = new CompositeSprite()
 	{
 		class = "EnemyUnit";
+		minSpeed = %speed;
+		maxSpeed = %speed;
+		myChromosome = %localChromosome;
 	};
 	
     arenaScene.add( %newEnemy );

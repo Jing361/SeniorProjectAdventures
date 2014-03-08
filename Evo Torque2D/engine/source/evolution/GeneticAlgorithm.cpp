@@ -1,11 +1,48 @@
 #include "platform/platform.h"
 #include "GeneticAlgorithm.h"
+#include "sim/simBase.h"
+#include "console/consoleTypes.h"
+#include "GeneticAlgorithm_ScriptBinding.h"
+#include <iostream>
 
 using namespace Evolution;
 
 IMPLEMENT_CONOBJECT(GeneticAlgorithm);
 
-string GeneticAlgorithm::run (char * pastRoomInfo)
+const int POPSIZE = 100;
+const int MAXGENS = 10;
+const int NTOOLS = 7;
+const double PXOVER = 0.8;
+const double PMUTATION = 0.15;
+const string PASTROOMINFO = "C:\\Users\\Chris\\Documents\\Project Evo\\SeniorProjectAdventures\\Evo Torque2D\\ga_input.txt";
+
+ConsoleMethod(GeneticAlgorithm, run, const char *, 3, 3, "() Gets the object's position.\n"
+                                                              "@return chromosome.")
+{
+	// Fetch result.  
+    string result = object->run(argv[2]);  
+    // Create Returnable Buffer.  
+	char* pBuffer = Con::getReturnBuffer(result.size()*sizeof(string));  
+
+	dSprintf(pBuffer, result.size()*sizeof(string), "%s", result);  
+
+	return pBuffer; 
+}
+
+bool GeneticAlgorithm::onAdd()
+{
+  if (!Parent::onAdd())
+    return false;
+
+  return true;
+}
+
+void GeneticAlgorithm::onRemove()
+{
+  Parent::onRemove();
+}
+
+string GeneticAlgorithm::run ( const char* )
 {
 
 	initialize ( PASTROOMINFO );
@@ -54,14 +91,34 @@ string GeneticAlgorithm::run (char * pastRoomInfo)
 	cout << "\n";
 	cout << "Best fitness = " << population[population.size()-1].getFitness() << "\n";
 
-	string result;
+	ofstream fileOut;
+	fileOut.open("C:\\Users\\Chris\\Documents\\Project Evo\\SeniorProjectAdventures\\Evo Torque2D\\enginelog.txt");
+
+	string result = "";
+	char numstr[21];
+
 	for(geneIterator = population[population.size()-1].getGene()->begin(); 
-		geneIterator != population[population.size()-1].getGene()->end(); 
+		geneIterator != population[population.size()-1].getGene()->end() - 1; 
 		++geneIterator)
 		{
-			result += *geneIterator;
-			result += " ";
+			fileOut<< *geneIterator << ",";
+			sprintf_s(numstr,"%d", *geneIterator);
+			result += numstr;		
+			fileOut<< result.c_str();
+			result += ',';
 		}
+	sprintf_s(numstr,"%d", *(geneIterator));
+	result+= numstr;
+
+	fileOut<< endl << result.size() << "Size" << sizeof(string) << endl;
+
+	//Con::printf("Here");
+	//Con::printf("%s\n",result.c_str());
+	//Con::printf("Here");
+
+	
+	fileOut << result.c_str();
+	fileOut.close();
 
 	return result;
 }
@@ -145,7 +202,7 @@ void GeneticAlgorithm::evaluate ( )
 	return;
 }
 
-void GeneticAlgorithm::initialize ( char* filename  )
+void GeneticAlgorithm::initialize ( string filename  )
 {
 	ifstream file_in;
 
@@ -159,7 +216,7 @@ void GeneticAlgorithm::initialize ( char* filename  )
 
 	srand (time(0));								//Warning
 
-	file_in.open ( filename );
+	file_in.open ( PASTROOMINFO.c_str() );
 
 	if ( !file_in )
 	{

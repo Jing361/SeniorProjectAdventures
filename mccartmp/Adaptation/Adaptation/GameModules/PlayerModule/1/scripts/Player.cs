@@ -17,14 +17,14 @@ function Player::initialize(%this)
 	%this.setSceneLayer(5);
 	%this.fixedAngle = true;
 	
-	%this.walkSpeed = 600;			// <-- f*cked (is there a max limit on linearVelocity??)
+	%this.sizeRatio = 0.8;
+	
+	%this.walkSpeed = 100;			// <-- f*cked (is there a max limit on linearVelocity?? of 130?)
 	%this.health = 100;
 	%this.setPosition(0, 25);
 	
 	%this.setupSprite();
 	%this.setupControls();
-
-	%this.setUseMouseEvents(true);
 	
     %this.createPolygonBoxCollisionShape(%this.getWidth(), %this.getHeight());
     %this.setCollisionShapeIsSensor(0, true);
@@ -38,7 +38,8 @@ function Player::setupSprite( %this )
 {
 	%this.addSprite("0 0");
 	%this.setSpriteAnimation("GameAssets:playerbaseAnim", 0);
-	%this.setSpriteSize(159, 210);
+	%this.setSpriteName("BodyAnim");
+	%this.setSpriteSize(159*%this.sizeRatio, 210*%this.sizeRatio);
 }
 
 //-----------------------------------------------------------------------------
@@ -56,17 +57,19 @@ function Player::setupControls( %this )
 	%controls.rightKey = "keyboard D";
 	%this.addBehavior(%controls);
 	
-	/* %controls = AlignToJoystickBehavior.createInstance();
-	%controls.xAxis = "gamepad0 thumblx";
-	%controls.yAxis = "gamepad0 thumbly";
-	%this.addBehavior(%controls); */
-}
-
-//-----------------------------------------------------------------------------
-
-function Player::onUpdate( %this )
-{
-	echo("mousemousemousezzzz");
+/* 	%xBoxControl = AlignToJoystickBehavior.createInstance();
+	%xBoxControl.xAxis = "joystick0 xaxis";
+	%xBoxControl.yAxis = "joystick0 yaxis";
+	%xBoxControl.rotationOffset = 90;
+	%this.addBehavior(%xBoxControl); */
+	
+	
+	exec("./behaviors/controls/faceMouse.cs");
+	
+	%faceMse = FaceMouseBehavior.createInstance();
+	%faceMse.object = mainPlayer;
+	%faceMse.rotationOffset = 180;
+	%this.addBehavior(%faceMse);
 }
 
 //-----------------------------------------------------------------------------

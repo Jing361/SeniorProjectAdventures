@@ -18,6 +18,8 @@ function EnemyUnit::initialize(%this)
 	
 	%this.setAngle(90);
 	
+	%this.sizeRatio = 0.8;
+	
 	//%this.setupSprite();
 	%this.setupBehaviors();
 
@@ -29,7 +31,7 @@ function EnemyUnit::initialize(%this)
 	//%this.CollisionCallback = true;
 	%this.setCollisionCallback(true);
 					
-	%this.configureTools("0 0 0 0 0 4 2");		// ordering: shield/parry/acid/tar/blade/shooter/blob
+	%this.configureTools(%this.myChromosome);		// ordering: shield/parry/acid/tar/blade/shooter/blob (+1)
 }
 
 //-----------------------------------------------------------------------------
@@ -48,8 +50,8 @@ function EnemyUnit::setupBehaviors( %this )
 	exec("./behaviors/movement/Drift.cs");
 	exec("./behaviors/ai/faceObject.cs");
 	%driftMove = DriftBehavior.createInstance();
-	%driftMove.minSpeed = 300;
-	%driftMove.maxSpeed = 350;
+	%driftMove.minSpeed = %this.minSpeed;
+	%driftMove.maxSpeed = %this.maxSpeed;
 	%this.addBehavior(%driftMove);
 	
 	%faceObj = FaceObjectBehavior.createInstance();
@@ -160,9 +162,6 @@ function EnemyUnit::orderTools( %this )
 		}
 	}
 }
-
-
-
 
 //-----------------------------------------------------------------------------
 ///call this to add tools to body. ensures toolNode is tracked in grid

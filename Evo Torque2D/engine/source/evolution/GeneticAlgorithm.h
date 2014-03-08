@@ -1,7 +1,7 @@
 // Darwin.h
 
 #pragma once
-#include "sim/scriptObject.h"
+#include "sim/simBase.h"
 
 #include <cstdlib>
 #include <iostream>
@@ -16,8 +16,10 @@
 #include <vector>
 #include <algorithm>
 #include "Genotype.h"
+#include "GeneticAlgorithm_ScriptBinding.h"
 
 using std::ifstream;
+using std::ofstream;
 using std::cout;
 using std::cerr;
 using std::setw;
@@ -30,18 +32,12 @@ using std::vector;
 
 namespace Evolution {
 
-	class GeneticAlgorithm : public ScriptObject
+	class GeneticAlgorithm : public SimObject
 	{
-	   typedef ScriptObject Parent;
+	private:
+		typedef SimObject Parent;
 
-
-		#define POPSIZE 100
-		#define MAXGENS 10
-		#define NTOOLS 7
-		#define PXOVER 0.8
-		#define PMUTATION 0.15
-		#define PASTROOMINFO "C:\Users\Chris\Documents\Project Evo\Torque2D-2.0 - Copy\ga_input.txt"
-
+	public:
 		struct {
 			bool operator()(Genotype &a, Genotype &b)
 			{   
@@ -60,19 +56,25 @@ namespace Evolution {
 		double enemyDPSwing;
 		double enemyDPShot;
 
+		GeneticAlgorithm() {}
+		virtual ~GeneticAlgorithm() {}
+
 	public:
-		string run(char *);
+		string run( const char* );
 
 		void crossover ( );
 		void elitist ( Genotype );
 		void evaluate ( );
-		void initialize ( char* );
+		void initialize ( string );
 		void sortPopulation ( );
 		void mutate ( );
 		int randval ( int );
 		void selector ( );
 		void verifyAndPush( Genotype );
 		void Xover ( int, int );
+
+		bool onAdd();
+		void onRemove();
 
 		DECLARE_CONOBJECT(GeneticAlgorithm);
 
