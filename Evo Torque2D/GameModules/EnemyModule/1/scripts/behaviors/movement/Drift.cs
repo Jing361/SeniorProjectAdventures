@@ -19,6 +19,7 @@ function DriftBehavior::onCollision(%this, %object, %collisionDetails)
 	if(%object.getSceneGroup() == 5)	//Player sceneGroup 
 	{
 		%this.recycle(%object.side);
+		%object.takeDamage(15);
 	}
 	else if(%object.getSceneGroup() == 15)
 	{
@@ -29,7 +30,7 @@ function DriftBehavior::onCollision(%this, %object, %collisionDetails)
 
 function DriftBehavior::recycle(%this)
 {
-  %this.owner.setPosition(getRandom(-$roomWidth/2, $roomWidth/2), $roomHeight/2);
+  %this.owner.setPosition(getRandom(-$roomWidth/4, $roomWidth/4), $roomHeight/2);
   %this.owner.setLinearVelocityX( 0 );
   %this.owner.setLinearVelocityY( -%this.speed );
 }

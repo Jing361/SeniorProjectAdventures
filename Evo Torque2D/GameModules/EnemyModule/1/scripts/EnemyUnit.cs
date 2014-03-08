@@ -4,17 +4,27 @@
 
 function EnemyUnit::onAdd( %this )
 {
-	%this.initialize();
+	%this.myArena.EnemyCount++;
 }
 
 //-----------------------------------------------------------------------------
+///ordering: armor/parry/acid/tar/blade/shooter/blob
 
 function EnemyUnit::initialize(%this)
 {
-	exec("./ToolNode.cs");
+	//--Execute Nodes-----------------------
+	exec("./Tools/ToolNode.cs");
+	exec("./Tools/Armor/ToolArmor.cs");
+	exec("./Tools/Parry/ToolParry.cs");
+	exec("./Tools/Acid/ToolAcid.cs");
+	exec("./Tools/Tar/ToolTar.cs");
+	exec("./Tools/Blade/ToolBlade.cs");
+	exec("./Tools/Shooter/ToolShooter.cs");
+	
 	%this.setSceneGroup(10);		//Enemy Unit sceneGroup
 
-	%this.health = 100;
+	%this.fullHealth = 100;
+	%this.health = %this.fullHealth;
 	%this.walkSpeed = 10;
 	%this.setAngle(90);
 	
@@ -24,14 +34,22 @@ function EnemyUnit::initialize(%this)
 	%this.setupBehaviors();
 
 	%this.setSceneLayer(10);
-	
-    //%this.createPolygonBoxCollisionShape(74, 78);
-    //%this.setCollisionShapeIsSensor(0, true);
     %this.setCollisionGroups( "5 15" );
-	//%this.CollisionCallback = true;
 	%this.setCollisionCallback(true);
-					
+			
+	//Parse local chromsome and build body
+	%this.maxBodySize = 0;								//largest (abs) indices for myBody position
 	%this.configureTools(%this.myChromosome);		// ordering: shield/parry/acid/tar/blade/shooter/blob (+1)
+	
+	%this.myHealthbar = new CompositeSprite()
+	{
+		class = "Healthbar";
+		owner = %this;
+		xOffset = 0;
+		yOffset = 80*%this.sizeRatio;
+	};
+
+    %this.getScene().add( %this.myHealthbar );
 }
 
 //-----------------------------------------------------------------------------
@@ -44,6 +62,7 @@ function EnemyUnit::setupSprite( %this )
 	
 	%obj = new T2dShapeVector()   
     {   
+	
         scenegraph = %this;   
     };    
     %obj.setPolyPrimitive( 4 );  
@@ -67,13 +86,29 @@ function EnemyUnit::setupBehaviors( %this )
 	%this.addBehavior(%driftMove);
 	
 	%faceObj = FaceObjectBehavior.createInstance();
-	%faceObj.object = mainPlayer;
-	%faceObj.rotationOffset = 180;
+	%faceObj.object = %this.mainPlayer;
+	%faceObj.rotationOffset = 0;
 	%this.addBehavior(%faceObj);
 }
 
 //-----------------------------------------------------------------------------
-///ordering: shield/parry/acid/tar/blade/shooter/blob
+
+function EnemyUnit::takeDamage( %this, %dmgAmount )
+{
+	%this.health -= %dmgAmount;
+	
+	if( %this.health <= 0)
+	{
+		%this.kill();
+		%this.safeDelete();
+	}
+
+	%this.myHealthbar.assessDamage();
+}
+
+//-----------------------------------------------------------------------------
+///ordering: armor/parry/acid/tar/blade/shooter/blob
+///Build actual body based off chromosome
 
 function EnemyUnit::configureTools(%this, %chromosome)
 {
@@ -89,15 +124,19 @@ function EnemyUnit::configureTools(%this, %chromosome)
 	
 	%this.myBodyContainer = new SimSet();
 	
+	
+	//Blobs first
 	%this.myBodyContainer.add(%this.addToolNode("Blob", "0 0"));	//0,0 is always first Blob node
+	%this.nextBlobDirection = 0;			// 0=left, 1=down, 2=right, 3=up
 	
 	for(%i = 1; %i < %this.toolBlob_count; %i++) 		
 	{
-		%nextPosition = %this.findViablePosition(%this.myBodyContainer.getObject(%i - 1).getOpenSlots(), true);
+		%nextPosition = %this.findNextBlobPosition(%this.myBodyContainer.getObject(%i - 1).getOpenSlots(), 0);
 		
 		%this.myBodyContainer.add(%this.addToolNode("Blob", %nextPosition));
 	}
 	
+	//Rest of Tools
 	%nextPosition = "";
 	
 	%this.configureSingleTool("Armor", %this.toolArmor_count);
@@ -107,9 +146,58 @@ function EnemyUnit::configureTools(%this, %chromosome)
 	%this.configureSingleTool("Blade", %this.toolBlade_count);
 	%this.configureSingleTool("Shooter", %this.toolShooter_count);
 	
+	%this.checkLargeBodyBlobs();
+	
 	%this.initiateToolSprites();		//ensures proper sprite layering
+	
+	%this.echoBodyLayout();
 }
 
+//-----------------------------------------------------------------------------
+
+function EnemyUnit::echoBodyLayout( %this)
+{
+	%scale = %this.maxBodySize;
+	echo("");	//newline
+	echo("Enemy Obj ID:" SPC %this.getID());
+	
+	%xAxisLabel = "  ";
+	for(%i = -%scale; %i <= %scale; %i++)
+	{
+		if(%i >= 0)
+			%xAxisLabel = %xAxisLabel SPC "" SPC %i;
+		else
+			%xAxisLabel = %xAxisLabel SPC %i;
+	}
+	echo(%xAxisLabel);
+	
+	for(%i = %scale; %i >= -%scale; %i--)
+	{
+		if(%i >= 0)
+			%line = " " @ %i;
+		else
+			%line = %i;
+		
+		for(%j = -%scale; %j <= %scale; %j++)
+		{
+			%nodeChar = " ";
+			%currNode = %this.myBody[%j, %i];
+			if( isObject(%currNode) )
+			{
+				if(%currNode.toolType $= "Blob")
+					%nodeChar = "#";
+				else if(%currNode.toolType $= "Armor")		//(Acid is 'A')
+					%nodeChar = "@";
+				else
+					%nodeChar = getSubStr(%currNode.toolType, 0, 1);
+			}
+			%line = %line SPC "" SPC %nodeChar;
+		}
+		echo(%line);
+	}
+	
+	echo("\n");
+}
 //-----------------------------------------------------------------------------
 
 function EnemyUnit::configureSingleTool( %this, %toolType, %toolCount )
@@ -123,7 +211,7 @@ function EnemyUnit::configureSingleTool( %this, %toolType, %toolCount )
 			%allPositions = %allPositions @ %this.myBodyContainer.getObject(%j).getOpenSlots() @ " ";
 		}
 		
-		%nextPosition = %this.findViablePosition(%allPositions, true);
+		%nextPosition = %this.findViablePosition(%allPositions);
 		
 		%nextNode = %this.addToolNode(%toolType, %nextPosition);
 		%this.myBodyContainer.add(%nextNode);
@@ -138,7 +226,7 @@ function EnemyUnit::initiateToolSprites( %this )
 	%this.orderTools();
 	for(%j = %this.myBodyContainer.getCount() - 1; %j >= 0; %j--)
 	{
-		%this.myBodyContainer.getObject(%j).setupSprites();
+		%this.myBodyContainer.getObject(%j).setupSprite();
 	}
 }
 
@@ -183,8 +271,17 @@ function EnemyUnit::orderTools( %this )
 
 function EnemyUnit::addToolNode( %this, %type, %position)
 {
-	%tool = %this.createToolNode(%type, getWord(%position, 0), getWord(%position, 1));
+	%xPos = getWord(%position, 0);
+	%yPos = getWord(%position, 1);
+	%tool = %this.createToolNode(%type, %xPos, %yPos);
 	%this.addToGrid(%tool);
+	
+	if(mAbs(%xPos) > %this.maxBodySize)
+		%this.maxBodySize = mAbs(%xPos);
+		
+	if(mAbs(%yPos) > %this.maxBodySize)
+		%this.maxBodySize = mAbs(%xPos);
+	
 	return %tool;
 }
 
@@ -200,15 +297,28 @@ function EnemyUnit::addToGrid( %this, %tool)
 
 function EnemyUnit::createToolNode( %this, %type, %posX, %posY)
 {
-	%nextTool = new SceneObject()
-	{
-		class = "ToolNode";
-		owner = %this;
-		toolType = %type;
-		bodyPosX = %posX;
-		bodyPosY = %posY;
-		orientation = %this.findToolOrientation(%posX, %posY);
-	};
+
+	if(%type $= "Armor"){
+		%nextTool = ToolArmor::CreateInstance(%this, %type, %posX, %posY, %this.findToolOrientation(%posX, %posY));
+	}
+	else if(%type $= "Parry"){
+		%nextTool = ToolParry::CreateInstance(%this, %type, %posX, %posY, %this.findToolOrientation(%posX, %posY));
+	}
+	else if(%type $= "Acid"){
+		%nextTool = ToolAcid::CreateInstance(%this, %type, %posX, %posY, %this.findToolOrientation(%posX, %posY));
+	}
+	else if(%type $= "Tar"){
+		%nextTool = ToolTar::CreateInstance(%this, %type, %posX, %posY, %this.findToolOrientation(%posX, %posY));
+	}
+	else if(%type $= "Blade"){
+		%nextTool = ToolBlade::CreateInstance(%this, %type, %posX, %posY, %this.findToolOrientation(%posX, %posY));
+	}
+	else if(%type $= "Shooter"){
+		%nextTool = ToolShooter::CreateInstance(%this, %type, %posX, %posY, %this.findToolOrientation(%posX, %posY));
+	}
+	else{
+		%nextTool = ToolNode::CreateInstance(%this, %type, %posX, %posY, %this.findToolOrientation(%posX, %posY));
+	}
 	
 	return %nextTool;
 }
@@ -241,13 +351,54 @@ function EnemyUnit::findToolOrientation( %this, %posX, %posY)
 }
 
 //-----------------------------------------------------------------------------
+///finds free body coordinate to add blob to (%positions is all possible positions in which to place new tool)
+///works in outward spiral. e.g: starting at A then B then C...
+///      J I H G .
+///      K B A F .
+///      L C D E .
+///      M N O P Q
+
+function EnemyUnit::findNextBlobPosition( %this, %positions, %bootstrap )			
+{
+	%bootstrap++;
+	if(%bootstrap >= 4)
+		return "0 0";		// "0 0" reserved for first Blob tool node added, so this means no viable positions found
+	
+	for(%i = 0; %i < getWordCount(%positions) - 1; %i += 2)
+	{
+		if((%i/2) == %this.nextBlobDirection)
+		{
+			%currPosition = getWord(%positions, %i) SPC getWord(%positions, %i + 1);
+			
+			
+			if(!isObject(%this.myBody[getWord(%currPosition, 0), getWord(%currPosition, 1)]))
+			{
+				%this.nextBlobDirection++;
+				if(%this.nextBlobDirection > 3)
+					%this.nextBlobDirection = 0;
+					
+				return %currPosition;
+			}
+			else
+			{				
+				%this.nextBlobDirection--;
+				if(%this.nextBlobDirection < 0)
+					%this.nextBlobDirection = 3;	
+					
+				return %this.findNextBlobPosition( %positions, %bootstrap);		//recursive search for position
+			}
+		}
+	}
+}
+
+//-----------------------------------------------------------------------------
 ///finds free body coordinate to add toolNode to (%positions is all possible positions in which to place new tool)
 
-function EnemyUnit::findViablePosition( %this, %positions , %flag)			
+function EnemyUnit::findViablePosition( %this, %positions)			
 {
 	for(%i = 0; %i < getWordCount(%positions) - 1; %i += 2)
 	{
-		%currPosition = getWord(%positions, %i) SPC getWord(%positions, %i + 1);			//get first 
+		%currPosition = getWord(%positions, %i) SPC getWord(%positions, %i + 1);			//get position 
 		
 		if(!isObject(%this.myBody[getWord(%currPosition, 0), getWord(%currPosition, 1)]))
 		{
@@ -256,6 +407,86 @@ function EnemyUnit::findViablePosition( %this, %positions , %flag)
 	}
 	
 	return "0 0";		// "0 0" reserved for first Blob tool node added, so this means no viable positions found
+}
+
+//-----------------------------------------------------------------------------
+///finds free body coordinate to add toolNode to (%positions is all possible positions in which to place new tool)
+
+function EnemyUnit::checkLargeBodyBlobs( %this )			
+{
+	%scale = %this.maxBodySize;
+	
+	for(%i = %scale; %i > -%scale; %i--)
+	{
+		for(%j = %scale; %j > -%scale; %j--)
+		{
+			%currNode = %this.myBody[%i, %j];
+			
+			if( isObject(%currNode) )
+			{
+				if(%currNode.toolType $= "Blob")
+				{
+					if(%currNode.drawSprite == true)
+					{
+						%this.blobSearch2x2( %currNode );
+					}
+				}
+			}
+		}
+	}
+}
+
+//-----------------------------------------------------------------------------
+///finds free body coordinate to add toolNode to (%positions is all possible positions in which to place new tool)
+
+function EnemyUnit::blobSearch2x2( %this, %rootBlob )			
+{
+	%scale = %this.maxBodySize;
+	
+	%nodeList = new SimSet();
+	
+	echo("Check" SPC %rootBlob.bodyPosX SPC %rootBlob.bodyPosY);
+	
+	%objA = %this.myBody[%rootBlob.bodyPosX, %rootBlob.bodyPosY - 1];
+	%objB = %this.myBody[%rootBlob.bodyPosX - 1, %rootBlob.bodyPosY];
+	%objC = %this.myBody[%rootBlob.bodyPosX - 1, %rootBlob.bodyPosY - 1];
+	
+	if(!isObject(%objA) || !isObject(%objB) || !isObject(%objC))
+		return false;
+	
+	%nodeList.add(%objA);		//down
+	%nodeList.add(%objB);		//left
+	%nodeList.add(%objC);	//left-down
+
+	echo("check");
+	
+	for(%i = 0; %i < %nodeList.getCount(); %i++)
+	{
+		if( isObject(%nodeList.getObject(0)) )
+		{
+			if(! %nodeList.getObject(0).toolType $= "Blob")
+			{
+				return false;
+			}
+			else if( %nodeList.getObject(0).drawSprite == false )		//already used in larger body check
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	echo("found big body");
+	
+	for(%i = 0; %i < %nodeList.getCount(); %i++)
+	{
+		%nodeList.getObject(0).drawSprite = false;
+	}
+	
+	return true;
 }
 
 //-----------------------------------------------------------------------------
@@ -276,6 +507,26 @@ function EnemyUnit::getChromosome( %this )
 
 //-----------------------------------------------------------------------------
 
+function EnemyUnit::kill( %this )
+{
+	%this.myArena.EnemyCount--;
+	
+	if(%this.myArena.EnemyCount <= 0)
+	{
+		%this.myArena.myManager.endCurrentLevel();
+	}
+}
+
+//-----------------------------------------------------------------------------
+
+function EnemyUnit::getMyScene( %this )
+{
+	return %this.getScene();
+}
+
+//-----------------------------------------------------------------------------
+
 function EnemyUnit::destroy( %this )
 {
+
 }

@@ -10,17 +10,34 @@ $roomWidth = 160;
 $roomHeight = 120;
 $pixelToWorldRatio = $roomWidth/1600;
 
+//---------------------------------------------------------------------
+
 function RoomManager::create( %this )
 {
+	setRandomSeed(getRealTime());
+
     new Scene(mainScene)
 	{
-		class="defualtWindow";
+		//class="defualtWindow";
 	};
 
     new SceneWindow(mainWindow)
 	{
-		useWindowMouseEvents = "1";
+		//useWindowMouseEvents = "1";
 	};
+	
+	/*
+	//Broken/delete me
+	mainWindow.UseObjectInputEvents = true;
+	
+	%inputter = new ScriptObject()  
+	{  
+	   class="ExampleListener";  
+	};  
+
+	mainWindow.addInputListener(%inputter);
+	*/
+	
 	
     mainWindow.profile = new GuiControlProfile();
     Canvas.setContent(mainWindow);
@@ -28,13 +45,10 @@ function RoomManager::create( %this )
 	new ScriptObject(InputManager);
 	mainWindow.addInputListener(InputManager);
 
-
     mainWindow.setScene(mainScene);
     mainWindow.setCameraPosition( 0, 0 );
 	
 	mainScene.layerSortMode0 = "Newest";
-	
-    mainScene.setDebugOn( "aabb" );			//bound boxes visible
 	
     mainWindow.setCameraSize( $roomWidth, $roomHeight );
     //mainWindow.setCameraSize( $roomWidth*1.2, $roomHeight*1.2 );	//zoomed out cam
@@ -58,21 +72,41 @@ function RoomManager::create( %this )
 	};
 		 
 	%gui_titleScreen.openTitleScreen(mainScene);
+	
+	//Lasting Variables
+	%this.CurrentLevel = 0;
 }
     
 //-----------------------------------------------------------------------------
   
-function RoomManager::changeToArena( %this )
+function RoomManager::startNextLevel( %this )
 {
+	%this.CurrentLevel++;
+	
 	%gameArena = new SceneObject()
 	{
 		class = "Arena";
+		myManager = %this;
 	};
-	new Scene(arenaScene);
-	arenaScene.setDebugOn("collision");
-	arenaScene.layerSortMode0 = "X";
+	
+	%arenaScene = new Scene();
+	%arenaScene.setDebugOn("collision");
+	%arenaScene.layerSortMode0 = "X";
+	%arenaScene.add(%gameArena);
 	%gameArena.buildArena( );
-	mainWindow.setScene( arenaScene );
+	
+	mainWindow.setScene( %arenaScene );
+	
+	%this.currentArena = %gameArena;
+}
+
+//-----------------------------------------------------------------------------
+
+function RoomManager::endCurrentLevel( %this )
+{
+	%this.currentArena.player.clearBehaviors();
+	%this.currentArena.getScene().remove(%this.currentArena.player);
+	%this.startNextLevel();
 }
 
 //-----------------------------------------------------------------------------

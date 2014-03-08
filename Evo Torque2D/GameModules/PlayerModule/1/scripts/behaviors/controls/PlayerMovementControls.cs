@@ -27,6 +27,7 @@ function PlayerMovementControlsBehavior::onBehaviorAdd(%this)
     GlobalActionMap.bindObj(getWord(%this.leftKey, 0), getWord(%this.leftKey, 1), "moveLeft", %this);
     GlobalActionMap.bindObj(getWord(%this.rightKey, 0), getWord(%this.rightKey, 1), "moveRight", %this);
     GlobalActionMap.bindObj("keyboard", "space", "pressFire", %this);
+    GlobalActionMap.bindObj("keyboard", "v", "pressMelee", %this);
 
 	%this.up = 0;
 	%this.down = 0;
@@ -36,6 +37,10 @@ function PlayerMovementControlsBehavior::onBehaviorAdd(%this)
 	//shot barrel offset (instead of bullet coming out of center of player)	
 	%this.barrelXoffset = 55*%this.owner.sizeRatio;
 	%this.barrelYoffset = -42*%this.owner.sizeRatio;
+	
+	//blade offset (instead of strike effect coming out of center of player)	
+	%this.bladeXoffset = 100*%this.owner.sizeRatio;
+	%this.bladeYoffset = 50*%this.owner.sizeRatio;
 }
 
 function PlayerMovementControlsBehavior::onBehaviorRemove(%this)
@@ -50,6 +55,8 @@ function PlayerMovementControlsBehavior::onBehaviorRemove(%this)
     GlobalActionMap.unbindObj(getWord(%this.downKey, 0), getWord(%this.downKey, 1), %this);
     GlobalActionMap.unbindObj(getWord(%this.leftKey, 0), getWord(%this.leftKey, 1), %this);
     GlobalActionMap.unbindObj(getWord(%this.rightKey, 0), getWord(%this.rightKey, 1), %this);
+    GlobalActionMap.unbindObj("keyboard", "space", %this);
+    GlobalActionMap.unbindObj("keyboard", "v", %this);
 
 	%this.up = 0;
 	%this.down = 0;
@@ -104,6 +111,7 @@ function PlayerMovementControlsBehavior::moveRight(%this, %val)
     %this.right = %val;
     %this.updateMovement();
 }
+
 //------------------------------------------------------------------------------------
 
 function PlayerMovementControlsBehavior::pressFire(%this, %val)
@@ -117,8 +125,29 @@ function PlayerMovementControlsBehavior::pressFire(%this, %val)
 			fireAngle = %this.owner.getAngle();
 		};
 		
-		arenaScene.add( %newBullet );
+		%this.rangedCount++;
+		%this.owner.getScene().add( %newBullet );
 		
 		%newBullet.setPosition(%this.owner.getWorldPoint(%this.barrelXoffset, %this.barrelYoffset) );
+	}
+} 
+
+//------------------------------------------------------------------------------------
+
+function PlayerMovementControlsBehavior::pressMelee(%this, %val)
+{
+	if(%val == 1)
+	{
+		// add a strike effect to the arena
+		%newStriker = new CompositeSprite()
+		{
+			class = "PlayerStrike";
+			strikeAngle = %this.owner.getAngle();
+		};
+			
+		%this.meleeCount++;
+		%this.owner.getScene().add( %newStriker );
+		
+		%newStriker.setPosition(%this.owner.getWorldPoint(%this.bladeXoffset, %this.bladeYoffset) );
 	}
 } 

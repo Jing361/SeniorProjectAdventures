@@ -25,6 +25,7 @@ function FaceObjectBehavior::onUpdate(%this)
    if (!isObject(%this.object))
       return;
    
-   %targetRotation = %this.rotationOffset + Vector2AngleToPoint (%this.owner.getPosition(), %this.object.getPosition());
+   %targetRotation = %this.rotationOffset + Vector2AngleToPoint (%this.owner.getPosition(), %this.object.getPosition()) - 90;
    %this.owner.setAngle(%targetRotation);
+   
 }

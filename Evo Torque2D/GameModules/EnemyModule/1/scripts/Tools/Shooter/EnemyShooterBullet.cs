@@ -2,25 +2,25 @@
 // PlayerModule: playerBullet class and functions
 //-----------------------------------------------------------------------------
 
-function PlayerBullet::onAdd( %this )
+function EnemyShooterBullet::onAdd( %this )
 {
 	%this.initialize();
 }
 
 //-----------------------------------------------------------------------------
 
-function PlayerBullet::initialize(%this)
+function EnemyShooterBullet::initialize(%this)
 {
-	%this.setSceneGroup(6);
-	%this.setSceneLayer(6);
+	%this.setSceneGroup(11);
+	%this.setSceneLayer(11);
 	%this.fixedAngle = true;
 	
 	%this.shotDamage = 10;
 	%this.shotSpeed = 75;		
 	%this.setBullet(true);
 	%this.sizeRatio = $pixelToWorldRatio;
-	%this.myWidth = 39 * %this.sizeRatio;
-	%this.myHeight = 24 * %this.sizeRatio;
+	%this.myWidth = 30 * %this.sizeRatio;
+	%this.myHeight = 8 * %this.sizeRatio;
 	
 	%this.setupSprite();
 		
@@ -28,28 +28,26 @@ function PlayerBullet::initialize(%this)
 	
     %this.createPolygonBoxCollisionShape(%this.myWidth, %this.myHeight);
     %this.setCollisionShapeIsSensor(0, true);
-    %this.setCollisionGroups( "10 15" );
+    %this.setCollisionGroups( "5 15" );
 	%this.setCollisionCallback(true);
 }
 
 //-----------------------------------------------------------------------------
 
-function PlayerBullet::setupSprite( %this )
+function EnemyShooterBullet::setupSprite( %this )
 {
 	%this.addSprite("0 0");
-	%this.setSpriteImage("GameAssets:playershot", 0);
+	%this.setSpriteImage("GameAssets:shootershot", 0);
 	%this.setSpriteSize(%this.myWidth, %this.myHeight);
 	%this.setAngle(%this.fireAngle);
 }
 
 //-----------------------------------------------------------------------------
 
-function PlayerBullet::onCollision(%this, %object, %collisionDetails)
+function EnemyShooterBullet::onCollision(%this, %object, %collisionDetails)
 {
-	if(%object.class $= "EnemyUnit")
+	if(%object.getSceneGroup() == 5)
 	{
-		//%object.recycle(%object.side);
-		
 		%object.takeDamage(%this.shotDamage);
 		%this.safeDelete();
 	}
@@ -61,6 +59,6 @@ function PlayerBullet::onCollision(%this, %object, %collisionDetails)
 
 //-----------------------------------------------------------------------------
 
-function PlayerBullet::destroy( %this )
+function EnemyShooterBullet::destroy( %this )
 {
 }

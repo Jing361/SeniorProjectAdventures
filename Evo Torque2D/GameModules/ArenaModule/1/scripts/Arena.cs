@@ -2,30 +2,6 @@
 // Room setup and wall collisions
 //-----------------------------------------------------------------------------
 
-function Arena::getAnimationList(%this)
-{		
-   %list = "GameAssets:playerbaseAnim" @ "," @ "GameAssets:seahorseAnim" ;
-}
-
-//-----------------------------------------------------------------------------
-
-function Arena::getAnimationSize(%this, %anim)
-{
-    switch$(%anim)
-    {
-        case "GameAssets:seahorseAnim":
-        %animInfo = "7.5 15";
-        
-        case "GameAssets:playerbaseAnim":
-        %animInfo = "11.35 15";
-        
-    }
-
-    return %animInfo;
-}
-
-//-----------------------------------------------------------------------------
-
 function Arena::buildArena(%this)
 {
     // A pre-built Arena of size 100x75, with background.
@@ -41,7 +17,7 @@ function Arena::buildArena(%this)
     %background.setAwake( false );
     %background.setActive( false );
     %background.setSceneLayer(30);
-    arenaScene.add( %background );
+    %this.getScene().add( %background );
     
     // Arena Edges
     %roomEdges = new Sprite();
@@ -52,13 +28,15 @@ function Arena::buildArena(%this)
     %roomEdges.setAwake( false );
     %roomEdges.setActive( false );
     %roomEdges.setSceneLayer(2);
-    arenaScene.add( %roomEdges ); 
+    %this.getScene().add( %roomEdges ); 
     
     %this.addArenaBoundaries( $roomWidth, $roomHeight );
 	
-	%this.player = %this.spawnPlayer(-25, 0);
+	%this.player = %this.spawnPlayer(-25, 0);		//add player before Enemies!
 	
 	
+	// Enemy Info
+	%this.EnemyCount = 0;
 	
 	%this.processRoomChromosomes();
 	
@@ -88,10 +66,10 @@ function Arena::addArenaBoundaries(%this, %width, %height)
     %wrapWidth = %width * 1.0;
     %wrapHeight = %height * 1.0;	//1.1
 
-    arenaScene.add( %this.createOneArenaBoundary( "left",   -%wrapWidth/2 SPC 0,  5 SPC %wrapHeight) );
-    arenaScene.add( %this.createOneArenaBoundary( "right",  %wrapWidth/2 SPC 0,   5 SPC %wrapHeight) );
-    arenaScene.add( %this.createOneArenaBoundary( "top",    0 SPC -%wrapHeight/2, %wrapWidth SPC 5 ) );
-    arenaScene.add( %this.createOneArenaBoundary( "bottom", 0 SPC %wrapHeight/2,  %wrapWidth SPC 5 ) );
+    %this.getScene().add( %this.createOneArenaBoundary( "left",   -%wrapWidth/2 SPC 0,  5 SPC %wrapHeight) );
+    %this.getScene().add( %this.createOneArenaBoundary( "right",  %wrapWidth/2 SPC 0,   5 SPC %wrapHeight) );
+    %this.getScene().add( %this.createOneArenaBoundary( "top",    0 SPC -%wrapHeight/2, %wrapWidth SPC 5 ) );
+    %this.getScene().add( %this.createOneArenaBoundary( "bottom", 0 SPC %wrapHeight/2,  %wrapWidth SPC 5 ) );
 }
 
 //-----------------------------------------------------------------------------
@@ -119,16 +97,19 @@ function Arena::createOneArenaBoundary(%this, %side, %position, %size)
 function Arena::spawnPlayer(%this, %xPos, %yPos)
 {
     // add a Player object to the Arena
-	new CompositeSprite(mainPlayer)
+	%mainPlayer = new CompositeSprite()
 	{
 		class = "Player";
+		myArena = %this;
 	};
 	
-    arenaScene.add( mainPlayer );
+    %this.getScene().add( %mainPlayer );
 	
-	mainPlayer.setPosition(%xPos, %yPos);
+	%mainPlayer.initialize();
+	
+	%mainPlayer.setPosition(%xPos, %yPos);
 
-	return mainPlayer;
+	return %mainPlayer;
 } 
 
 //-----------------------------------------------------------------------------
@@ -137,18 +118,20 @@ function Arena::processRoomChromosomes(%this)
 {
 	%toolVarietyCount = 7;		//number of different tools available, length of local chromosomes
 	
-	$genAlg = new GeneticAgorithm();
+	//$genAlg = new GeneticAlgorithm();
 	
-	//%chromosome = "1 1 1 1 1 2 5" SPC "0 0 0 0 1 2 4" SPC "4 0 0 0 0 0 0" SPC "0 0 0 0 0 0 0";
-	%chromosome = $genAlg.run("");
+	%chromosome = "1 1 1 1 1 3 4" ;//SPC "0 0 0 0 1 2 4" SPC "4 0 0 0 0 0 0" SPC "0 0 0 0 0 0 0";
+	//%chromosome = $genAlg.run("");
+	
+	echo("Chromosome:" SPC %chromosome);
 	
 	for(%i = 0; %i < getWordCount(%chromosome)/%toolVarietyCount; %i++)
 	{
 		%subChromosome = getWords(%chromosome, %i*%toolVarietyCount, (%toolVarietyCount - 1) + %i*%toolVarietyCount);
 		
-		echo(%subChromosome);
+		echo("  sub" SPC %subChromosome);
 		
-		%this.spawnEnemyUnit(%subChromosome, getRandom(-$roomWidth/2, $roomWidth/2), $roomHeight/2);
+		%this.spawnEnemyUnit(%subChromosome, getRandom(-$roomWidth/3, $roomWidth/3), $roomHeight/2 - getRandom(0, $roomHeight/10));
 	}
 	
 }
@@ -162,11 +145,29 @@ function Arena::spawnEnemyUnit(%this, %localChromosome, %xPos, %yPos)
 	{
 		class = "EnemyUnit";
 		myChromosome = %localChromosome;
+		myArena = %this;
+		mainPlayer = %this.player;
 	};
 	
-    arenaScene.add( %newEnemy );
+    %this.getScene().add( %newEnemy );
+	%newEnemy.initialize();
 	
 	%newEnemy.setPosition(%xPos, %yPos);
 
 	return %newEnemy;
+} 
+
+//-----------------------------------------------------------------------------
+
+function Arena::finishRoom(%this)
+{
+	%totalButtonCount = %this.player.rangedCount +
+		%this.player.meleeCount +
+		%this.player.blockCount + 
+		%this.player.dashCount;
+	
+	//sum up everything
+	//write file...
+	
+	
 } 

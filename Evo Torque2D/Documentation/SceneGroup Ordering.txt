@@ -6,4 +6,5 @@
  5: Player
  6: PlayerShots
 10: Enemies
+11: EnemyShots/Effects
 15: Walls/Obsticals
