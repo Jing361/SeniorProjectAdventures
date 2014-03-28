@@ -13,6 +13,7 @@ function Player::initialize(%this)
 {
 	exec("./playerBullet/PlayerBullet.cs");
 	exec("./playerStrike/PlayerStrike.cs");
+	exec("./playerDash/PlayerDash.cs");
 	
 	%this.setSceneGroup(5);			//0: Player sceneGroup
 	%this.setSceneLayer(5);
@@ -26,8 +27,13 @@ function Player::initialize(%this)
 	%this.myHeight = 169 * %this.sizeRatio;
 	
 	%this.walkSpeed = 40;
-	%this.health = 100;
 	%this.setPosition(0, 25);
+	
+	//Dash
+	%this.isDashing = false;
+	%this.currDashDirection = 0;
+	%this.dashLength = 0.3*1000;		//ms
+	%this.dashSpeed = 120;
 	
 	//Algorithm Counters
 	%this.rangedCount = 0;
@@ -94,30 +100,34 @@ function Player::setupSprite( %this )
 function Player::setupControls( %this )
 {
 	exec("./behaviors/controls/PlayerMovementControls.cs");
+	exec("./behaviors/controls/PlayerAimControls.cs");
 	exec("./behaviors/controls/alignToJoystick.cs");
 	
  	%controls = PlayerMovementControlsBehavior.createInstance();
 	%controls.walkSpeed = %this.walkSpeed;
-	%controls.upKey = "keyboard W";
-	%controls.leftKey = "keyboard A";
-	%controls.downKey = "keyboard S";
-	%controls.rightKey = "keyboard D";
+	%controls.upKey = "keyboard E";
+	%controls.leftKey = "keyboard S";
+	%controls.downKey = "keyboard D";
+	%controls.rightKey = "keyboard F";
 	%this.addBehavior(%controls);
 	
-/* 	%xBoxControl = AlignToJoystickBehavior.createInstance();
+ 	%aimer = PlayerAimControlsBehavior.createInstance();
+	%this.addBehavior(%aimer);
+	
+ 	%xBoxControl = AlignToJoystickBehavior.createInstance();
 	%xBoxControl.xAxis = "joystick0 xaxis";
 	%xBoxControl.yAxis = "joystick0 yaxis";
 	%xBoxControl.rotationOffset = 90;
-	%this.addBehavior(%xBoxControl); */
+	%this.addBehavior(%xBoxControl); 
 	
-	
+	/*
 	exec("./behaviors/controls/faceMouse.cs");
 	
 	%faceMse = FaceMouseBehavior.createInstance();
 	%faceMse.object = mainPlayer;
 	%faceMse.rotationOffset = -90;
 	%this.addBehavior(%faceMse);
-	
+	*/
 	/*
 	exec("./behaviors/controls/mouseInput.cs");
 	

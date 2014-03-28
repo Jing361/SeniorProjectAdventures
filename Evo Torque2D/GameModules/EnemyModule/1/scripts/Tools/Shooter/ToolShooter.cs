@@ -99,8 +99,6 @@ function ToolShooter::shoot( %this )
 	%localX = %this.bodyPosX*%this.myWidth;// - %this.barrelXoffset*((-1*%this.bodyPosX)/%this.bodyPosX);
 	%localY = %this.bodyPosY*%this.myHeight;// + %this.barrelYoffset*((-1*%this.bodyPosY)/%this.bodyPosY);
 	
-	echo(%localX SPC %localY);
-	
 	%newBullet.setPosition(%this.owner.getWorldPoint(%localX, %localY)  );
 	
 	%this.mySchedule = schedule(%this.reloadTime, 0, "ToolShooter::shoot", %this);

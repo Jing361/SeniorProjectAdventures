@@ -9,7 +9,7 @@ function Arena::buildArena(%this)
     // arena have reached the edges.
 
     // Background
-    %background = new Sprite();
+    %background = new Sprite() {class="backgroundObj";};
     %background.setBodyType( "static" );
     %background.setImage( "GameAssets:background" );
     %background.setSize( $roomWidth, $roomHeight );
@@ -17,10 +17,11 @@ function Arena::buildArena(%this)
     %background.setAwake( false );
     %background.setActive( false );
     %background.setSceneLayer(30);
+    %background.setSceneGroup( 0 );
     %this.getScene().add( %background );
     
     // Arena Edges
-    %roomEdges = new Sprite();
+    %roomEdges = new Sprite() {class="backgroundObj";};
     %roomEdges.setBodyType( "static" );
     %roomEdges.setImage( "GameAssets:backgroundedging" );
     %roomEdges.setSize( $roomWidth, $roomHeight );
@@ -28,6 +29,7 @@ function Arena::buildArena(%this)
     %roomEdges.setAwake( false );
     %roomEdges.setActive( false );
     %roomEdges.setSceneLayer(2);
+    %roomEdges.setSceneGroup( 0 );
     %this.getScene().add( %roomEdges ); 
     
     %this.addArenaBoundaries( $roomWidth, $roomHeight );

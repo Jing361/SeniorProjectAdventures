@@ -19,16 +19,23 @@ if (!isObject(AlignToJoystickBehavior))
 
 function AlignToJoystickBehavior::onBehaviorAdd(%this)
 {
-   if (!isObject(GlobalActionMap))
-      return;
+	if (!isObject(GlobalActionMap))
+		return;
    
-   GlobalActionMap.bindObj(getWord(%this.xAxis, 0), getWord(%this.xAxis, 1), "moveX", %this);
-   GlobalActionMap.bindObj(getWord(%this.yAxis, 0), getWord(%this.yAxis, 1), "moveY", %this);
+	GlobalActionMap.bindObj(getWord(%this.xAxis, 0), getWord(%this.xAxis, 1), "moveX", %this);
+	GlobalActionMap.bindObj(getWord(%this.yAxis, 0), getWord(%this.yAxis, 1), "moveY", %this);
    
-   echo(GlobalActionMap);
+	new ActionMap(moveMap);
    
-   %this.xVal = 0;
-   %this.yVal = 0;
+	moveMap.activateDirectInput();
+	moveMap.enableJoystick();
+	moveMap.enableXInput();
+	$enableDirectInput=true;
+   
+	echo(GlobalActionMap);
+   
+	%this.xVal = 0;
+	%this.yVal = 0;
 }
 
 function AlignToJoystickBehavior::moveX(%this, %val)

@@ -21,6 +21,13 @@ function FaceMouseBehavior::onBehaviorAdd(%this)
 
 function FaceMouseBehavior::onUpdate(%this)
 {
-	%targetRotation = %this.rotationOffset + Vector2AngleToPoint(%this.owner.getPosition(), mainWindow.getMousePosition());
-    %this.owner.setAngle(%targetRotation);
+	if(! %this.owner.isDashing)
+	{
+		%targetRotation = %this.rotationOffset + Vector2AngleToPoint(%this.owner.getPosition(), mainWindow.getMousePosition());
+		%this.owner.setAngle(%targetRotation);
+	}
+	else
+	{
+		%this.owner.setAngle(%this.owner.currDashDirection);
+	}
 }

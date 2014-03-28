@@ -13,7 +13,12 @@ $pixelToWorldRatio = $roomWidth/1600;
 //---------------------------------------------------------------------
 
 function RoomManager::create( %this )
-{
+{   
+	activateDirectInput();
+	enableJoystick();
+	enableXInput();
+	$enableDirectInput=true;
+	
 	setRandomSeed(getRealTime());
 
     new Scene(mainScene)
