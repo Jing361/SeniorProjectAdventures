@@ -104,20 +104,20 @@ string GeneticAlgorithm::run ( const char* )
 			fileOut<< *geneIterator << " ";
 			sprintf_s(numstr,"%d", *geneIterator);
 			result += numstr;		
-			fileOut<< result.c_str();
+			//fileOut<< result.c_str();
 			result += ' ';
 		}
 	sprintf_s(numstr,"%d", *(geneIterator));
 	result+= numstr;
 
-	fileOut<< endl << result.size() << "Size" << sizeof(string) << endl;
+	//fileOut<< endl << result.size() << "Size" << sizeof(string) << endl;
 
 	//Con::printf("Here");
 	//Con::printf("%s\n",result.c_str());
 	//Con::printf("Here");
 
 	
-	fileOut << result.c_str();
+	fileOut << endl << endl << result.c_str();
 	fileOut.close();
 
 	return result;
