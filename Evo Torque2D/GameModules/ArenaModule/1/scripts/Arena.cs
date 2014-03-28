@@ -120,10 +120,10 @@ function Arena::processRoomChromosomes(%this)
 {
 	%toolVarietyCount = 7;		//number of different tools available, length of local chromosomes
 	
-	//$genAlg = new GeneticAlgorithm();
+	$genAlg = new GeneticAlgorithm();
 	
-	%chromosome = "1 1 1 1 1 3 4" ;//SPC "0 0 0 0 1 2 4" SPC "4 0 0 0 0 0 0" SPC "0 0 0 0 0 0 0";
-	//%chromosome = $genAlg.run("");
+	//%chromosome = "1 1 1 1 1 3 4" ;//SPC "0 0 0 0 1 2 4" SPC "4 0 0 0 0 0 0" SPC "0 0 0 0 0 0 0";
+	%chromosome = $genAlg.run("");
 	
 	echo("Chromosome:" SPC %chromosome);
 	

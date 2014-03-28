@@ -14,7 +14,7 @@ const int MAXGENS = 10;
 const int NTOOLS = 7;
 const double PXOVER = 0.8;
 const double PMUTATION = 0.15;
-const string PASTROOMINFO = "C:\\Users\\Chris\\Documents\\Project Evo\\SeniorProjectAdventures\\Evo Torque2D\\ga_input.txt";
+const string PASTROOMINFO = ".\\utilities\\ga_input.txt";
 
 ConsoleMethod(GeneticAlgorithm, run, const char *, 3, 3, "() Gets the object's position.\n"
                                                               "@return chromosome.")
@@ -92,7 +92,7 @@ string GeneticAlgorithm::run ( const char* )
 	cout << "Best fitness = " << population[population.size()-1].getFitness() << "\n";
 
 	ofstream fileOut;
-	fileOut.open("C:\\Users\\Chris\\Documents\\Project Evo\\SeniorProjectAdventures\\Evo Torque2D\\enginelog.txt");
+	fileOut.open(".\\utilities\\enginelog.txt");
 
 	string result = "";
 	char numstr[21];
