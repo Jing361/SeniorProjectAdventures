@@ -101,11 +101,11 @@ string GeneticAlgorithm::run ( const char* )
 		geneIterator != population[population.size()-1].getGene()->end() - 1; 
 		++geneIterator)
 		{
-			fileOut<< *geneIterator << ",";
+			fileOut<< *geneIterator << " ";
 			sprintf_s(numstr,"%d", *geneIterator);
 			result += numstr;		
 			fileOut<< result.c_str();
-			result += ',';
+			result += ' ';
 		}
 	sprintf_s(numstr,"%d", *(geneIterator));
 	result+= numstr;
