@@ -156,7 +156,7 @@ function RoomManager::writeRoomSummationFile( %this )
 	%file = new FileObject();
 	
 	
-	if(%file.openForWrite("utilities/ga_input2.txt"))
+	if(%file.openForWrite("utilities/ga_input.txt"))
 	{
 		%file.writeLine((10 + %this.CurrentLevel*5) @ "");
 		%file.writeLine("");
