@@ -92,6 +92,7 @@ function RoomManager::startNextLevel( %this )
 	{
 		class = "Arena";
 		myManager = %this;
+		currLevel = %this.CurrentLevel;
 	};
 	
 	%arenaScene = new Scene();
@@ -109,9 +110,74 @@ function RoomManager::startNextLevel( %this )
 
 function RoomManager::endCurrentLevel( %this )
 {
+	%this.writeRoomSummationFile();
+
 	%this.currentArena.player.clearBehaviors();
 	%this.currentArena.getScene().remove(%this.currentArena.player);
 	%this.startNextLevel();
+}
+
+//-----------------------------------------------------------------------------
+
+function RoomManager::writeRoomSummationFile( %this )
+{
+	%plyrRangeCount = %this.currentArena.player.rangedCount;
+	%plyrMeleeCount = %this.currentArena.player.meleeCount;
+	%plyrBlockCount = %this.currentArena.player.blockCount;
+	%plyrDashCount = %this.currentArena.player.dashCount;
+	
+	
+	echo("Results:");
+	echo(%plyrRangeCount);
+	echo(%plyrMeleeCount);
+	echo(%plyrBlockCount);
+	echo(%plyrDashCount);
+	echo("");
+	
+	%totalCount = %plyrRangeCount + %plyrMeleeCount + %plyrBlockCount + %plyrDashCount;
+					
+	if(%totalCount > 0)
+	{	
+		%plyrRangeCount = %plyrRangeCount/%totalCount;
+		%plyrMeleeCount = %plyrMeleeCount/%totalCount;
+		%plyrBlockCount = %plyrBlockCount/%totalCount;
+		%plyrDashCount = %plyrDashCount/%totalCount;
+	}
+	
+	echo("Result Percents:");
+	echo(%plyrRangeCount);
+	echo(%plyrMeleeCount);
+	echo(%plyrBlockCount);
+	echo(%plyrDashCount);
+	echo(" total:" SPC %totalCount);
+	
+	echo("RoomManager.main: chromosome" SPC (%this.currentArena.roomChromosomes));
+	
+	%file = new FileObject();
+	
+	
+	if(%file.openForWrite("utilities/ga_input2.txt"))
+	{
+		%file.writeLine((10 + %this.CurrentLevel*5) @ "");
+		%file.writeLine("");
+		%file.writeLine(%plyrRangeCount @ "");
+		%file.writeLine(%plyrMeleeCount @ "");
+		%file.writeLine(%plyrBlockCount @ "");
+		%file.writeLine(%plyrDashCount @ "");
+		%file.writeLine("6.25");				//enemy dps melee
+		%file.writeLine("2.5");					//enemy dps range
+		%file.writeLine("");
+		%file.writeLine("");
+		%file.writeLine(%this.currentArena.roomChromosomes);	//enemy subChromosomes (1/line)
+		
+		echo("RoomManager.main: Summation file Written");
+	}
+	else
+	{
+		error("RoomManager.main: Summation file is not open for writing");
+	}
+	%file.close();
+	
 }
 
 //-----------------------------------------------------------------------------

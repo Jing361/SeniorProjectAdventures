@@ -221,8 +221,9 @@ function PlayerMovementControlsBehavior::pressFire(%this, %val)
 			fireAngle = %this.owner.getAngle();
 		};
 		
-		%this.rangedCount++;
+		%this.owner.rangedCount++;
 		%this.owner.getScene().add( %newBullet );
+		
 		
 		%newBullet.setPosition(%this.owner.getWorldPoint(%this.barrelXoffset, %this.barrelYoffset) );
 	}
@@ -241,7 +242,7 @@ function PlayerMovementControlsBehavior::pressMelee(%this, %val)
 			strikeAngle = %this.owner.getAngle();
 		};
 			
-		%this.meleeCount++;
+		%this.owner.meleeCount++;
 		%this.owner.getScene().add( %newStriker );
 		
 		%newStriker.setPosition(%this.owner.getWorldPoint(%this.bladeXoffset, %this.bladeYoffset) );

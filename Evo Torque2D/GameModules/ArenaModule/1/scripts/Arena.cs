@@ -36,6 +36,7 @@ function Arena::buildArena(%this)
 	
 	%this.player = %this.spawnPlayer(-25, 0);		//add player before Enemies!
 	
+	%this.roomChromosomes = "";
 	
 	// Enemy Info
 	%this.EnemyCount = 0;
@@ -120,22 +121,38 @@ function Arena::processRoomChromosomes(%this)
 {
 	%toolVarietyCount = 7;		//number of different tools available, length of local chromosomes
 	
-	$genAlg = new GeneticAlgorithm();
-	
-	//%chromosome = "1 1 1 1 1 3 4" ;//SPC "0 0 0 0 1 2 4" SPC "4 0 0 0 0 0 0" SPC "0 0 0 0 0 0 0";
-	%chromosome = $genAlg.run("");
+	if(%this.currLevel > 1)
+	{
+		$genAlg = new GeneticAlgorithm();
+		
+		//%chromosome = "1 1 1 1 1 3 4" ;//SPC "0 0 0 0 1 2 4" SPC "4 0 0 0 0 0 0" SPC "0 0 0 0 0 0 0";
+		%chromosome = $genAlg.run("");
+	}
+	else
+	{
+		%chromosome = "0 0 0 0 1 2 1" ;
+	}
 	
 	echo("Chromosome:" SPC %chromosome);
 	
 	for(%i = 0; %i < getWordCount(%chromosome)/%toolVarietyCount; %i++)
 	{
+	
 		%subChromosome = getWords(%chromosome, %i*%toolVarietyCount, (%toolVarietyCount - 1) + %i*%toolVarietyCount);
 		
 		echo("  sub" SPC %subChromosome);
 		
 		%this.spawnEnemyUnit(%subChromosome, getRandom(-$roomWidth/3, $roomWidth/3), $roomHeight/2 - getRandom(0, $roomHeight/10));
+		
+		if(%i >= (getWordCount(%chromosome)/%toolVarietyCount) - 1)
+		{
+			%this.roomChromosomes = %this.roomChromosome @ %subChromosome;
+		}
+		else
+		{
+			%this.roomChromosomes = %this.roomChromosome @ %subChromosome NL "";
+		}
 	}
-	
 }
 
 //-----------------------------------------------------------------------------
