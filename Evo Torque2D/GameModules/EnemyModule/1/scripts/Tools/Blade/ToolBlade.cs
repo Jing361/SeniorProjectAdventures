@@ -13,6 +13,7 @@ function ToolBlade::CreateInstance(%emyOwner, %type, %posX, %posY, %toolOrientat
 		bodyPosX = %posX;
 		bodyPosY = %posY;
 		orientation = %toolOrientation;
+		stackLevel = 1;
 	};  
   
     return %r;  

@@ -1,9 +1,9 @@
 
-function TitleScreen::onAdd(%this)
+function TitleScreenGUI::onAdd(%this)
 {
 }
 
-function TitleScreen::openTitleScreen(%this, %scene)
+function TitleScreenGUI::openTitleScreen(%this, %scene)
 {
 	// Background
     %background = new Sprite();

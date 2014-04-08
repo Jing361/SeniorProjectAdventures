@@ -15,7 +15,7 @@ function Player::initialize(%this)
 	exec("./playerStrike/PlayerStrike.cs");
 	exec("./playerDash/PlayerDash.cs");
 	
-	%this.setSceneGroup(5);			//0: Player sceneGroup
+	%this.setSceneGroup(5);			//5: Player sceneGroup
 	%this.setSceneLayer(5);
 	%this.fixedAngle = true;
 	
@@ -101,7 +101,7 @@ function Player::setupControls( %this )
 {
 	exec("./behaviors/controls/PlayerMovementControls.cs");
 	exec("./behaviors/controls/PlayerAimControls.cs");
-	exec("./behaviors/controls/alignToJoystick.cs");
+	//exec("./behaviors/controls/alignToJoystick.cs");
 	
  	%controls = PlayerMovementControlsBehavior.createInstance();
 	%controls.walkSpeed = %this.walkSpeed;
@@ -114,11 +114,13 @@ function Player::setupControls( %this )
  	%aimer = PlayerAimControlsBehavior.createInstance();
 	%this.addBehavior(%aimer);
 	
+	/*
  	%xBoxControl = AlignToJoystickBehavior.createInstance();
 	%xBoxControl.xAxis = "joystick0 xaxis";
 	%xBoxControl.yAxis = "joystick0 yaxis";
 	%xBoxControl.rotationOffset = 90;
 	%this.addBehavior(%xBoxControl); 
+	*/
 	
 	/*
 	exec("./behaviors/controls/faceMouse.cs");

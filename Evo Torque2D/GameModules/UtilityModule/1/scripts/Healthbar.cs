@@ -26,10 +26,7 @@ function Healthbar::initialize(%this)
 	%this.segmentWidth = 12 * %this.sizeRatio;
 	%this.segmentHeight = 12 * %this.sizeRatio;
 	
-	if(%this.curved)
-		%this.drawHealthbarCurved(%this.owner.fullHealth);
-	else
-		%this.drawHealthbar(%this.owner.fullHealth);
+	%this.assessDamage( );		//go to draw for first time
 }
 
 //-----------------------------------------------------------------------------
@@ -51,9 +48,10 @@ function Healthbar::drawHealthbar(%this, %health)
 
 //-----------------------------------------------------------------------------
 
-function Healthbar::drawHealthbarCurved(%this, %health)
+function Healthbar::drawHealthbarCurved(%this, %health, %totalHealth)
 {
-	%numSegs = %health/10;
+	%numGreenSegs = %health/10;
+	%numSegs = %totalHealth/10;
 	
 	%currX = -(%numSegs*%this.segmentWidth)/2;
 	
@@ -61,7 +59,12 @@ function Healthbar::drawHealthbarCurved(%this, %health)
 	{
 		%currY = -(%currX*%currX)/60;
 		%this.addSprite(%currX SPC %currY);
-		%this.setSpriteImage("GameAssets:healthBarSegment", 0);
+		
+		if(%i < %numGreenSegs)
+			%this.setSpriteImage("GameAssets:healthBarSegment", 0);
+		else
+			%this.setSpriteImage("GameAssets:healthBarSegmentRed", 0);
+		 
 		%this.setSpriteSize(%this.segmentWidth, %this.segmentHeight);
 		
 		%currX += %this.segmentWidth;
@@ -92,7 +95,7 @@ function Healthbar::assessDamage( %this )
 	%this.clearSprites();
 
 	if(%this.curved)
-		%this.drawHealthbarCurved(%this.owner.health);
+		%this.drawHealthbarCurved(%this.owner.health, %this.owner.fullHealth);
 	else
 		%this.drawHealthbar(%this.owner.health);
 }

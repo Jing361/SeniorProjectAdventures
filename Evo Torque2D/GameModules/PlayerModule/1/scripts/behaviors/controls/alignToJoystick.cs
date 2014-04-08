@@ -52,7 +52,6 @@ function AlignToJoystickBehavior::moveY(%this, %val)
 
 function AlignToJoystickBehavior::updateMovement(%this)
 {
-   echo("moveddddd");
    %targetRotation = mRadToDeg(mAtan(%this.yVal, %this.xVal)) + %this.rotationOffset;
    if (%this.turnSpeed == 0)
       %this.owner.rotation = %targetRotation;

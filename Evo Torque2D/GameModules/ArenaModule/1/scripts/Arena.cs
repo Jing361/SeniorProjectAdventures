@@ -44,7 +44,7 @@ function Arena::buildArena(%this)
 	%this.processRoomChromosomes();
 	
 	/*
-	//Enemy horse race creator (scrap)
+	//Enemy speed race creator (scrap)
 	%frac = $roomWidth/8.0;
 	%start = 100;
 	for(%i = 1; %i <= 8; %i++)
@@ -123,26 +123,32 @@ function Arena::processRoomChromosomes(%this)
 	
 	if(%this.currLevel > 1)
 	{
+		echo("Arena.Arena: Creating GeneticAlgorithm instance");
 		$genAlg = new GeneticAlgorithm();
 		
-		//%chromosome = "1 1 1 1 1 3 4" ;//SPC "0 0 0 0 1 2 4" SPC "4 0 0 0 0 0 0" SPC "0 0 0 0 0 0 0";
+		//%chromosome = "1 1 1 1 1 5 4" SPC "0 0 0 0 1 2 3";// SPC "4 0 0 0 0 0 1" SPC "0 2 2 0 0 0 1";
+		echo("Arena.Arena: GeneticAlgorithm.run()");
 		%chromosome = $genAlg.run("");
+		echo("Arena.Arena: GeneticAlgorithm. run successful!");
 	}
 	else
 	{
-		%chromosome = "0 0 0 0 1 2 1" ;
+		%chromosome = "0 0 0 0 2 3 1";
 	}
 	
 	echo("Chromosome:" SPC %chromosome);
 	
-	for(%i = 0; %i < getWordCount(%chromosome)/%toolVarietyCount; %i++)
+	for(%i = 0; %i < mFloor(getWordCount(%chromosome)/%toolVarietyCount); %i++)
 	{
 	
 		%subChromosome = getWords(%chromosome, %i*%toolVarietyCount, (%toolVarietyCount - 1) + %i*%toolVarietyCount);
 		
 		echo("  sub" SPC %subChromosome);
 		
+		echo("Arena.Arena: spawn enemy unit" SPC %i);
 		%this.spawnEnemyUnit(%subChromosome, getRandom(-$roomWidth/3, $roomWidth/3), $roomHeight/2 - getRandom(0, $roomHeight/10));
+		
+		echo("Arena.Arena: spawned enemy unit successfuly" SPC %i);
 		
 		if(%i >= (getWordCount(%chromosome)/%toolVarietyCount) - 1)
 		{
@@ -169,6 +175,7 @@ function Arena::spawnEnemyUnit(%this, %localChromosome, %xPos, %yPos)
 	};
 	
     %this.getScene().add( %newEnemy );
+		echo("Arena.Arena: initializing enemy:");
 	%newEnemy.initialize();
 	
 	%newEnemy.setPosition(%xPos, %yPos);
