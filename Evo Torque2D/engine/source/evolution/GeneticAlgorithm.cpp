@@ -19,12 +19,22 @@ const string PASTROOMINFO = ".\\utilities\\ga_input.txt";
 ConsoleMethod(GeneticAlgorithm, run, const char *, 3, 3, "() Gets the object's position.\n"
                                                               "@return chromosome.")
 {
+	char* pBuffer = Con::getReturnBuffer(256);
 	// Fetch result.  
-    string result = object->run(argv[2]);  
-    // Create Returnable Buffer.  
-	char* pBuffer = Con::getReturnBuffer(result.size()*sizeof(string));  
+    string result = object->run(argv[2]);
 
-	dSprintf(pBuffer, result.size()*sizeof(string), "%s", result);  
+	//string result = "1 0 1 0 1 0 1";
+	Con::printf("Here1");
+	//Con::printf(result.c_str());
+	//char* p;
+	//Con::printf("%d  %d" , (result.size(),sizeof(string)));
+    // Create Returnable Buffer.  
+	//char* pBuffer = Con::getReturnBuffer(result.c_str());  
+
+	Con::printf("Here2");
+	dSprintf(pBuffer, 256, "%s", result.c_str());  
+
+	Con::printf("Here3");
 
 	return pBuffer; 
 }
@@ -45,17 +55,26 @@ void GeneticAlgorithm::onRemove()
 string GeneticAlgorithm::run ( const char* )
 {
 
+	Con::printf("Here before");
+
 	initialize ( PASTROOMINFO );
+	Con::printf("Here after init");
 
 	evaluate ( );
+	Con::printf("Here after eval");
 
 	sortPopulation() ;
+	Con::printf("Here after sort");
 
 	for (int generation = 0; generation < MAXGENS; generation++ )
 	{
 
 		crossover ( );
+		Con::printf("Here after cross");
+
 		mutate ( );
+		Con::printf("Here after mutate");
+
 		//verify();
 		evaluate ( );
 		selector ( );
@@ -92,7 +111,9 @@ string GeneticAlgorithm::run ( const char* )
 	cout << "Best fitness = " << population[population.size()-1].getFitness() << "\n";
 
 	ofstream fileOut;
-	fileOut.open(".\\utilities\\enginelog.txt");
+	fileOut.open(".\\utilities\\enginelog2.txt");
+	
+	fileOut<< "Hello?" << endl;
 
 	string result = "";
 	char numstr[21];
@@ -112,8 +133,8 @@ string GeneticAlgorithm::run ( const char* )
 
 	//fileOut<< endl << result.size() << "Size" << sizeof(string) << endl;
 
-	//Con::printf("Here");
-	//Con::printf("%s\n",result.c_str());
+	Con::printf("Here");
+	Con::printf("%s\n",result.c_str());
 	//Con::printf("Here");
 
 	
@@ -216,6 +237,9 @@ void GeneticAlgorithm::initialize ( string filename  )
 
 	srand (time(0));								//Warning
 
+	ofstream fileOut;
+	fileOut.open(".\\utilities\\enginelog.txt");
+
 	file_in.open ( PASTROOMINFO.c_str() );
 
 	if ( !file_in )
@@ -236,14 +260,26 @@ void GeneticAlgorithm::initialize ( string filename  )
 
 	file_in >> pointLimit >> rangedPercent >> meleePercent >> blockPercent >> dashPercent >> enemyDPSwing >> enemyDPShot;
 
+	fileOut << pointLimit << endl << rangedPercent << endl << meleePercent << endl << blockPercent << endl << dashPercent << endl <<
+		 enemyDPSwing << endl << enemyDPShot << endl;
+
 	cout<< pointLimit << endl;
 
-	while (!file_in.eof())
+	file_in >> current;
+	while (!file_in.eof() && current >= 0)
 	{
-		file_in >> current;
+		fileOut << current << " ";
 		population[0].genePushBack(current);
+		file_in >> current;
 	}
 
+	fileOut<< endl;
+
+	for(int i = 0; i < population[0].getGene()->size(); ++i)
+	{
+		fileOut << population[0].getGene()->at(i) << " ";
+	}
+	
 	int j = 1;
 	vector<int>::reverse_iterator geneIterator;
 	while(j < POPSIZE)
@@ -265,13 +301,13 @@ void GeneticAlgorithm::initialize ( string filename  )
 			points += *geneIterator;
 
 		}
-
-		if(points <= pointLimit)
+		//if(points <= pointLimit)
 			++j;
 
 	}
 
 	file_in.close ( );
+	fileOut.close();
 
 	return;
 }
@@ -449,6 +485,8 @@ void GeneticAlgorithm::verifyAndPush( Genotype g )
 
 		}
 
+	//Con::printf("%d mutate" ,pointLimit);
+
 	if(points <= pointLimit)
 		population.push_back(g);
 
@@ -493,7 +531,8 @@ void GeneticAlgorithm::Xover ( int a, int b )
 			points += *geneIterator;
 
 		}
-
+	
+	//Con::printf("%d cross" ,pointLimit);
 	if(points <= pointLimit)
 		population.push_back(g);
 

@@ -28,6 +28,8 @@ function EnemyShooterBullet::initialize(%this)
 	
     %this.createPolygonBoxCollisionShape(%this.myWidth, %this.myHeight);
     %this.setCollisionShapeIsSensor(0, true);
+	
+    //%this.setCollisionGroups($UtilityObj.getCollisionGroup("Player") SPC $UtilityObj.getCollisionGroup("Walls"));
     %this.setCollisionGroups( "5 15" );
 	%this.setCollisionCallback(true);
 }

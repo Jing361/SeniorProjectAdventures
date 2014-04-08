@@ -14,10 +14,15 @@ $pixelToWorldRatio = $roomWidth/1600;
 
 function RoomManager::create( %this )
 {   
-	activateDirectInput();
-	enableJoystick();
-	enableXInput();
-	$enableDirectInput=true;
+	//$UtilityObj = new SimObject()
+	//{
+	//	class = "Utility";
+	//};
+
+	//activateDirectInput();
+	//enableJoystick();
+	//enableXInput();
+	//$enableDirectInput=true;
 	
 	setRandomSeed(getRealTime());
 
@@ -66,13 +71,14 @@ function RoomManager::create( %this )
 	
     // load some scripts and variables
     //exec("./scripts/arena.cs");
-    exec("./titleScreen.cs");
+    exec("./titleScreenGUI.cs");
+    exec("./roomCompleteGUI.cs");
 	exec("./scripts/behaviors/movement/shooterControls.cs");
 	exec("./scripts/behaviors/movement/drift.cs");
 	
 	%gui_titleScreen = new SceneObject()
 	{
-		class = "TitleScreen";
+		class = "TitleScreenGUI";
 		myManager = %this;
 	};
 		 
@@ -96,8 +102,8 @@ function RoomManager::startNextLevel( %this )
 	};
 	
 	%arenaScene = new Scene();
-	%arenaScene.setDebugOn("collision");
-	%arenaScene.layerSortMode0 = "X";
+	//%arenaScene.setDebugOn("collision");
+	%arenaScene.layerSortMode0 = "Newest";
 	%arenaScene.add(%gameArena);
 	%gameArena.buildArena( );
 	
@@ -114,7 +120,10 @@ function RoomManager::endCurrentLevel( %this )
 
 	%this.currentArena.player.clearBehaviors();
 	%this.currentArena.getScene().remove(%this.currentArena.player);
-	%this.startNextLevel();
+	
+	%this.currentArena.getScene().schedule(320, "clear");  
+	
+	%this.goToRoomCompleteScreen();
 }
 
 //-----------------------------------------------------------------------------
@@ -127,7 +136,7 @@ function RoomManager::writeRoomSummationFile( %this )
 	%plyrDashCount = %this.currentArena.player.dashCount;
 	
 	
-	echo("Results:");
+	echo("RoomManager.main: Results:");
 	echo(%plyrRangeCount);
 	echo(%plyrMeleeCount);
 	echo(%plyrBlockCount);
@@ -158,6 +167,8 @@ function RoomManager::writeRoomSummationFile( %this )
 	
 	if(%file.openForWrite("utilities/ga_input.txt"))
 	{
+		echo("RoomManager.main: write file opened");
+		
 		%file.writeLine((10 + %this.CurrentLevel*5) @ "");
 		%file.writeLine("");
 		%file.writeLine(%plyrRangeCount @ "");
@@ -170,6 +181,7 @@ function RoomManager::writeRoomSummationFile( %this )
 		%file.writeLine("");
 		%file.writeLine(%this.currentArena.roomChromosomes);	//enemy subChromosomes (1/line)
 		
+		echo(%this.currentArena.roomChromosomes);
 		echo("RoomManager.main: Summation file Written");
 	}
 	else
@@ -177,7 +189,32 @@ function RoomManager::writeRoomSummationFile( %this )
 		error("RoomManager.main: Summation file is not open for writing");
 	}
 	%file.close();
+	echo("RoomManager.main: write file closed");
 	
+}   
+ 
+//-----------------------------------------------------------------------------
+  
+function RoomManager::goToRoomCompleteScreen( %this )
+{	
+	%completeRoomScene = new Scene();
+	%completeRoomScene.layerSortMode0 = "Newest";
+	mainWindow.setScene( %completeRoomScene );
+	
+	%gui_roomCompleteScreen = new SceneObject()
+	{
+		class = "RoomCompleteGUI";
+		myManager = %this;
+	};
+		 
+	%gui_roomCompleteScreen.openScreen(%completeRoomScene);
+}   
+
+//-----------------------------------------------------------------------------
+  
+function RoomManager::endRoomCompleteScreen( %this )
+{	
+	%this.startNextLevel();
 }
 
 //-----------------------------------------------------------------------------

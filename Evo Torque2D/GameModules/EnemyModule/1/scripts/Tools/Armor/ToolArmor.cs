@@ -13,10 +13,24 @@ function ToolArmor::CreateInstance(%emyOwner, %type, %posX, %posY, %toolOrientat
 		bodyPosX = %posX;
 		bodyPosY = %posY;
 		orientation = %toolOrientation;
+		stackLevel = 1;
 	};  
   
     return %r;  
-}  
+}   
+
+//-----------------------------------------------------------------------------
+
+function ToolArmor::initialize(%this)
+{	
+	Parent::initialize(%this);
+	
+	%this.healthBonus = 10 * %this.stackLevel;
+	
+	//add to enemy's total health
+	%this.owner.fullHealth = %this.owner.fullHealth + %this.healthBonus;
+	%this.owner.health = %this.owner.fullHealth;
+}
 
 //-----------------------------------------------------------------------------
 

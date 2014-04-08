@@ -13,6 +13,7 @@ function ToolAcid::CreateInstance(%emyOwner, %type, %posX, %posY, %toolOrientati
 		bodyPosX = %posX;
 		bodyPosY = %posY;
 		orientation = %toolOrientation;
+		stackLevel = 1;
 	};  
   
     return %r;  

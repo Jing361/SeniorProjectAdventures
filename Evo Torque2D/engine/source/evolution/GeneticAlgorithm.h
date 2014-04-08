@@ -16,7 +16,7 @@
 #include <vector>
 #include <algorithm>
 #include "Genotype.h"
-#include "GeneticAlgorithm_ScriptBinding.h"
+//#include "GeneticAlgorithm_ScriptBinding.h"
 
 using std::ifstream;
 using std::ofstream;

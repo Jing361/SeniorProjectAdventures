@@ -13,6 +13,7 @@ function ToolTar::CreateInstance(%emyOwner, %type, %posX, %posY, %toolOrientatio
 		bodyPosX = %posX;
 		bodyPosY = %posY;
 		orientation = %toolOrientation;
+		stackLevel = 1;
 	};  
   
     return %r;  

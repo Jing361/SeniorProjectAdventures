@@ -22,3 +22,36 @@ function getAngle(%objectA, %objectB)
 }
 
 //-----------------------------------------------------------------------------
+
+function Utility::getCollisionGroup(%this, %groupName)
+{
+	%groupNumber = 0;
+	
+	if(%groupName $= "Player")
+	{
+		%groupNumber = 5;
+	}
+	else if(%groupName $= "PlayerAttacks")
+	{
+		%groupNumber = 6;
+	}
+	else if(%groupName $= "Pickups")
+	{
+		%groupNumber = 9;
+	}
+	else if(%groupName $= "Enemies")
+	{
+		%groupNumber = 10;
+	}
+	else if(%groupName $= "EnemyAttacks")
+	{
+		%groupNumber = 11;
+	}
+	else if(%groupName $= "Wall")
+	{
+		%groupNumber = 15;
+	}
+	
+	
+	return %groupNumber;
+}

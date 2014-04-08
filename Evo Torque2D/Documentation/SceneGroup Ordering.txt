@@ -2,9 +2,10 @@
 *SceneGroups used for collision management*
 *Note: SceneLayers are not used for collision grouping, only for rendering depth purposes*
 ----------------------------------------------------
- 0: default
+ 0: Default
  5: Player
- 6: PlayerShots
+ 6: PlayerAttacks
+ 9: Pickups
 10: Enemies
-11: EnemyShots/Effects
-15: Walls/Obsticals
+11: EnemyAttacks
+15: Walls
