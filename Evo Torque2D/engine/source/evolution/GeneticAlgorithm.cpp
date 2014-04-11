@@ -10,31 +10,26 @@ using namespace Evolution;
 IMPLEMENT_CONOBJECT(GeneticAlgorithm);
 
 const int POPSIZE = 100;
-const int MAXGENS = 10;
+const int MAXGENS = 50;
 const int NTOOLS = 7;
 const double PXOVER = 0.8;
 const double PMUTATION = 0.15;
 const string PASTROOMINFO = ".\\utilities\\ga_input.txt";
+const double WEIGHTS[NTOOLS] = {1.25, 1.25, 1.25, 1.25, 1, 1, 1};
 
-ConsoleMethod(GeneticAlgorithm, run, const char *, 3, 3, "() Gets the object's position.\n"
+ConsoleMethod(GeneticAlgorithm, run, const char *, 2, 2, "() Gets the object's position.\n"
                                                               "@return chromosome.")
 {
 	char* pBuffer = Con::getReturnBuffer(256);
 	// Fetch result.  
-    string result = object->run(argv[2]);
+    string result = object->run();
 
-	//string result = "1 0 1 0 1 0 1";
-	Con::printf("Here1");
-	//Con::printf(result.c_str());
-	//char* p;
 	//Con::printf("%d  %d" , (result.size(),sizeof(string)));
     // Create Returnable Buffer.  
 	//char* pBuffer = Con::getReturnBuffer(result.c_str());  
 
-	Con::printf("Here2");
 	dSprintf(pBuffer, 256, "%s", result.c_str());  
 
-	Con::printf("Here3");
 
 	return pBuffer; 
 }
@@ -52,69 +47,80 @@ void GeneticAlgorithm::onRemove()
   Parent::onRemove();
 }
 
-string GeneticAlgorithm::run ( const char* )
+string GeneticAlgorithm::run ( )
 {
+	ofstream fileOut;
+	fileOut.open(".\\utilities\\enginelogfinal.txt");
+	
+	vector<int>::iterator geneIterator;
 
-	Con::printf("Here before");
-
-	initialize ( PASTROOMINFO );
-	Con::printf("Here after init");
+	initialize ( );
 
 	evaluate ( );
-	Con::printf("Here after eval");
 
 	sortPopulation() ;
-	Con::printf("Here after sort");
 
 	for (int generation = 0; generation < MAXGENS; generation++ )
 	{
 
+		fileOut<< "Generation:  " << generation << "\n";
+		fileOut<< " Population    " << population.size() << "\n";
+
+		for(int j = 0; j < POPSIZE; ++j)
+		{
+			fileOut << "var("  ") = " << "\n";
+
+			for(geneIterator = population[j].getGene()->begin(); geneIterator != population[j].getGene()->end(); ++geneIterator)
+			{
+				fileOut << *geneIterator << "  ";
+
+			}
+
+			fileOut << "\n";
+
+			fileOut << population[j].getFitness() << "\n";
+
+		}
+
 		crossover ( );
-		Con::printf("Here after cross");
 
 		mutate ( );
-		Con::printf("Here after mutate");
 
 		//verify();
 		evaluate ( );
 		selector ( );
 		//elitist ( );
-		cout<< "Generation:  " << generation << "\n";
-		cout<< " Population    " << population.size() << "\n";
+		fileOut<< "Generation:  " << generation << "\n";
+		fileOut<< " Population    " << population.size() << "\n";
 	}
 
-	cout << "\n";
-	cout << rangedPercent << "\n" << meleePercent << "\n" << blockPercent << "\n" << dashPercent << "\n" << enemyDPSwing 
+	fileOut << "\n";
+	fileOut << rangedPercent << "\n" << meleePercent << "\n" << blockPercent << "\n" << dashPercent << "\n" << enemyDPSwing 
 		<< "\n" << enemyDPShot << "\n";
 
-	vector<int>::iterator geneIterator;
 
 
 	for(int j = 0; j < POPSIZE; ++j)
 	{
-		cout << "var("  ") = " << "\n";
+		fileOut << "var("  ") = " << "\n";
 
 		for(geneIterator = population[j].getGene()->begin(); geneIterator != population[j].getGene()->end(); ++geneIterator)
 		{
-			cout << *geneIterator << "  ";
+			fileOut << *geneIterator << "  ";
 
 		}
 
-		cout << "\n";
+		fileOut << "\n";
 
-		cout << population[j].getFitness() << "\n";
+		fileOut << population[j].getFitness() << "\n";
 
 	}
 
-	cout << "\n";
-	cout << "\n";
-	cout << "Best fitness = " << population[population.size()-1].getFitness() << "\n";
+	fileOut << "\n";
+	fileOut << "\n";
+	fileOut << "Best fitness = " << population[population.size()-1].getFitness() << "\n";
 
-	ofstream fileOut;
-	fileOut.open(".\\utilities\\enginelog2.txt");
 	
-	fileOut<< "Hello?" << endl;
-
 	string result = "";
 	char numstr[21];
 
@@ -133,8 +139,7 @@ string GeneticAlgorithm::run ( const char* )
 
 	//fileOut<< endl << result.size() << "Size" << sizeof(string) << endl;
 
-	Con::printf("Here");
-	Con::printf("%s\n",result.c_str());
+	Con::printf("GA %s\n",result.c_str());
 	//Con::printf("Here");
 
 	
@@ -214,31 +219,26 @@ void GeneticAlgorithm::evaluate ( )
 			advance(geneIterator,1);
 			tools[6] += *geneIterator;
 		}
-		//cout<< "reactions:   " << ( rangedPercent * tools[0] ) + ( meleePercent * tools[1] ) + ( blockPercent * tools[2] ) + ( dashPercent * tools[3] ) << "\n";
-		//cout<< "improvement: " << (enemyDPSwing/(enemyDPSwing + enemyDPShot) * tools[4] ) + ( enemyDPShot/(enemyDPSwing + enemyDPShot) * tools[5] ) << "\n";
+		int toolsSum = tools[0] + tools[1] + tools[2] + tools[3] + tools[4] + tools[5] + tools[6];
+
 		population[member].setFitness( 
 			( rangedPercent * tools[0] ) + ( meleePercent * tools[1] ) + ( blockPercent * tools[2] ) + ( dashPercent * tools[3] ) 
-			+ (enemyDPSwing/(enemyDPSwing + enemyDPShot) * tools[4] ) + ( enemyDPShot/(enemyDPSwing + enemyDPShot) * tools[5] )  );
+			+ (enemyDPSwing/(enemyDPSwing + enemyDPShot) * tools[4] ) + ( enemyDPShot/(enemyDPSwing + enemyDPShot) * tools[5] )  
+			+ (pointLimit/50 * tools[6]) + (pointLimit/100 * toolsSum/NTOOLS));
 	}
 	return;
 }
 
-void GeneticAlgorithm::initialize ( string filename  )
+void GeneticAlgorithm::initialize (  )
 {
 	ifstream file_in;
 
-	//int shield;
-	//int parry;
-	//int acid;
-	//int tar;
-	//int blade;
-	//int projectile;
-	//int blob;
+	//shield parry acid tar blade projectile blob;
 
 	srand (time(0));								//Warning
 
 	ofstream fileOut;
-	fileOut.open(".\\utilities\\enginelog.txt");
+	fileOut.open(".\\utilities\\engineloginit.txt");
 
 	file_in.open ( PASTROOMINFO.c_str() );
 
@@ -265,6 +265,8 @@ void GeneticAlgorithm::initialize ( string filename  )
 
 	cout<< pointLimit << endl;
 
+	
+
 	file_in >> current;
 	while (!file_in.eof() && current >= 0)
 	{
@@ -284,7 +286,7 @@ void GeneticAlgorithm::initialize ( string filename  )
 	vector<int>::reverse_iterator geneIterator;
 	while(j < POPSIZE)
 	{
-		int points = 0;
+		double points = 0;
 		
 		population[j].setGene(*population[0].getGene());
 
@@ -294,11 +296,12 @@ void GeneticAlgorithm::initialize ( string filename  )
 			population[j].genePushBack(randval(*geneIterator));
 
 		}*/
-
+		int currentTool = 0;
 		for(geneIterator = population[j].getGene()->rbegin(); geneIterator != population[j].getGene()->rend(); ++geneIterator)
 		{
+			++currentTool;
 
-			points += *geneIterator;
+			points += *geneIterator * WEIGHTS[currentTool%NTOOLS];
 
 		}
 		//if(points <= pointLimit)
@@ -337,6 +340,9 @@ void GeneticAlgorithm::mutate ( )
 		{
 
 			x = rand ( ) % 1000 / 1000.0;
+///////////////////
+// finds two values for tools and increments or decrements them
+///////////////////
 			if ( x < PMUTATION )
 			{
 				++transfer;
@@ -373,17 +379,6 @@ void GeneticAlgorithm::mutate ( )
 }
 
 int GeneticAlgorithm::randval ( int x )
-
-	//****************************************************************************80
-	// 
-	//  Purpose:
-	//
-	//    RANDVAL generates a random value within bounds.
-	//
-	//  Modified:
-	//
-	//    29 December 2007
-	//
 {
 	int val;
 
@@ -476,12 +471,34 @@ void GeneticAlgorithm::selector ( )
 void GeneticAlgorithm::verifyAndPush( Genotype g )
 {
 	vector<int>::iterator geneIterator;
-	int points = 0;
+	double points = 0;
+	int currentTool;
+	int blobRec = 1;
+	int toolVariety = 0;
 
 	for(geneIterator = g.getGene()->begin(); geneIterator != g.getGene()->end(); ++geneIterator)
 		{
+			++currentTool;
+			blobRec += *geneIterator/5;
+			//On blob count
+			if(currentTool%NTOOLS == 6)
+			{
+				if(*geneIterator < blobRec)
+					*geneIterator = blobRec;
+				
+				blobRec = 1;
+				toolVariety = 0;
+			}
+			else
+			{
+				if(*geneIterator > 0)
+					++toolVariety;
+				if(toolVariety > 4)
+					++blobRec;
+			}
+			points += *geneIterator * WEIGHTS[currentTool%NTOOLS];
 
-			points += *geneIterator;
+			//points += *geneIterator;
 
 		}
 
@@ -508,33 +525,55 @@ void GeneticAlgorithm::Xover ( int a, int b )
 	//
 
 	pointA = rand () % ( population[a].getGene()->size() );
-	//cout<< pointA << "\n";
 
-	pointB = (pointA % NTOOLS) +
-		NTOOLS * ( rand () % ( population[b].getGene()->size() / NTOOLS) ) ;
-	//cout<< pointB << "\n";
+	//pointB = (pointA % NTOOLS) + 
+	//	NTOOLS * ( rand () % ( population[b].getGene()->size() / NTOOLS) ) ;
+
+	pointB = rand () % ( population[b].getGene()->size() );
 
 	// 
 	//  Splice the parents together 
 	//
 
 	Genotype g;
+	Genotype g2;
+
+	vector<int>::iterator geneIterator;
 
 	g.assignGene(population[a].spliceGene(0, pointA), population[b].spliceGene(pointB, population[b].getGene()->size()));
 
-	vector<int>::iterator geneIterator;
-	int points = 0;
+	if((g.getGene()->size()%NTOOLS) != 0)
+	{
+			string result = "";
+			char numstr[21];
 
-	for(geneIterator = g.getGene()->begin(); geneIterator != g.getGene()->end(); ++geneIterator)
-		{
+			for(geneIterator = g.getGene()->begin(); 
+				geneIterator != g.getGene()->end() - 1; 
+				++geneIterator)
+				{
+					sprintf_s(numstr,"%d", *geneIterator);
+					result += numstr;		
+					result += ' ';
+				}
+			sprintf_s(numstr,"%d", *(geneIterator));
+			result+= numstr;
+			Con::printf("GA %s\n",result.c_str());
+	}
+	while((g.getGene()->size()%NTOOLS) != 0) 
+	{
+		g.genePushBack(0);
+		Con::printf("In loop");
+		Con::printf("%d", (g.getGene()->size()%NTOOLS));
+	}
 
-			points += *geneIterator;
+	Con::printf("After 0 added");
 
-		}
-	
-	//Con::printf("%d cross" ,pointLimit);
-	if(points <= pointLimit)
-		population.push_back(g);
+	g2.assignGene(population[b].spliceGene(0, pointB), population[a].spliceGene(pointA, population[a].getGene()->size()));
+	while((g2.getGene()->size()%NTOOLS) != 0)
+		g2.genePushBack(0);
+
+	verifyAndPush(g);
+	verifyAndPush(g2);
 
 
 	/*	Method to allow 4 parents and cut/splice
