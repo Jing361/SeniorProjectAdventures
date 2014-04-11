@@ -10,7 +10,7 @@ function Healthbar::onAdd( %this )
 //-----------------------------------------------------------------------------
 
 function Healthbar::initialize(%this)
-{
+{	
 	if(!isObject(%this.owner))			//no owner, no service
 	{
 		%this.safeDelete();

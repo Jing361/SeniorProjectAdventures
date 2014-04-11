@@ -45,8 +45,6 @@ function EnemyUnit::configureTools(%this, %chromosome)
 	//Rest of Tools
 	%nextPosition = "";
 	
-	
-	//%toolToAddTypeCounts = new SimSet();	//number of each tool to add to body
 	for(%i = 0; %i < %this.numberToolTypes; %i++)
 	{
 		%toolToAddTypeCounts[%i] = %this.toolTypeCounts[%i];
@@ -76,9 +74,6 @@ function EnemyUnit::configureTools(%this, %chromosome)
 
 function EnemyUnit::configureSingleTool( %this, %toolType, %toAddCount )
 {
-	//for(%i = 0; %i < %toolCount; %i++) 		
-	//{
-	
 	if(%toAddCount <= 0)
 	{
 		return 0;

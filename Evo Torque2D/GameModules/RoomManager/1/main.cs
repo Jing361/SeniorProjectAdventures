@@ -14,10 +14,12 @@ $pixelToWorldRatio = $roomWidth/1600;
 
 function RoomManager::create( %this )
 {   
-	//$UtilityObj = new SimObject()
-	//{
-	//	class = "Utility";
-	//};
+/*
+	$UtilityObj = new SimObject()
+	{
+		class = "Utility";
+	};
+*/
 
 	//activateDirectInput();
 	//enableJoystick();
@@ -102,7 +104,7 @@ function RoomManager::startNextLevel( %this )
 	};
 	
 	%arenaScene = new Scene();
-	//%arenaScene.setDebugOn("collision");
+	%arenaScene.setDebugOn("collision");
 	%arenaScene.layerSortMode0 = "Newest";
 	%arenaScene.add(%gameArena);
 	%gameArena.buildArena( );
@@ -116,6 +118,8 @@ function RoomManager::startNextLevel( %this )
 
 function RoomManager::endCurrentLevel( %this )
 {
+	echo("RoomManager.main: Room finished!");
+	
 	%this.writeRoomSummationFile();
 
 	%this.currentArena.player.clearBehaviors();
@@ -168,15 +172,28 @@ function RoomManager::writeRoomSummationFile( %this )
 	if(%file.openForWrite("utilities/ga_input.txt"))
 	{
 		echo("RoomManager.main: write file opened");
+	
+		if(%this.currentArena.roomShooterShotsFired > 0)
+			%averageRangedDamage = (%this.currentArena.roomShooterDamage/%this.currentArena.roomShooterShotsFired);
+		else
+			%averageRangedDamage = 0;
 		
-		%file.writeLine((10 + %this.CurrentLevel*5) @ "");
+		if(%this.currentArena.roomBladeAttackNums > 0)
+			%averageMeleeDamage = (%this.currentArena.roomBladeDamage/%this.currentArena.roomBladeAttackNums);
+		else
+			%averageMeleeDamage = 0;
+			
+		echo("Room Avg. Melee:" SPC %averageMeleeDamage);
+		echo("Room Avg. Range:" SPC %averageRangedDamage);
+		
+		%file.writeLine((5 + %this.CurrentLevel*2) @ "");
 		%file.writeLine("");
 		%file.writeLine(%plyrRangeCount @ "");
 		%file.writeLine(%plyrMeleeCount @ "");
 		%file.writeLine(%plyrBlockCount @ "");
 		%file.writeLine(%plyrDashCount @ "");
-		%file.writeLine("6.25");				//enemy dps melee
-		%file.writeLine("2.5");					//enemy dps range
+		%file.writeLine(%averageMeleeDamage);					//enemy dps melee
+		%file.writeLine(%averageRangedDamage);					//enemy dps range
 		%file.writeLine("");
 		%file.writeLine("");
 		%file.writeLine(%this.currentArena.roomChromosomes);	//enemy subChromosomes (1/line)

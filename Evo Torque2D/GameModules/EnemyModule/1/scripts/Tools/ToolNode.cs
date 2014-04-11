@@ -23,14 +23,13 @@ function ToolNode::CreateInstance(%emyOwner, %type, %posX, %posY, %toolOrientati
 
 function ToolNode::onAdd( %this )
 {
-	//%this.initialize();
 }
 
 //-----------------------------------------------------------------------------
 
 function ToolNode::initialize(%this)
 {	
-	%this.setSceneGroup(10);		//Enemy Unit sceneGroup
+	%this.setSceneGroup(Utility.getCollisionGroup("Enemies"));		//Enemy Unit sceneGroup
 
 	%this.myWidth = 64 * %this.owner.sizeRatio;
 	%this.myHeight = 64 * %this.owner.sizeRatio;
@@ -41,6 +40,10 @@ function ToolNode::initialize(%this)
 	%this.setCollisionCallback(false);
 	
 	%this.setupSprite();
+	
+	if(%this.toolType $= %this.owner.blobToolName) {
+		%this.blobBonus();
+	}
 	
 	%this.addStackSprites();
 }
@@ -131,9 +134,20 @@ function ToolNode::addStackSprites( %this )
 
 function ToolNode::setupSpriteBlob( %this )
 {
-	%this.owner.setSpriteImage("GameAssets:tool_blob1x1_a", 0);
+	%this.owner.setSpriteImage("GameAssets:tool_blob1x1_b", 0);
 	%this.owner.setSpriteSize(88 * %this.owner.sizeRatio, 88 * %this.owner.sizeRatio);
 	%this.sortLevel = 2;
+}
+
+//-----------------------------------------------------------------------------
+
+function ToolNode::blobBonus( %this )
+{
+	%healthBonus = 10 * %this.stackLevel;
+	
+	//add to unit's total health
+	%this.owner.fullHealth = %this.owner.fullHealth + %healthBonus;
+	%this.owner.health = %this.owner.fullHealth;
 }
 
 //-----------------------------------------------------------------------------
@@ -150,18 +164,74 @@ function ToolNode::getAdjacentSlots( %this )
 	if(%this.toolType !$= %this.owner.blobToolName)
 		return "";
 		
-	%left = (%this.bodyPosX - 1) SPC (%this.bodyPosY);
-	%down = (%this.bodyPosX) SPC (%this.bodyPosY - 1);
 	%right = (%this.bodyPosX + 1) SPC (%this.bodyPosY);
 	%up = (%this.bodyPosX) SPC (%this.bodyPosY + 1);
+	%left = (%this.bodyPosX - 1) SPC (%this.bodyPosY);
+	%down = (%this.bodyPosX) SPC (%this.bodyPosY - 1);
 	
-	return %left SPC %down SPC %right SPC %up @ " ";
+	return %right SPC %up SPC %left SPC %down @ " ";
 }
 //-----------------------------------------------------------------------------
 
 function ToolNode::getBodyPosistion( %this )
 {
 	return (%this.bodyPosX) SPC (%this.bodyPosY);
+}
+
+//-----------------------------------------------------------------------------
+
+function ToolNode::getRelativePosistion( %this )
+{
+	return (%this.bodyPosX*%this.myWidth) SPC (%this.bodyPosY*%this.myHeight);
+}
+
+//-----------------------------------------------------------------------------
+
+function ToolNode::getWorldPosistion( %this )
+{
+	return %this.owner.getWorldPoint(%this.getRelativePosistion());
+}
+
+//-----------------------------------------------------------------------------
+
+function ToolNode::getWorldPosistion( %this, %xOffset, %yOffset )
+{
+	%pos = %this.getRelativePosistion();
+	%x = getWord(%pos, 0) + %xOffset;
+	%y = getWord(%pos, 1) + %yOffset;
+
+	return %this.owner.getWorldPoint(%x SPC %y);
+}
+
+//-----------------------------------------------------------------------------
+//Enter offsets as if tool is not rotated, returns rotated values according to orientation
+function ToolNode::getOrientatedOffset(%this, %xOffset, %yOffset)
+{
+	%x = 0;
+	%y = 0;
+	
+	if(%this.orientation == 0)
+	{
+		%x = %xOffset;
+		%y = %yOffset;
+	}
+	else if(%this.orientation == 90)
+	{
+		%x = %x - %yOffset;
+		%y = %y + %xOffset;
+	}
+	else if(%this.orientation == 180)
+	{
+		%x = %x - %xOffset;
+		%y = %y - %yOffset;
+	}
+	else if(%this.orientation == 270)
+	{
+		%x = %x + %yOffset;
+		%y = %y - %xOffset;
+	}
+	
+	return %x SPC %y;
 }
 
 //-----------------------------------------------------------------------------

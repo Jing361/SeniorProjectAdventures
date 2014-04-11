@@ -29,6 +29,7 @@ function ToolShooter::initialize(%this)
 	Parent::initialize(%this);
 	
 	%this.reloadTime = %this.reloadTime/%this.stackLevel;
+	%this.shooterDamage = 15;
 	
 	//shot barrel offset (instead of bullet coming out of center of cannon)	
 	%this.barrelXoffset = 55*%this.owner.sizeRatio;
@@ -68,7 +69,7 @@ function ToolShooter::setupCollisionShape( %this )
 
 function ToolShooter::setupSprite( %this )
 {
-	%this.owner.addSprite(%this.bodyPosX*%this.myWidth SPC %this.bodyPosY*%this.myHeight);
+	%this.owner.addSprite(%this.getRelativePosistion());
 	
 	%this.owner.setSpriteImage("GameAssets:tool_shooter_a", 0);
 	%this.owner.setSpriteSize(64 * %this.owner.sizeRatio, 64 * %this.owner.sizeRatio);
@@ -90,29 +91,28 @@ function ToolShooter::setupBehaviors( %this )
 
 function ToolShooter::shoot( %this )
 {
-	if (isObject(%this.owner))
+	%this.owner.shooterShotsFired++;
+
+	// add a bullet to the arena
+	%newBullet = new CompositeSprite()
 	{
-		// add a bullet to the arena
-		%newBullet = new CompositeSprite()
-		{
-			class = "EnemyShooterBullet";
-			fireAngle = %this.owner.getAngle();
-		};
+		class = "EnemyShooterBullet";
+		fireAngle = %this.owner.getAngle();
+		shotDamage = %this.shooterDamage;
+		owner = %this;
+	};
+	
+	%this.owner.getMyScene().add( %newBullet );
+	
+	%newBullet.setPosition(%this.getWorldPosistion());
 		
-		%this.owner.getMyScene().add( %newBullet );
-		
-		%localX = %this.bodyPosX*%this.myWidth;// - %this.barrelXoffset*((-1*%this.bodyPosX)/%this.bodyPosX);
-		%localY = %this.bodyPosY*%this.myHeight;// + %this.barrelYoffset*((-1*%this.bodyPosY)/%this.bodyPosY);
-		
-		%newBullet.setPosition(%this.owner.getWorldPoint(%localX, %localY)  );
-		
-		%this.mySchedule = schedule(%this.reloadTime, 0, "ToolShooter::shoot", %this);
-	}
+	//%this.mySchedule = schedule(%this.reloadTime, 0, "ToolShooter::shoot", %this);
+	
 } 
 
 //-----------------------------------------------------------------------------
 
-function ToolShooter::destroy( %this )
+function ToolShooter::onRemove( %this )
 {
 	echo("EnemyMod.ToolShooter: Deleted");
 }

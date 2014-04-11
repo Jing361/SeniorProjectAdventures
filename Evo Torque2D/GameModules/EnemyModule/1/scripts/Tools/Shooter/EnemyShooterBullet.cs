@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// PlayerModule: playerBullet class and functions
+// 
 //-----------------------------------------------------------------------------
 
 function EnemyShooterBullet::onAdd( %this )
@@ -11,11 +11,10 @@ function EnemyShooterBullet::onAdd( %this )
 
 function EnemyShooterBullet::initialize(%this)
 {
-	%this.setSceneGroup(11);
+	%this.setSceneGroup(Utility.getCollisionGroup("EnemyAttacks"));
 	%this.setSceneLayer(11);
 	%this.fixedAngle = true;
 	
-	%this.shotDamage = 10;
 	%this.shotSpeed = 75;		
 	%this.setBullet(true);
 	%this.sizeRatio = $pixelToWorldRatio;
@@ -30,7 +29,7 @@ function EnemyShooterBullet::initialize(%this)
     %this.setCollisionShapeIsSensor(0, true);
 	
     //%this.setCollisionGroups($UtilityObj.getCollisionGroup("Player") SPC $UtilityObj.getCollisionGroup("Walls"));
-    %this.setCollisionGroups( "5 15" );
+    %this.setCollisionGroups( Utility.getCollisionGroup("Player") SPC Utility.getCollisionGroup("PlayerBlock") SPC Utility.getCollisionGroup("Wall") );
 	%this.setCollisionCallback(true);
 }
 
@@ -48,12 +47,20 @@ function EnemyShooterBullet::setupSprite( %this )
 
 function EnemyShooterBullet::onCollision(%this, %object, %collisionDetails)
 {
-	if(%object.getSceneGroup() == 5)
+	if(%object.getSceneGroup() == Utility.getCollisionGroup("Player"))
+	{
+		%object.takeDamage(%this.shotDamage);
+		%this.owner.owner.shooterDamage += %this.shotDamage;
+		echo("EnemyShot dmg:"SPC %this.owner.owner.shooterDamage);
+		
+		%this.safeDelete();
+	}
+	else if(%object.getSceneGroup() == Utility.getCollisionGroup("PlayerBlock"))
 	{
 		%object.takeDamage(%this.shotDamage);
 		%this.safeDelete();
 	}
-	else if(%object.getSceneGroup() == 15)
+	else if(%object.getSceneGroup() == Utility.getCollisionGroup("Wall"))
 	{
 		%this.safeDelete();
 	}

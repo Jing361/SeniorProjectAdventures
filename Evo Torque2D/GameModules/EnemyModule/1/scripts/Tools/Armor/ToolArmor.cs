@@ -25,18 +25,17 @@ function ToolArmor::initialize(%this)
 {	
 	Parent::initialize(%this);
 	
-	%this.healthBonus = 10 * %this.stackLevel;
+	//-Stats--
+	%this.armorRating = 2;
 	
-	//add to enemy's total health
-	%this.owner.fullHealth = %this.owner.fullHealth + %this.healthBonus;
-	%this.owner.health = %this.owner.fullHealth;
+	%this.owner.armorValue += %this.armorRating*%this.stackLevel;
 }
 
 //-----------------------------------------------------------------------------
 
 function ToolArmor::setupSprite( %this )
 {
-	%this.owner.addSprite(%this.bodyPosX*%this.myWidth SPC %this.bodyPosY*%this.myHeight);
+	%this.owner.addSprite(%this.getRelativePosistion());
 	
 	%this.owner.setSpriteImage("GameAssets:tool_armor_a", 0);
 	%this.owner.setSpriteSize(144 * %this.owner.sizeRatio, 80 * %this.owner.sizeRatio);

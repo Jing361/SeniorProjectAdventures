@@ -22,20 +22,33 @@ function EnemyUnit::initialize(%this)
 	exec("./Tools/Blade/ToolBlade.cs");
 	exec("./Tools/Shooter/ToolShooter.cs");
 	
-	%this.setSceneGroup(10);		//Enemy Unit sceneGroup
 
+	//-Stats---
 	%this.fullHealth = 100;
 	%this.health = %this.fullHealth;
 	%this.walkSpeed = 10;
-	%this.setAngle(90);
+	%this.turnSpeed = 60;
+	
+	%this.armorValue = 0;
+	%this.parryChance = 0;
+	
+	//-DamageTracking---
+	%this.shooterDamage = 0;
+	%this.shooterShotsFired = 0;
+	%this.bladeDamage = 0;
+	%this.bladeAttackNums = 0;
+	
+	//-Info---
+	%this.setSceneGroup(Utility.getCollisionGroup("Enemies"));		//Enemy Unit sceneGroup
+	%targetRotation = Vector2AngleToPoint (%this.getPosition(), %this.mainTarget.getPosition());
+	%this.setAngle(%targetRotation);
 	
 	%this.sizeRatio = $pixelToWorldRatio;
 	
-	//%this.setupSprite();
 	%this.setupBehaviors();
 
 	%this.setSceneLayer(10);
-    %this.setCollisionGroups( "5 15" );
+    %this.setCollisionGroups( Utility.getCollisionGroup("Player") SPC Utility.getCollisionGroup("Wall") );
 	%this.setCollisionCallback(true);
 			
 	//Parse local chromsome and build body
@@ -88,15 +101,39 @@ function EnemyUnit::setupBehaviors( %this )
 	%this.addBehavior(%driftMove);
 	
 	%faceObj = FaceObjectBehavior.createInstance();
-	%faceObj.object = %this.mainPlayer;
+	%faceObj.object = %this.mainTarget;
 	%faceObj.rotationOffset = 0;
 	%this.addBehavior(%faceObj);
+	//%this.setAngle(0);
 }
 
 //-----------------------------------------------------------------------------
 
-function EnemyUnit::takeDamage( %this, %dmgAmount )
+function EnemyUnit::takeDamage( %this, %dmgAmount, %dmgType )
 {
+	if(%dmgType $= "Ranged")
+	{
+		%dmgAmount -= %this.armorValue;
+		
+		if(%dmgAmount < 0)
+		{
+			%dmgAmount = 0;
+		}
+	}
+	else if(%dmgType $= "Melee")
+	{
+		%rollRand = getRandom();
+		
+		echo("EnemyUnit.Parry: roll:" SPC %rollRand  SPC "<" SPC %this.parryChance);
+		
+		if(%rollRand < %this.parryChance)
+		{
+			%dmgAmount = 0;
+			%this.generateParrySpark();
+			echo("EnemyUnit.takeDamage: Melee attacked parried!");
+		}
+	}
+	
 	%this.health -= %dmgAmount;
 	
 	if( %this.health <= 0)
@@ -106,6 +143,8 @@ function EnemyUnit::takeDamage( %this, %dmgAmount )
 	}
 
 	%this.myHealthbar.assessDamage();
+	
+	return %dmgAmount;
 }
 
 
@@ -132,8 +171,7 @@ function EnemyUnit::kill( %this )
 {
 	%this.myArena.EnemyCount--;
 	
-	
-	echo("EnemyMod.EnemyUnit:" SPC %this.myBodyContainer.getCount());
+	echo("EnemyMod.EnemyUnit: body size:" SPC %this.myBodyContainer.getCount());
 	for(%i = 0; %i < %this.myBodyContainer.getCount(); %i++)
 	{
 		%currTool = %this.myBodyContainer.getObject(%j);
@@ -142,11 +180,6 @@ function EnemyUnit::kill( %this )
 	}
 	
 	%this.safeDelete();
-	
-	if(%this.myArena.EnemyCount <= 0)
-	{
-		%this.myArena.myManager.endCurrentLevel();
-	}
 }
 
 //-----------------------------------------------------------------------------
@@ -158,7 +191,22 @@ function EnemyUnit::getMyScene( %this )
 
 //-----------------------------------------------------------------------------
 
-function EnemyUnit::destroy( %this )
+function EnemyUnit::onRemove( %this )
 {
-	echo("EnemyMod.EnemyUnit: Deleted");
+	//echo("EnemyMod.EnemyUnit: Deleted");
+	
+	//echo( %this.shooterDamage );
+	//echo( %this.shooterShotsFired );
+	//echo( %this.bladeDamage );
+	//echo( %this.bladeAttackNums );
+	
+	%this.myArena.roomShooterDamage += %this.shooterDamage;
+	%this.myArena.roomShooterShotsFired += %this.shooterShotsFired;
+	%this.myArena.roomBladeDamage += %this.bladeDamage;
+	%this.myArena.roomBladeAttackNums += %this.bladeAttackNums;
+	
+	if(%this.myArena.EnemyCount <= 0)
+	{
+		%this.myArena.myManager.endCurrentLevel();
+	}
 }

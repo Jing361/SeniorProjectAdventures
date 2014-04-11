@@ -17,7 +17,7 @@ function Arena::buildArena(%this)
     %background.setAwake( false );
     %background.setActive( false );
     %background.setSceneLayer(30);
-    %background.setSceneGroup( 0 );
+    %background.setSceneGroup( Utility.getCollisionGroup("") );
     %this.getScene().add( %background );
     
     // Arena Edges
@@ -29,11 +29,14 @@ function Arena::buildArena(%this)
     %roomEdges.setAwake( false );
     %roomEdges.setActive( false );
     %roomEdges.setSceneLayer(2);
-    %roomEdges.setSceneGroup( 0 );
+    %roomEdges.setSceneGroup( Utility.getCollisionGroup("") );
     %this.getScene().add( %roomEdges ); 
     
     %this.addArenaBoundaries( $roomWidth, $roomHeight );
 	
+    //%this.setUpdateCallback(true);
+	
+	//Populate room
 	%this.player = %this.spawnPlayer(-25, 0);		//add player before Enemies!
 	
 	%this.roomChromosomes = "";
@@ -42,6 +45,13 @@ function Arena::buildArena(%this)
 	%this.EnemyCount = 0;
 	
 	%this.processRoomChromosomes();
+	
+	
+	//-RoomDamageTracking---
+	%this.roomShooterDamage = 0;
+	%this.roomShooterShotsFired = 0;
+	%this.roomBladeDamage = 0;
+	%this.roomBladeAttackNums = 0;
 	
 	/*
 	//Enemy speed race creator (scrap)
@@ -88,7 +98,7 @@ function Arena::createOneArenaBoundary(%this, %side, %position, %size)
     %boundary.createPolygonBoxCollisionShape( %size );
     // the objects that collide with us should handle any callbacks.
     // remember to set those scene objects to collide with scene group 15 (which is our group)!
-    %boundary.setSceneGroup( 15 );
+    %boundary.setSceneGroup( Utility.getCollisionGroup("Wall") );
     %boundary.setCollisionCallback(false);
     %boundary.setBodyType( "static" );
     %boundary.setCollisionShapeIsSensor(0, true);
@@ -116,6 +126,7 @@ function Arena::spawnPlayer(%this, %xPos, %yPos)
 } 
 
 //-----------------------------------------------------------------------------
+///ordering: armor/parry/acid/tar/blade/shooter/blob
 
 function Arena::processRoomChromosomes(%this)
 {
@@ -126,14 +137,14 @@ function Arena::processRoomChromosomes(%this)
 		echo("Arena.Arena: Creating GeneticAlgorithm instance");
 		$genAlg = new GeneticAlgorithm();
 		
-		//%chromosome = "1 1 1 1 1 5 4" SPC "0 0 0 0 1 2 3";// SPC "4 0 0 0 0 0 1" SPC "0 2 2 0 0 0 1";
 		echo("Arena.Arena: GeneticAlgorithm.run()");
 		%chromosome = $genAlg.run("");
+		
 		echo("Arena.Arena: GeneticAlgorithm. run successful!");
 	}
 	else
 	{
-		%chromosome = "0 0 0 0 2 3 1";
+		%chromosome = "0 0 0 0 0 1 1" SPC "0 0 0 0 1 0 1";
 	}
 	
 	echo("Chromosome:" SPC %chromosome);
@@ -152,13 +163,23 @@ function Arena::processRoomChromosomes(%this)
 		
 		if(%i >= (getWordCount(%chromosome)/%toolVarietyCount) - 1)
 		{
-			%this.roomChromosomes = %this.roomChromosome @ %subChromosome;
+			%this.roomChromosomes = %this.roomChromosomes @ %subChromosome;
 		}
 		else
 		{
-			%this.roomChromosomes = %this.roomChromosome @ %subChromosome NL "";
+			%this.roomChromosomes = %this.roomChromosomes @ %subChromosome NL "";
 		}
 	}
+	
+	echo("Chromosome done processing!");
+	
+	//add health pickup------------------------
+	%healthPickup = new CompositeSprite()
+	{
+		class = "Pickup";
+	};
+		
+	%this.getScene().add( %healthPickup );
 }
 
 //-----------------------------------------------------------------------------
@@ -171,11 +192,12 @@ function Arena::spawnEnemyUnit(%this, %localChromosome, %xPos, %yPos)
 		class = "EnemyUnit";
 		myChromosome = %localChromosome;
 		myArena = %this;
-		mainPlayer = %this.player;
+		mainTarget = %this.player;
 	};
 	
     %this.getScene().add( %newEnemy );
-		echo("Arena.Arena: initializing enemy:");
+	
+	echo("Arena.Arena: initializing enemy:");
 	%newEnemy.initialize();
 	
 	%newEnemy.setPosition(%xPos, %yPos);

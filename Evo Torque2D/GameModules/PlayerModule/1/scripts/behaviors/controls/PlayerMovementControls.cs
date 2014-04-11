@@ -10,12 +10,13 @@ if (!isObject(PlayerMovementControlsBehavior))
     %template.behaviorType = "Input";
     %template.description  = "Shooter style movement control";
 
-    %template.addBehaviorField(walkSpeed, "Speed of travel", float, 0.0);
     %template.addBehaviorField(upKey, "Key to bind to upward movement", keybind, "keyboard up");
     %template.addBehaviorField(downKey, "Key to bind to downward movement", keybind, "keyboard down");
     %template.addBehaviorField(leftKey, "Key to bind to left movement", keybind, "keyboard left");
     %template.addBehaviorField(rightKey, "Key to bind to right movement", keybind, "keyboard right");
 }
+
+//------------------------------------------------------------------------------------
 
 function PlayerMovementControlsBehavior::onBehaviorAdd(%this)
 {
@@ -29,11 +30,14 @@ function PlayerMovementControlsBehavior::onBehaviorAdd(%this)
     GlobalActionMap.bindObj("keyboard", "space", "pressFire", %this);
     GlobalActionMap.bindObj("keyboard", "A", "pressMelee", %this);
     GlobalActionMap.bindObj("keyboard", "C", "pressDash", %this);
+    GlobalActionMap.bindObj("keyboard", "V", "pressBlock", %this);
 
 	%this.up = 0;
 	%this.down = 0;
 	%this.left = 0;
 	%this.right = 0;
+	
+   // %this.setUpdateCallback(true);
 	
 	//shot barrel offset (instead of bullet coming out of center of player)	
 	%this.barrelXoffset = 55*%this.owner.sizeRatio;
@@ -45,6 +49,8 @@ function PlayerMovementControlsBehavior::onBehaviorAdd(%this)
 	
 	%this.wallCheckDist = 2;
 }
+
+//------------------------------------------------------------------------------------
 
 function PlayerMovementControlsBehavior::onBehaviorRemove(%this)
 {
@@ -60,6 +66,7 @@ function PlayerMovementControlsBehavior::onBehaviorRemove(%this)
     GlobalActionMap.unbindObj("keyboard", "space", %this);
     GlobalActionMap.unbindObj("keyboard", "A", %this);
     GlobalActionMap.unbindObj("keyboard", "C", %this);
+    GlobalActionMap.unbindObj("keyboard", "V", %this);
 
 	%this.up = 0;
 	%this.down = 0;
@@ -67,13 +74,15 @@ function PlayerMovementControlsBehavior::onBehaviorRemove(%this)
 	%this.right = 0;
 }
 
+//------------------------------------------------------------------------------------
+
 function PlayerMovementControlsBehavior::onCollision(%this, %object, %collisionDetails)
 {
-	if(%object.class $= "EnemyUnit")
+	if(%object.getSceneGroup() == Utility.getCollisionGroup("Enemies"))
 	{
-		%object.recycle(%object.side);
+		//%object.recycle(%object.side);
 	}
-	else if(%object.getSceneGroup() == 15)		//wall
+	else if(%object.getSceneGroup() == Utility.getCollisionGroup("Wall"))
 	{
 		%this.up = 0;
 		%this.down = 0;
@@ -83,16 +92,21 @@ function PlayerMovementControlsBehavior::onCollision(%this, %object, %collisionD
 	}
 }
 
+//-----------------------------------------------------------------------------
+
+function PlayerMovementControlsBehavior::onUpdate(%this)
+{
+	%this.updateMovement();
+}
+
 //------------------------------------------------------------------------------------
   
 function PlayerMovementControlsBehavior::updateMovement(%this)
 {	 
-
-
 	if(! %this.owner.isDashing)
 	{	
-		%this.owner.setLinearVelocityX((%this.right - %this.left) * %this.walkSpeed);
-		%this.owner.setLinearVelocityY((%this.up - %this.down) * %this.walkSpeed);
+		%this.owner.setLinearVelocityX((%this.right - %this.left) * %this.owner.walkSpeed);
+		%this.owner.setLinearVelocityY((%this.up - %this.down) * %this.owner.walkSpeed);
 	}
 	else
 	{
@@ -103,6 +117,8 @@ function PlayerMovementControlsBehavior::updateMovement(%this)
 	}
 	
 }
+
+//------------------------------------------------------------------------------------
 
 function PlayerMovementControlsBehavior::checkObjAtPoint(%this, %xPoint, %yPoint, %sceneGroup)
 {
@@ -126,6 +142,8 @@ function PlayerMovementControlsBehavior::checkObjAtPoint(%this, %xPoint, %yPoint
 	return false;
 }
 
+//------------------------------------------------------------------------------------
+  
 function PlayerMovementControlsBehavior::moveUp(%this, %val)
 {
 	if(%val == 1)
@@ -144,8 +162,10 @@ function PlayerMovementControlsBehavior::moveUp(%this, %val)
 		%this.up = 0;
 	}
 	
-    %this.updateMovement();
+    //%this.updateMovement();
 }
+
+//------------------------------------------------------------------------------------
 
 function PlayerMovementControlsBehavior::moveDown(%this, %val)
 {
@@ -164,8 +184,10 @@ function PlayerMovementControlsBehavior::moveDown(%this, %val)
 	{
 		%this.down = 0;
 	}
-    %this.updateMovement();
+   // %this.updateMovement();
 }
+
+//------------------------------------------------------------------------------------
 
 function PlayerMovementControlsBehavior::moveLeft(%this, %val)
 {
@@ -184,8 +206,10 @@ function PlayerMovementControlsBehavior::moveLeft(%this, %val)
 	{
 		%this.left = 0;
 	}
-    %this.updateMovement();
+    //%this.updateMovement();
 }
+
+//------------------------------------------------------------------------------------
 
 function PlayerMovementControlsBehavior::moveRight(%this, %val)
 {
@@ -205,7 +229,7 @@ function PlayerMovementControlsBehavior::moveRight(%this, %val)
 		%this.right = 0;
 	}
 	
-    %this.updateMovement();
+    //%this.updateMovement();
 }
 
 //------------------------------------------------------------------------------------
@@ -255,7 +279,7 @@ function PlayerMovementControlsBehavior::pressDash(%this, %val)
 {
 	if(%val == 1)
 	{
-		if(! %this.owner.isDashing)
+		if((! %this.owner.isDashing) && (! %this.owner.tarred))
 		{
 			
 			%newDashTrail = new CompositeSprite()
@@ -285,3 +309,43 @@ function PlayerMovementControlsBehavior::endDash(%this)
 	%this.owner.isDashing = false;	
 	%this.owner.setLinearVelocityPolar(0, 0);	
 }
+
+//------------------------------------------------------------------------------------
+
+function PlayerMovementControlsBehavior::pressBlock(%this, %val)
+{
+	if(%val == 1)
+	{
+		%this.owner.blocker = new CompositeSprite()
+		{
+			class = "PlayerBlock";
+			blockAngle = %this.owner.getAngle();
+			owner = %this.owner;
+		};
+		
+		if(%this.owner.blockCooldown < %this.owner.blocker.maxDamage - %this.owner.blockCooldownRefresh )
+		{
+			%this.owner.blockCount++;
+			%this.owner.blocker.setPosition(%this.owner.getWorldPoint(0, 0) );
+			// add a block effect to the arena
+			%this.owner.getScene().add( %this.owner.blocker );
+			
+			%this.owner.blocker.takeDamage( %this.owner.blockCooldown );
+		}
+		else
+		{
+			if(isObject(%this.owner.blocker))
+			{
+				%this.owner.blocker.takeDamage( %this.owner.blockCooldown );
+				%this.owner.blocker.safeDelete();
+			}
+		}
+	}
+	else if(%val == 0)
+	{
+		if(isObject(%this.owner.blocker))
+		{
+			%this.owner.blocker.safeDelete();
+		}
+	}
+} 

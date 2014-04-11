@@ -14,6 +14,9 @@ function ToolAcid::CreateInstance(%emyOwner, %type, %posX, %posY, %toolOrientati
 		bodyPosY = %posY;
 		orientation = %toolOrientation;
 		stackLevel = 1;
+		reloadTime = 2.5*1000;
+		acidDamage = 5;
+		acidDamageToShield = 20;
 	};  
   
     return %r;  
@@ -21,9 +24,43 @@ function ToolAcid::CreateInstance(%emyOwner, %type, %posX, %posY, %toolOrientati
 
 //-----------------------------------------------------------------------------
 
+function ToolAcid::initialize(%this)
+{	
+	exec("./EnemyAcidSpray.cs");
+	exec("./ToolAcidTurret.cs");
+	
+	Parent::initialize(%this);
+	
+	%this.reloadTime = %this.reloadTime/%this.stackLevel;
+	
+	//shot barrel offset (instead of spray coming out of center of cannon)	
+	%this.barrelXoffset = 126*%this.owner.sizeRatio;
+	%this.barrelYoffset = 0*%this.owner.sizeRatio;	
+	
+	%this.addTurret();
+}
+
+//-----------------------------------------------------------------------------
+
+function ToolAcid::addTurret( %this )
+{
+	// add a turret to the arena
+	%this.myTurret = new CompositeSprite()
+	{
+		class = "ToolAcidTurret";
+		owner = %this;
+	};
+	
+	%this.owner.getMyScene().add( %this.myTurret );
+	
+	%this.myTurret.setPosition(%this.getWorldPosistion());
+}
+
+//-----------------------------------------------------------------------------
+
 function ToolAcid::setupSprite( %this )
 {
-	%this.owner.addSprite(%this.bodyPosX*%this.myWidth SPC %this.bodyPosY*%this.myHeight);
+	%this.owner.addSprite(%this.getRelativePosistion());
 	
 	%this.owner.setSpriteImage("GameAssets:tool_acid_a", 0);
 	%this.owner.setSpriteSize(64 * %this.owner.sizeRatio, 64 * %this.owner.sizeRatio);
@@ -36,5 +73,29 @@ function ToolAcid::setupSprite( %this )
 
 function ToolAcid::setupBehaviors( %this )
 {
-
+	exec("./behaviors/acidAI.cs");
+	%baseAI = AcidToolBehavior.createInstance();
+	%this.addBehavior(%baseAI);
 }
+
+//-----------------------------------------------------------------------------
+
+function ToolAcid::shoot( %this )
+{
+	// add a spray to the arena
+	%newSpray = new CompositeSprite()
+	{
+		class = "EnemyAcidSpray";
+		fireAngle = %this.owner.getAngle();
+		sprayDamage = %this.acidDamage;
+		sprayDamageToShield = %this.acidDamageToShield;
+		owner = %this;
+	};
+	
+	%this.owner.getMyScene().add( %newSpray );
+	
+	%newSpray.setPosition(%this.getWorldPosistion());	//%this.myWidth, 0
+		
+	//%this.mySchedule = schedule(%this.reloadTime, 0, "ToolShooter::shoot", %this);
+	
+} 

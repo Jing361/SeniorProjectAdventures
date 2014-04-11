@@ -1,24 +1,29 @@
 //-----------------------------------------------------------------------------
-// Basic player controls & behaviors
+// Shooter Tool AI
 //-----------------------------------------------------------------------------
 
 if (!isObject(ShooterToolBehavior))
 {
     %template = new BehaviorTemplate(ShooterToolBehavior);
 
-    %template.friendlyName = "Mouse Controls";
-    %template.behaviorType = "Input";
-    %template.description  = "Shooter style movement control";
-
-    %template.addBehaviorField(walkSpeed, "Speed of travel", float, 0.0);
+    %template.friendlyName = "Shooter tool AI";
+    %template.behaviorType = "AI";
+    %template.description  = "Shooter rep shooting";
 }
 
 function ShooterToolBehavior::onBehaviorAdd(%this)
 {
+	%this.mySchedule = schedule(getRandom(%this.owner.reloadTime), 0, "ShooterToolBehavior::doShoot", %this);
+}
 
-    //%this.setUpdateCallback(true);
-	
-	%this.mySchedule = schedule(%this.owner.reloadTime, 0, "ToolShooter::shoot", %this.owner);
+function ShooterToolBehavior::doShoot(%this)
+{
+	if (isObject(%this.owner.owner) && isObject(%this.owner.owner.mainTarget))
+	{
+		%this.owner.shoot();
+		
+		%this.mySchedule = schedule(%this.owner.reloadTime, 0, "ShooterToolBehavior::doShoot", %this);
+	}
 }
 
 function ShooterToolBehavior::onBehaviorRemove(%this)

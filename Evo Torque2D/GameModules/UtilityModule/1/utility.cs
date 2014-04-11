@@ -23,6 +23,15 @@ function getAngle(%objectA, %objectB)
 
 //-----------------------------------------------------------------------------
 
+function Utility::getPivotReposition(%this, %offsetLength, %angle)
+{
+	%rad = mDegToRad(%angle);
+	return mCos(%rad)*%offsetLength SPC mSin(%rad)*%offsetLength;
+}
+
+//-----------------------------------------------------------------------------
+//collision test: if(%object.getSceneGroup() == Utility.getCollisionGroup(""))
+
 function Utility::getCollisionGroup(%this, %groupName)
 {
 	%groupNumber = 0;
@@ -34,6 +43,10 @@ function Utility::getCollisionGroup(%this, %groupName)
 	else if(%groupName $= "PlayerAttacks")
 	{
 		%groupNumber = 6;
+	}
+	else if(%groupName $= "PlayerBlock")
+	{
+		%groupNumber = 7;
 	}
 	else if(%groupName $= "Pickups")
 	{

@@ -11,7 +11,7 @@ function PlayerStrike::onAdd( %this )
 
 function PlayerStrike::initialize(%this)
 {		
-	%this.setSceneGroup(4);
+	%this.setSceneGroup(Utility.getCollisionGroup("PlayerAttacks"));
 	%this.setSceneLayer(4);
 	%this.fixedAngle = true;
 	
@@ -31,7 +31,7 @@ function PlayerStrike::initialize(%this)
 	
     %this.createPolygonBoxCollisionShape(%this.myWidth, %this.myHeight);
     %this.setCollisionShapeIsSensor(0, true);
-    %this.setCollisionGroups( "10 15" );
+    %this.setCollisionGroups( Utility.getCollisionGroup("Enemies") );
 	%this.setCollisionCallback(true);
 	
     %this.setUpdateCallback(true);
@@ -55,11 +55,11 @@ function PlayerStrike::onCollision(%this, %object, %collisionDetails)
 {
 	if(%this.fresh)
 	{
-		if(%object.class $= "EnemyUnit")
+		if(%object.getSceneGroup() ==  Utility.getCollisionGroup("Enemies"))
 		{
 			//%object.recycle(%object.side);
 			
-			%object.takeDamage(%this.strikeDamage);
+			%object.takeDamage(%this.strikeDamage, "Melee");
 			%this.fresh = false;
 		}
 	}

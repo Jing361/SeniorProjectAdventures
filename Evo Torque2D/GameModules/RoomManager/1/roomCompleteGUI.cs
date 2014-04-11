@@ -5,6 +5,8 @@ function RoomCompleteGUI::onAdd(%this)
 
 function RoomCompleteGUI::openScreen(%this, %scene)
 {	
+	echo("RoomManager.roomCompleteGUI: openScreen()");
+
 	// Background
     %background = new Sprite();
     %background.setBodyType( "static" );
@@ -25,7 +27,7 @@ function RoomCompleteGUI::openScreen(%this, %scene)
 
 function RoomCompleteGUI::deleteThis(%this)
 {
-	echo("RoomCompleteGUI: deleting this shit");
+	echo("RoomManager.roomCompleteGUI: deleteThis()");
 	%this.clearBehaviors();
 	%this.safeDelete();
 }

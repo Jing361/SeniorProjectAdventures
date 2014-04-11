@@ -11,7 +11,7 @@ function PlayerBullet::onAdd( %this )
 
 function PlayerBullet::initialize(%this)
 {
-	%this.setSceneGroup(6);
+	%this.setSceneGroup(Utility.getCollisionGroup("PlayerAttacks"));
 	%this.setSceneLayer(6);
 	%this.fixedAngle = true;
 	
@@ -28,7 +28,7 @@ function PlayerBullet::initialize(%this)
 	
     %this.createPolygonBoxCollisionShape(%this.myWidth, %this.myHeight);
     %this.setCollisionShapeIsSensor(0, true);
-    %this.setCollisionGroups( "10 15" );
+    %this.setCollisionGroups( Utility.getCollisionGroup("Enemies") SPC Utility.getCollisionGroup("Wall") );
 	%this.setCollisionCallback(true);
 }
 
@@ -46,14 +46,12 @@ function PlayerBullet::setupSprite( %this )
 
 function PlayerBullet::onCollision(%this, %object, %collisionDetails)
 {
-	if(%object.class $= "EnemyUnit")
+	if(%object.getSceneGroup() == Utility.getCollisionGroup("Enemies"))
 	{
-		//%object.recycle(%object.side);
-		
-		%object.takeDamage(%this.shotDamage);
+		%object.takeDamage(%this.shotDamage, "Ranged");
 		%this.safeDelete();
 	}
-	else if(%object.getSceneGroup() == 15)
+	else if(%object.getSceneGroup() == Utility.getCollisionGroup("Wall"))
 	{
 		%this.safeDelete();
 	}

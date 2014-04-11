@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// Torque Game Builder
-// Copyright (C) GarageGames.com, Inc.
-//-----------------------------------------------------------------------------
 
 if (!isObject(FaceObjectBehavior))
 {
@@ -25,7 +22,7 @@ function FaceObjectBehavior::onUpdate(%this)
    if (!isObject(%this.object))
       return;
    
-   %targetRotation = %this.rotationOffset + Vector2AngleToPoint (%this.owner.getPosition(), %this.object.getPosition()) - 90;
-   %this.owner.setAngle(%targetRotation);
+   %targetRotation = Vector2AngleToPoint (%this.owner.getPosition(), %this.object.getPosition()) - 90;
    
+   %this.owner.rotateTo(%targetRotation, %this.owner.turnSpeed);
 }

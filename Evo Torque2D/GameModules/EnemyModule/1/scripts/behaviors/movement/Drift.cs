@@ -16,12 +16,12 @@ function DriftBehavior::onBehaviorAdd(%this)
 
 function DriftBehavior::onCollision(%this, %object, %collisionDetails)
 {
-	if(%object.getSceneGroup() == 5)	//Player sceneGroup 
+	if(%object.getSceneGroup() == Utility.getCollisionGroup("Player") )	//Player sceneGroup 
 	{
-		%this.recycle(%object.side);
-		%object.takeDamage(15);
+		//%this.recycle(%object.side);
+		//%object.takeDamage(15);
 	}
-	else if(%object.getSceneGroup() == 15)
+	else if(%object.getSceneGroup() == Utility.getCollisionGroup("Wall"))
 	{
 		if(%object.side $= "top")
 			%this.recycle(%object.side);
@@ -31,6 +31,6 @@ function DriftBehavior::onCollision(%this, %object, %collisionDetails)
 function DriftBehavior::recycle(%this)
 {
   %this.owner.setPosition(getRandom(-$roomWidth/4, $roomWidth/4), $roomHeight/2);
-  %this.owner.setLinearVelocityX( 0 );
+  %this.owner.setLinearVelocityX( getRandom(-%this.speed/4, %this.speed/4) );
   %this.owner.setLinearVelocityY( -%this.speed );
 }
