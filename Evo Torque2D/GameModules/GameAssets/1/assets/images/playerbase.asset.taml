@@ -1,7 +1,0 @@
-<ImageAsset
-    AssetName="playerbase"
-    ImageFile="playerbase.png"
-    CellCountX="2"
-    CellCountY="1"
-    CellWidth="210"
-    CellHeight="164" />

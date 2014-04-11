@@ -5,6 +5,7 @@
  0: Default
  5: Player
  6: PlayerAttacks
+ 7: PlayerBlock
  9: Pickups
 10: Enemies
 11: EnemyAttacks
