@@ -11,7 +11,7 @@ using namespace Evolution;
 IMPLEMENT_CONOBJECT(GeneticAlgorithm);
 
 const int POPSIZE = 100;
-const int MAXGENS = 50;
+const int MAXGENS = 30;
 const int NTOOLS = 7;
 const double PXOVER = 0.8;
 const double PMUTATION = 0.15;
@@ -238,7 +238,7 @@ void GeneticAlgorithm::evaluate ( )
 		population[member].setFitness( 
 			( rangedPercent * tools[0] ) + ( meleePercent * tools[1] ) + ( blockPercent * tools[2] ) + ( dashPercent * tools[3] ) 
 			+ (enemyDPSwing * tools[4] ) + ( enemyDPShot * tools[5] )  
-			+ (pointLimit/50 * tools[6]) + (pointLimit/50 * toolsSum/NTOOLS));
+			+ ((pointLimit/50) * tools[6]) + ((pointLimit/50) * toolsSum/NTOOLS));
 	}
 	return;
 }
@@ -399,6 +399,14 @@ int GeneticAlgorithm::randval ( int x )
 	val = ( ( rand() % 1000 ) / 1000.0 ) * 2 + (std::abs(x - 1));			//Warning
 
 	return val;
+}
+
+double GeneticAlgorithm::enemyCreationWeight(double d )
+{
+	if(d < 100)
+		return (2/M_PI) * atan(d/150);
+	else
+		return d/(125*M_PI);
 }
 
 void GeneticAlgorithm::selector ( )

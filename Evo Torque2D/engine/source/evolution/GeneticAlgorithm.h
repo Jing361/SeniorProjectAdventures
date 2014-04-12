@@ -69,6 +69,7 @@ namespace Evolution {
 		void sortPopulation ( );
 		void mutate ( );
 		int randval ( int );
+		double enemyCreationWeight(double);
 		void selector ( );
 		void verifyAndPush( Genotype );
 		void Xover ( int, int );
