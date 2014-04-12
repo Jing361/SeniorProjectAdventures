@@ -92,7 +92,7 @@ function Player::setupCollisionShape( %this )
 	
 	%this.createPolygonCollisionShape(%shapePoints);
 	
-    %this.setCollisionShapeIsSensor(0, true);
+    //%this.setCollisionShapeIsSensor(0, true);
     %this.setCollisionGroups( Utility.getCollisionGroup("Enemies") SPC Utility.getCollisionGroup("Wall") );
 	%this.setCollisionCallback(true);
 }

@@ -78,6 +78,7 @@ function PlayerMovementControlsBehavior::onBehaviorRemove(%this)
 
 function PlayerMovementControlsBehavior::onCollision(%this, %object, %collisionDetails)
 {
+/*
 	if(%object.getSceneGroup() == Utility.getCollisionGroup("Enemies"))
 	{
 		//%object.recycle(%object.side);
@@ -90,6 +91,7 @@ function PlayerMovementControlsBehavior::onCollision(%this, %object, %collisionD
 		%this.right = 0;
 		%this.updateMovement();
 	}
+*/
 }
 
 //-----------------------------------------------------------------------------

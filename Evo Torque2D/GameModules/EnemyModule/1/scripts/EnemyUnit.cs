@@ -48,7 +48,7 @@ function EnemyUnit::initialize(%this)
 	%this.setupBehaviors();
 
 	%this.setSceneLayer(10);
-    %this.setCollisionGroups( Utility.getCollisionGroup("Player") SPC Utility.getCollisionGroup("Wall") );
+    %this.setCollisionGroups( Utility.getCollisionGroup("Player") SPC Utility.getCollisionGroup("Wall")  SPC Utility.getCollisionGroup("Enemies") );
 	%this.setCollisionCallback(true);
 			
 	//Parse local chromsome and build body
@@ -95,16 +95,37 @@ function EnemyUnit::setupSprite( %this )
 function EnemyUnit::setupBehaviors( %this )
 {
 	exec("./behaviors/movement/Drift.cs");
+	exec("./behaviors/movement/wanderAround.cs");
 	exec("./behaviors/ai/faceObject.cs");
+	/*
 	%driftMove = DriftBehavior.createInstance();
 	%driftMove.speed = %this.walkSpeed;
 	%this.addBehavior(%driftMove);
+	*/
+	%wanderMove = WanderAroundBehavior.createInstance();
+	%wanderMove.turnDelay = 1;
+	%wanderMove.numDires = 8;
+	%wanderMove.moveSpeed = %this.walkSpeed;
+	%wanderMove.turnSpeed = %this.turnSpeed;
+	%this.addBehavior(%wanderMove);
 	
+	/*
 	%faceObj = FaceObjectBehavior.createInstance();
 	%faceObj.object = %this.mainTarget;
 	%faceObj.rotationOffset = 0;
 	%this.addBehavior(%faceObj);
+	*/
 	//%this.setAngle(0);
+}
+
+//-----------------------------------------------------------------------------
+
+function EnemyUnit::onCollision(%this, %object, %collisionDetails)
+{
+	if(%object.getSceneGroup() == Utility.getCollisionGroup("Player"))
+	{
+		%object.takeDamage(1);
+	}
 }
 
 //-----------------------------------------------------------------------------
@@ -172,12 +193,14 @@ function EnemyUnit::kill( %this )
 	%this.myArena.EnemyCount--;
 	
 	echo("EnemyMod.EnemyUnit: body size:" SPC %this.myBodyContainer.getCount());
-	for(%i = 0; %i < %this.myBodyContainer.getCount(); %i++)
+	%toolCount = %this.myBodyContainer.getCount();
+	for(%i = 0; %i < %toolCount; %i++)
 	{
-		%currTool = %this.myBodyContainer.getObject(%j);
-		//%this.getMyScene().remove(%currTool);
+		%currTool = %this.myBodyContainer.getObject(0);
 		%currTool.safeDelete();
 	}
+	
+	echo("EnemyMod.EnemyUnit: end kill");
 	
 	%this.safeDelete();
 }

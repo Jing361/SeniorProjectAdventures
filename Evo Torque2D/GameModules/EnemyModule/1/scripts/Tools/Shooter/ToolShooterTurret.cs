@@ -1,19 +1,16 @@
 //-----------------------------------------------------------------------------
-// PlayerModule: EnemyUnit class and functions
-//-----------------------------------------------------------------------------
 
-
-function ToolAcidTurret::onAdd( %this )
+function ToolShooterTurret::onAdd( %this )
 {
 	%this.initialize();
 }
 //-----------------------------------------------------------------------------
 
-function ToolAcidTurret::initialize(%this)
+function ToolShooterTurret::initialize(%this)
 {	
 	%this.setSceneLayer(9);
 	
-	%this.myWidth = 108 * %this.owner.owner.sizeRatio;
+	%this.myWidth = 104 * %this.owner.owner.sizeRatio;
 	%this.myHeight = 64 * %this.owner.owner.sizeRatio;
 	
 	%this.setupSprite();
@@ -23,17 +20,18 @@ function ToolAcidTurret::initialize(%this)
 
 //-----------------------------------------------------------------------------
 
-function ToolAcidTurret::setupSprite( %this )
+function ToolShooterTurret::setupSprite( %this )
 {
 	%this.addSprite();
 	
-	%this.setSpriteImage("GameAssets:tool_acid_turret_a", 0);
+	%this.setSpriteImage("GameAssets:tool_shooter_turret_a", 0);
+	
 	%this.setSpriteSize(%this.myWidth, %this.myHeight);
 }
 
 //-----------------------------------------------------------------------------
 
-function ToolAcidTurret::onUpdate( %this )
+function ToolShooterTurret::onUpdate( %this )
 {
 	if(!isObject(%this.owner))
 	{

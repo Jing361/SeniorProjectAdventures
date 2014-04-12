@@ -32,6 +32,7 @@ function ToolAcid::initialize(%this)
 	Parent::initialize(%this);
 	
 	%this.reloadTime = %this.reloadTime/%this.stackLevel;
+	%this.turnSpeed = 120;
 	
 	//shot barrel offset (instead of spray coming out of center of cannon)	
 	%this.barrelXoffset = 126*%this.owner.sizeRatio;
@@ -49,6 +50,7 @@ function ToolAcid::addTurret( %this )
 	{
 		class = "ToolAcidTurret";
 		owner = %this;
+		turnSpeed = %this.turnSpeed;
 	};
 	
 	%this.owner.getMyScene().add( %this.myTurret );
@@ -99,3 +101,13 @@ function ToolAcid::shoot( %this )
 	//%this.mySchedule = schedule(%this.reloadTime, 0, "ToolShooter::shoot", %this);
 	
 } 
+
+//-----------------------------------------------------------------------------
+
+function ToolAcid::onRemove( %this )
+{
+	if(isObject(%this.myTurret))
+	{
+		%this.myTurret.safeDelete();
+	}
+}

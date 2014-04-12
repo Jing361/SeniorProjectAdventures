@@ -101,7 +101,6 @@ function Arena::createOneArenaBoundary(%this, %side, %position, %size)
     %boundary.setSceneGroup( Utility.getCollisionGroup("Wall") );
     %boundary.setCollisionCallback(false);
     %boundary.setBodyType( "static" );
-    %boundary.setCollisionShapeIsSensor(0, true);
     return %boundary;
 }
 
@@ -144,7 +143,7 @@ function Arena::processRoomChromosomes(%this)
 	}
 	else
 	{
-		%chromosome = "0 0 0 0 0 1 1" SPC "0 0 0 0 1 0 1";
+		%chromosome = "0 0 1 0 0 1 2" SPC "0 0 0 0 1 0 1" SPC "0 0 0 0 1 0 1" SPC "0 0 0 0 1 0 1" SPC "0 0 0 0 1 0 1";
 	}
 	
 	echo("Chromosome:" SPC %chromosome);
@@ -157,7 +156,7 @@ function Arena::processRoomChromosomes(%this)
 		echo("  sub" SPC %subChromosome);
 		
 		echo("Arena.Arena: spawn enemy unit" SPC %i);
-		%this.spawnEnemyUnit(%subChromosome, getRandom(-$roomWidth/3, $roomWidth/3), $roomHeight/2 - getRandom(0, $roomHeight/10));
+		%this.spawnEnemyUnit(%subChromosome, getRandom(-$roomWidth/3, $roomWidth/3), getRandom(-$roomHeight/3, $roomHeight/3));
 		
 		echo("Arena.Arena: spawned enemy unit successfuly" SPC %i);
 		

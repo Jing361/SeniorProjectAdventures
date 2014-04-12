@@ -25,15 +25,21 @@ function ToolShooter::CreateInstance(%emyOwner, %type, %posX, %posY, %toolOrient
 function ToolShooter::initialize(%this)
 {	
 	exec("./EnemyShooterBullet.cs");
+	exec("./ToolShooterTurret.cs");
 	
 	Parent::initialize(%this);
 	
 	%this.reloadTime = %this.reloadTime/%this.stackLevel;
 	%this.shooterDamage = 15;
+	%this.turnSpeed = 120;
 	
 	//shot barrel offset (instead of bullet coming out of center of cannon)	
 	%this.barrelXoffset = 55*%this.owner.sizeRatio;
 	%this.barrelYoffset = 0*%this.owner.sizeRatio;	
+	
+	%this.addTurret();
+	
+    %this.setUpdateCallback(true);
 }
 
 //-----------------------------------------------------------------------------
@@ -67,6 +73,23 @@ function ToolShooter::setupCollisionShape( %this )
 
 //-----------------------------------------------------------------------------
 
+function ToolShooter::addTurret( %this )
+{
+	// add a turret to the arena
+	%this.myTurret = new CompositeSprite()
+	{
+		class = "ToolShooterTurret";
+		owner = %this;
+		turnSpeed = %this.turnSpeed;
+	};
+	
+	%this.owner.getMyScene().add( %this.myTurret );
+	
+	%this.myTurret.setPosition(%this.getWorldPosistion());
+}
+
+//-----------------------------------------------------------------------------
+
 function ToolShooter::setupSprite( %this )
 {
 	%this.owner.addSprite(%this.getRelativePosistion());
@@ -89,6 +112,13 @@ function ToolShooter::setupBehaviors( %this )
 
 //-----------------------------------------------------------------------------
 
+function ToolShooter::onUpdate( %this )
+{
+	echo("ToolShooter Still here");
+}
+
+//-----------------------------------------------------------------------------
+
 function ToolShooter::shoot( %this )
 {
 	%this.owner.shooterShotsFired++;
@@ -97,7 +127,7 @@ function ToolShooter::shoot( %this )
 	%newBullet = new CompositeSprite()
 	{
 		class = "EnemyShooterBullet";
-		fireAngle = %this.owner.getAngle();
+		fireAngle = %this.myTurret.getAngle();
 		shotDamage = %this.shooterDamage;
 		owner = %this;
 	};
@@ -109,10 +139,13 @@ function ToolShooter::shoot( %this )
 	//%this.mySchedule = schedule(%this.reloadTime, 0, "ToolShooter::shoot", %this);
 	
 } 
-
 //-----------------------------------------------------------------------------
 
 function ToolShooter::onRemove( %this )
 {
-	echo("EnemyMod.ToolShooter: Deleted");
+	if(isObject(%this.myTurret))
+	{
+		%this.myTurret.safeDelete();
+		echo("shooter: turret removed");
+	}
 }
