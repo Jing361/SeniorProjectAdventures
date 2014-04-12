@@ -32,6 +32,12 @@ function Player::initialize(%this)
 	%this.tarred = false;
 	%this.setPosition(0, 25);
 	
+	%this.fireRate = 3;					//per second
+	%this.fireCooldown = 1000/%this.fireRate;			//ms
+	
+	%this.strikeRate = 2;				//per second
+	%this.strikeCooldown = 1000/%this.strikeRate;		//ms
+	
 	//Dash
 	%this.isDashing = false;
 	%this.currDashDirection = 0;

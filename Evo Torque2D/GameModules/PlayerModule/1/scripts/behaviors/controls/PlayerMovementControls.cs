@@ -54,6 +54,9 @@ function PlayerMovementControlsBehavior::onBehaviorAdd(%this)
 	%this.bladeYoffset = 50*%this.owner.sizeRatio;
 	
 	%this.wallCheckDist = 2;
+	
+	%this.fireHeld = false;
+	%this.strikeHeld = false;
 }
 
 //------------------------------------------------------------------------------------
@@ -93,6 +96,16 @@ function PlayerMovementControlsBehavior::onCollision(%this, %object, %collisionD
 function PlayerMovementControlsBehavior::onUpdate(%this)
 {
 	%this.updateMovement();
+	
+	if(%this.fireHeld)
+	{
+		%this.tryFire();
+	}
+	
+	if(%this.strikeHeld)
+	{
+		%this.tryMelee();
+	}
 }
 
 //------------------------------------------------------------------------------------
@@ -234,6 +247,18 @@ function PlayerMovementControlsBehavior::pressFire(%this, %val)
 {
 	if(%val == 1)
 	{
+		%this.fireHeld = true;
+	}
+	else
+	{
+		%this.fireHeld = false;
+	}
+} 
+
+function PlayerMovementControlsBehavior::tryFire(%this)
+{
+	if(getEventTimeLeft(%this.fireCooldownTime) <= 0)
+	{
 		// add a bullet to the arena
 		%newBullet = new CompositeSprite()
 		{
@@ -246,8 +271,10 @@ function PlayerMovementControlsBehavior::pressFire(%this, %val)
 		
 		
 		%newBullet.setPosition(%this.owner.getWorldPoint(%this.barrelXoffset, %this.barrelYoffset) );
+		
+		%this.fireCooldownTime = schedule(%this.owner.fireCooldown, 0, "", %this);
 	}
-} 
+}
 
 //------------------------------------------------------------------------------------
 
@@ -255,6 +282,19 @@ function PlayerMovementControlsBehavior::pressMelee(%this, %val)
 {
 	if(%val == 1)
 	{
+		%this.strikeHeld = true;
+	}
+	else
+	{
+		%this.strikeHeld = false;
+	}
+} 
+
+function PlayerMovementControlsBehavior::tryMelee(%this)
+{
+	if(getEventTimeLeft(%this.strikeCooldownTime) <= 0)
+	{
+		echo("press melee (plyCOntroles");
 		// add a strike effect to the arena
 		%newStriker = new CompositeSprite()
 		{
@@ -266,8 +306,10 @@ function PlayerMovementControlsBehavior::pressMelee(%this, %val)
 		%this.owner.getScene().add( %newStriker );
 		
 		%newStriker.setPosition(%this.owner.getWorldPoint(%this.bladeXoffset, %this.bladeYoffset) );
+		
+		%this.strikeCooldownTime = schedule(%this.owner.strikeCooldown, 0, "", %this);
 	}
-} 
+}
 
 //------------------------------------------------------------------------------------
 
