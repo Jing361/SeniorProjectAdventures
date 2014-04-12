@@ -496,27 +496,38 @@ void GeneticAlgorithm::verifyAndPush( Genotype g )
 	double points = 0;
 	int currentTool;
 	int blobRec = 1;
-	int toolVariety = 0;
+	int toolSlots = 0;
+	int toolTypes = 0;
 
 	for(geneIterator = g.getGene()->begin(); geneIterator != g.getGene()->end(); ++geneIterator)
 		{
 			++currentTool;
-			blobRec += *geneIterator/5;
+			
 			//On blob count
-			if(currentTool%NTOOLS == 6)
+			if(currentTool%NTOOLS < 6)
 			{
-				if(*geneIterator < blobRec)
-					*geneIterator = blobRec;
-				
-				blobRec = 1;
-				toolVariety = 0;
+				if(*geneIterator > 0)
+				{
+					++toolTypes;
+					//++toolSlots;
+					//if(*geneIterator/5 > 0)
+					//	toolSlots += *geneIterator/5;
+
+				}
+
 			}
 			else
 			{
-				if(*geneIterator > 0)
-					++toolVariety;
-				if(toolVariety > 4)
-					++blobRec;
+				blobRec += toolTypes/4;
+
+				if(*geneIterator < blobRec)
+					*geneIterator = blobRec;
+
+				points += (--toolTypes) * 2;
+				
+				blobRec = 1;
+				toolTypes = 0;
+				//toolSlots = 0;
 			}
 			points += *geneIterator * WEIGHTS[currentTool%NTOOLS];
 
@@ -547,7 +558,7 @@ void GeneticAlgorithm::Xover ( int a, int b )
 	//			A	  B
 	//point -- [XXX[P)XX)
 	//
-	if((pointLimit - 5) % 4 == 0 && generation == 0)
+	if((pointLimit - 5) % 10 == 0 && generation == 0)
 		for(int i = 0; i < NTOOLS; i++)
 		{
 			population[a].getGene()->insert(population[a].getGene()->end(), 0);
