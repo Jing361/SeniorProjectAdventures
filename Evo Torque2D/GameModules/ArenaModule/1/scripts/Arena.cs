@@ -52,18 +52,35 @@ function Arena::buildArena(%this)
 	%this.roomShooterShotsFired = 0;
 	%this.roomBladeDamage = 0;
 	%this.roomBladeAttackNums = 0;
-	
-	/*
-	//Enemy speed race creator (scrap)
-	%frac = $roomWidth/8.0;
-	%start = 100;
-	for(%i = 1; %i <= 8; %i++)
-	{
-		%this.spawnEnemyUnit((-$roomWidth/2 + %frac*%i), $roomHeight/2, %start+(10*%i));
-		echo(%i SPC ": " SPC %start+(10*%i));
-	}
-	*/
+
+	//font 4 times for pseudo boldness
+	%this.addRoomFont(-$roomWidth/2 + 1, $roomHeight/2 - 0.2);
 }
+
+//-----------------------------------------------------------------------------
+
+function Arena::addRoomFont(%this, %x, %y)
+{
+	%this.addRoomNumFont(%x, %y);
+	%this.addRoomNumFont(%x + 0.1, %y);
+	%this.addRoomNumFont(%x + 0.1, %y + 0.1);
+	%this.addRoomNumFont(%x, %y + 0.1);
+}
+
+//-----------------------------------------------------------------------------
+
+function Arena::addRoomNumFont(%this, %x, %y)
+{
+	%font = new ImageFont();
+	%font.Image = "GameAssets:font";
+	%font.Text = "Room:" @ %this.currLevel;
+	%font.FontSize = "3 3";
+	%font.setBlendColor(1, 1, 0);
+	%font.setPosition(%x, %y);
+	%font.TextAlignment = "Left";
+	%this.getScene().add( %font ); 
+}
+
 
 //-----------------------------------------------------------------------------
 

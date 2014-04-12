@@ -170,7 +170,21 @@ function Player::onUpdate( %this )
 	}
 }
 
+//-----------------------------------------------------------------------------
 
+function Player::hit(%this, %damage)
+{
+	if(isObject(%this.blocker))
+	{
+		%this.blocker.takeDamage(%damage);
+		return 0;
+	}
+	else
+	{
+		%this.takeDamage(%damage);
+		return %damage;
+	}
+}
 	
 //-----------------------------------------------------------------------------
 

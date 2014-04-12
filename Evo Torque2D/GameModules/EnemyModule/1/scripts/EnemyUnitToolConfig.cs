@@ -92,7 +92,7 @@ function EnemyUnit::configureSingleTool( %this, %toolType, %toAddCount )
 		
 		if(%nextPosition $= "x")
 		{
-			%nextPosition = %this.findSameTypeSlot(%allPositions, %toolType, 1);
+			%nextPosition = %this.findSameTypeSlot(%allPositions, %toolType, -1);
 			
 			%this.stackToolNode(%nextPosition, 1);
 		}
@@ -127,9 +127,14 @@ function EnemyUnit::findOpenSlot( %this, %positions)
 //-----------------------------------------------------------------------------
 ///finds a existing slot that is occupied by the same tool Type
 
-function EnemyUnit::findSameTypeSlot( %this, %positions, %toolType, %highestStackLevel)			
+function EnemyUnit::findSameTypeSlot( %this, %positions, %toolType, %lowestStackLevel)			
 {
 	%result = "0 0";
+	
+	if(getWordCount(%positions) == 0)
+	{
+		return "x";
+	}
 	
 	for(%i = 0; %i < getWordCount(%positions) - 1; %i += 2)
 	{
@@ -139,7 +144,29 @@ function EnemyUnit::findSameTypeSlot( %this, %positions, %toolType, %highestStac
 		
 		if(%currToolNode.toolType $= %toolType)
 		{
-			return %currPosition;
+			%currStackLevel = %currToolNode.stackLevel;
+			
+			if(%currStackLevel < %lowestStackLevel)
+			{
+				return %currPosition;
+			}
+			else
+			{
+				%posistionsMinusCurr = removeWord(%positions, 0);
+				%posistionsMinusCurr = removeWord(%posistionsMinusCurr, 0);
+				
+				%nexToolPos = %this.findSameTypeSlot(%posistionsMinusCurr, %toolType, %currStackLevel);
+				
+				if(%lowestStackLevel == -1)		//first call
+				{
+					if(%nexToolPos $= "x")		//all equal
+					{
+						return %currPosition;
+					}
+				}
+				
+				return %nexToolPos;
+			}
 		}
 	}
 	
@@ -147,7 +174,6 @@ function EnemyUnit::findSameTypeSlot( %this, %positions, %toolType, %highestStac
 }
 
 //-----------------------------------------------------------------------------
-
 function EnemyUnit::initiateTools( %this )
 {
 	%this.orderTools();

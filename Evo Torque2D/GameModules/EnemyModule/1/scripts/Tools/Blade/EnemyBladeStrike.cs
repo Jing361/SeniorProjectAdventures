@@ -28,7 +28,7 @@ function EnemyBladeStrikeEffect::initialize(%this)
 	
     %this.createPolygonBoxCollisionShape(%this.myWidth, %this.myHeight);
     %this.setCollisionShapeIsSensor(0, true);
-    %this.setCollisionGroups( Utility.getCollisionGroup("Player") );
+    %this.setCollisionGroups( Utility.getCollisionGroup("Player") SPC Utility.getCollisionGroup("PlayerBlock") );
 	%this.setCollisionCallback(true);
 	
     %this.setUpdateCallback(true);
@@ -54,10 +54,9 @@ function EnemyBladeStrikeEffect::onCollision(%this, %object, %collisionDetails)
 	{
 		if(%object.getSceneGroup() ==  Utility.getCollisionGroup("Player"))
 		{			
-			%object.takeDamage(%this.strikeDamage);
-			%this.owner.owner.bladeDamage += %this.strikeDamage;
-			%this.fresh = false;
 			
+			%this.owner.owner.bladeDamage += %object.hit(%this.strikeDamage);
+			%this.fresh = false;
 			%this.setSpriteBlendColor(1, 0, 0, 0.75);
 		}
 	}

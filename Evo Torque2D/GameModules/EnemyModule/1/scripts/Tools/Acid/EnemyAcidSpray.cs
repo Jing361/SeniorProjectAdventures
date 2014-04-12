@@ -122,7 +122,6 @@ function EnemyAcidSpray::onUpdate(%this)
 
 function EnemyAcidSpray::refreshThis( %this )
 {
-	echo("freshhhhhhhhhhhhhh (acidspray)");
 	%this.refresh = true;
 }
 
