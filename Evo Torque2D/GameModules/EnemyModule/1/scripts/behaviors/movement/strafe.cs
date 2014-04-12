@@ -25,13 +25,13 @@ function WanderAroundBehavior::onBehaviorAdd(%this)
 function WanderAroundBehavior::changeDir(%this)
 {
   %targetRotation = (getRandom(0, %this.numDires) * (360/%this.numDires));
-  
+/*
   if (%this.turnSpeed == 0)
     %this.owner.setAngle(%targetRotation);
   else
     %this.owner.rotateTo(%targetRotation, %this.turnSpeed);
-
-  %this.owner.setLinearVelocityPolar(%this.owner.getAngle() + 90, %this.moveSpeed);
+*/
+  %this.owner.setLinearVelocityPolar(%targetRotation + 90, %this.moveSpeed);
     
   %this.schedule(%this.turnDelay * 1000, "changeDir");
 }
