@@ -186,7 +186,7 @@ function RoomManager::writeRoomSummationFile( %this )
 		echo("Room Avg. Melee:" SPC %averageMeleeDamage);
 		echo("Room Avg. Range:" SPC %averageRangedDamage);
 		
-		%file.writeLine((5 + %this.CurrentLevel*2) @ "");
+		%file.writeLine((5 + %this.CurrentLevel*5) @ "");
 		%file.writeLine("");
 		%file.writeLine(%plyrRangeCount @ "");
 		%file.writeLine(%plyrMeleeCount @ "");

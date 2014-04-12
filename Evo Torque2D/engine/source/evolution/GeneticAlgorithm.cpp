@@ -4,6 +4,7 @@
 #include "console/consoleTypes.h"
 #include "GeneticAlgorithm_ScriptBinding.h"
 #include <iostream>
+#include <cmath>
 
 using namespace Evolution;
 
@@ -15,7 +16,7 @@ const int NTOOLS = 7;
 const double PXOVER = 0.8;
 const double PMUTATION = 0.15;
 const string PASTROOMINFO = ".\\utilities\\ga_input.txt";
-const double WEIGHTS[NTOOLS] = {1.25, 1.25, 1.25, 1.25, 1, 1, 1};
+const double WEIGHTS[NTOOLS] = {1.25, 1.25, 1.25, 1.25, 1, 1, 0.5};
 
 ConsoleMethod(GeneticAlgorithm, run, const char *, 2, 2, "() Gets the object's position.\n"
                                                               "@return chromosome.")
@@ -94,9 +95,22 @@ string GeneticAlgorithm::run ( )
 		fileOut<< " Population    " << population.size() << "\n";
 	}
 
+
+	double tempSwing, tempShot;
 	fileOut << "\n";
-	fileOut << rangedPercent << "\n" << meleePercent << "\n" << blockPercent << "\n" << dashPercent << "\n" << enemyDPSwing 
-		<< "\n" << enemyDPShot << "\n";
+	fileOut << rangedPercent << "\n" << meleePercent << "\n" << blockPercent << "\n" << dashPercent << "\n" << tempSwing 
+		<< "\n" << tempShot << "\n";
+
+	if(tempShot ==0 && tempSwing == 0)
+	{
+		enemyDPShot = 0;
+		enemyDPSwing = 0;
+	}
+	else
+	{
+		enemyDPShot = tempShot/(tempShot + tempSwing);
+		enemyDPSwing = tempSwing/(tempShot + tempSwing);
+	}
 
 
 
@@ -223,8 +237,8 @@ void GeneticAlgorithm::evaluate ( )
 
 		population[member].setFitness( 
 			( rangedPercent * tools[0] ) + ( meleePercent * tools[1] ) + ( blockPercent * tools[2] ) + ( dashPercent * tools[3] ) 
-			+ (enemyDPSwing/(enemyDPSwing + enemyDPShot) * tools[4] ) + ( enemyDPShot/(enemyDPSwing + enemyDPShot) * tools[5] )  
-			+ (pointLimit/50 * tools[6]) + (pointLimit/100 * toolsSum/NTOOLS));
+			+ (enemyDPSwing * tools[4] ) + ( enemyDPShot * tools[5] )  
+			+ (pointLimit/50 * tools[6]) + (pointLimit/50 * toolsSum/NTOOLS));
 	}
 	return;
 }
