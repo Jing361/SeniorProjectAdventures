@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// 
-//-----------------------------------------------------------------------------
-
 function EnemyShooterBullet::onAdd( %this )
 {
 	%this.initialize();
@@ -12,7 +9,7 @@ function EnemyShooterBullet::onAdd( %this )
 function EnemyShooterBullet::initialize(%this)
 {
 	%this.setSceneGroup(Utility.getCollisionGroup("EnemyAttacks"));
-	%this.setSceneLayer(11);
+	%this.setSceneLayer(9);
 	%this.fixedAngle = true;
 	
 	%this.shotSpeed = 75;		
@@ -39,8 +36,10 @@ function EnemyShooterBullet::setupSprite( %this )
 {
 	%this.addSprite("0 0");
 	%this.setSpriteImage("GameAssets:shootershot", 0);
-	%this.setSpriteSize(%this.myWidth, %this.myHeight);
+	%this.setSpriteSize(2*%this.myWidth, 2*%this.myHeight);
 	%this.setAngle(%this.fireAngle);
+	%this.setVisible(false);
+	%this.mySchedule = schedule(110, 0, "EnemyShooterBullet::becomeVisible", %this);		//"comes out of barrel"
 }
 
 //-----------------------------------------------------------------------------
@@ -64,6 +63,14 @@ function EnemyShooterBullet::onCollision(%this, %object, %collisionDetails)
 	{
 		%this.safeDelete();
 	}
+}
+
+//-----------------------------------------------------------------------------
+
+function EnemyShooterBullet::becomeVisible( %this )
+{
+	if(isObject(%this))
+		%this.setVisible(true);
 }
 
 //-----------------------------------------------------------------------------

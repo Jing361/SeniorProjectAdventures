@@ -85,6 +85,7 @@ function PlayerMovementControlsBehavior::onBehaviorRemove(%this)
 
 function PlayerMovementControlsBehavior::onCollision(%this, %object, %collisionDetails)
 {
+
 }
 
 //-----------------------------------------------------------------------------

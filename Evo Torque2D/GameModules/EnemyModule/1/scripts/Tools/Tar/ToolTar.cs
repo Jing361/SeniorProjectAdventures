@@ -31,7 +31,7 @@ function ToolTar::initialize(%this)
 	Parent::initialize(%this);
 	
 	%this.reloadTime = %this.reloadTime/%this.stackLevel;
-	%this.slowEffect = 12;
+	%this.slowEffect = 10;
 	%this.slowEffectDuration = 10 * 1000;
 	
 	//shot barrel offset (instead of bullet coming out of center of cannon)	
@@ -82,4 +82,4 @@ function ToolTar::shoot( %this )
 	%this.owner.getMyScene().add( %newBullet );
 	
 	
-} 
+}

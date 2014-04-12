@@ -104,7 +104,7 @@ function RoomManager::startNextLevel( %this )
 	};
 	
 	%arenaScene = new Scene();
-	%arenaScene.setDebugOn("collision");
+	//%arenaScene.setDebugOn("collision");
 	%arenaScene.layerSortMode0 = "Newest";
 	%arenaScene.add(%gameArena);
 	%gameArena.buildArena( );
