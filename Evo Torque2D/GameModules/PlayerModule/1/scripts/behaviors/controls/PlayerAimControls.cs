@@ -6,9 +6,14 @@ if (!isObject(PlayerAimControlsBehavior))
 {
     %template = new BehaviorTemplate(PlayerAimControlsBehavior);
 
-    %template.friendlyName = "Shooter Aiming";
-    %template.behaviorType = "Input";
-    %template.description  = "Shooter style aiming control";
+  %template.friendlyName = "Shooter Aiming";
+  %template.behaviorType = "Input";
+  %template.description  = "Shooter style aiming control";
+
+  %template.addBehaviorField(upKey, "", keybind, "keyboard up");
+  %template.addBehaviorField(dwnKey, "", keybind, "keyboard down");
+  %template.addBehaviorField(lftKey, "", keybind, "keyboard left");
+  %template.addBehaviorField(rgtKey, "", keybind, "keyboard right");
 }
 
 function PlayerAimControlsBehavior::onBehaviorAdd(%this)
@@ -17,10 +22,10 @@ function PlayerAimControlsBehavior::onBehaviorAdd(%this)
        return;
 	   
 	//cardinal
-    GlobalActionMap.bindObj("keyboard", "I", "faceUp", %this);
-    GlobalActionMap.bindObj("keyboard", "L", "faceRight", %this);
-    GlobalActionMap.bindObj("keyboard", "K", "faceDown", %this);
-    GlobalActionMap.bindObj("keyboard", "J", "faceLeft", %this);
+    GlobalActionMap.bindObj("keyboard", %this.upKey, "faceUp", %this);
+    GlobalActionMap.bindObj("keyboard", %this.rgtKey, "faceRight", %this);
+    GlobalActionMap.bindObj("keyboard", %this.dwnKey, "faceDown", %this);
+    GlobalActionMap.bindObj("keyboard", %this.lftKey, "faceLeft", %this);
 	
 	//diagonal
     GlobalActionMap.bindObj("keyboard", "U", "faceUL", %this);
@@ -34,11 +39,11 @@ function PlayerAimControlsBehavior::onBehaviorRemove(%this)
     if (!isObject(GlobalActionMap))
        return;
 
-    GlobalActionMap.unbindObj("keyboard", "I", %this);
-    GlobalActionMap.unbindObj("keyboard", "L", %this);
-    GlobalActionMap.unbindObj("keyboard", "K", %this);
-    GlobalActionMap.unbindObj("keyboard", "J", %this);
-	
+    GlobalActionMap.unbindObj("keyboard", %this.upKey, %this);
+    GlobalActionMap.unbindObj("keyboard", %this.rgtKey, %this);
+    GlobalActionMap.unbindObj("keyboard", %this.dwnKey, %this);
+    GlobalActionMap.unbindObj("keyboard", %this.lftKey, %this);
+
     GlobalActionMap.unbindObj("keyboard", "U", %this);
     GlobalActionMap.unbindObj("keyboard", "O", %this);
     GlobalActionMap.unbindObj("keyboard", "Comma", %this);

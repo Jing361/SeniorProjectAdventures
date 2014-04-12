@@ -94,12 +94,16 @@ function EnemyUnit::setupSprite( %this )
 
 function EnemyUnit::setupBehaviors( %this )
 {
-	exec("./behaviors/movement/Drift.cs");
+  exec("./behaviors/movement/wanderAround.cs");
 	exec("./behaviors/ai/faceObject.cs");
-	%driftMove = DriftBehavior.createInstance();
-	%driftMove.speed = %this.walkSpeed;
-	%this.addBehavior(%driftMove);
-	
+
+  %wanderMove = WanderAroundBehavior.createInstance();
+	%wanderMove.turnDelay = 1;
+	%wanderMove.numDires = 8;
+	%wanderMove.moveSpeed = %this.walkSpeed;
+	%wanderMove.turnSpeed = %this.turnSpeed;
+	%this.addBehavior(%wanderMove);
+
 	%faceObj = FaceObjectBehavior.createInstance();
 	%faceObj.object = %this.mainTarget;
 	%faceObj.rotationOffset = 0;

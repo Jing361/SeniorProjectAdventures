@@ -92,8 +92,8 @@ function Player::setupCollisionShape( %this )
 	
 	%this.createPolygonCollisionShape(%shapePoints);
 	
-    %this.setCollisionShapeIsSensor(0, true);
-    %this.setCollisionGroups( Utility.getCollisionGroup("Enemies") SPC Utility.getCollisionGroup("Wall") );
+
+  %this.setCollisionGroups( Utility.getCollisionGroup("Enemies") SPC Utility.getCollisionGroup("Wall") );
 	%this.setCollisionCallback(true);
 }
 //-----------------------------------------------------------------------------
@@ -115,10 +115,10 @@ function Player::setupControls( %this )
 	//exec("./behaviors/controls/alignToJoystick.cs");
 	
  	%controls = PlayerMovementControlsBehavior.createInstance();
-	%controls.upKey = "keyboard E";
-	%controls.leftKey = "keyboard S";
-	%controls.downKey = "keyboard D";
-	%controls.rightKey = "keyboard F";
+	%controls.upKey = "keyboard W";
+	%controls.leftKey = "keyboard A";
+	%controls.downKey = "keyboard S";
+	%controls.rightKey = "keyboard D";
 	%this.addBehavior(%controls);
 	
  	%aimer = PlayerAimControlsBehavior.createInstance();
