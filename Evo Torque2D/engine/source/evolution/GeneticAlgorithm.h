@@ -60,15 +60,16 @@ namespace Evolution {
 		virtual ~GeneticAlgorithm() {}
 
 	public:
-		string run( const char* );
+		string run( );
 
 		void crossover ( );
 		void elitist ( Genotype );
 		void evaluate ( );
-		void initialize ( string );
+		void initialize ( );
 		void sortPopulation ( );
 		void mutate ( );
 		int randval ( int );
+		double enemyCreationWeight(double);
 		void selector ( );
 		void verifyAndPush( Genotype );
 		void Xover ( int, int );

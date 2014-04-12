@@ -137,7 +137,7 @@ function Arena::processRoomChromosomes(%this)
 		$genAlg = new GeneticAlgorithm();
 		
 		echo("Arena.Arena: GeneticAlgorithm.run()");
-		%chromosome = $genAlg.run("");
+		%chromosome = $genAlg.run();
 		
 		echo("Arena.Arena: GeneticAlgorithm. run successful!");
 	}
