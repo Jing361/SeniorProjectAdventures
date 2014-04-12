@@ -61,7 +61,7 @@ string GeneticAlgorithm::run ( )
 
 	sortPopulation() ;
 
-	for (int generation = 0; generation < MAXGENS; generation++ )
+	for (generation = 0; generation < MAXGENS; generation++ )
 	{
 
 		fileOut<< "Generation:  " << generation << "\n";
@@ -238,7 +238,7 @@ void GeneticAlgorithm::evaluate ( )
 		population[member].setFitness( 
 			( rangedPercent * tools[0] ) + ( meleePercent * tools[1] ) + ( blockPercent * tools[2] ) + ( dashPercent * tools[3] ) 
 			+ (enemyDPSwing * tools[4] ) + ( enemyDPShot * tools[5] )  
-			+ ((pointLimit/50) * tools[6]) + ((pointLimit/50) * toolsSum/NTOOLS));
+			+ (enemyCreationWeight(pointLimit) * tools[6]) + (enemyCreationWeight(pointLimit) * toolsSum/NTOOLS));
 	}
 	return;
 }
@@ -538,6 +538,8 @@ void GeneticAlgorithm::Xover ( int a, int b )
 	int pointA; // parent A crossover point
 	int pointB; // parent B crossover point
 
+	vector<int>::iterator geneIterator;
+
 	// 
 	//  Select the crossover point.
 	//
@@ -545,6 +547,12 @@ void GeneticAlgorithm::Xover ( int a, int b )
 	//			A	  B
 	//point -- [XXX[P)XX)
 	//
+	if((pointLimit - 5) % 4 == 0 && generation == 0)
+		for(int i = 0; i < NTOOLS; i++)
+		{
+			population[a].getGene()->insert(population[a].getGene()->end(), 0);
+			population[b].getGene()->insert(population[b].getGene()->end(), 0);
+		}
 
 	pointA = rand () % ( population[a].getGene()->size() );
 
@@ -559,8 +567,8 @@ void GeneticAlgorithm::Xover ( int a, int b )
 
 	Genotype g;
 	Genotype g2;
+	
 
-	vector<int>::iterator geneIterator;
 
 	g.assignGene(population[a].spliceGene(0, pointA), population[b].spliceGene(pointB, population[b].getGene()->size()));
 

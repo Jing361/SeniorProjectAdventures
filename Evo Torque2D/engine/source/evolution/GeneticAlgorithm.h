@@ -48,6 +48,8 @@ namespace Evolution {
 		vector<Genotype> population;
 		vector<Genotype> newPopulation;
 
+		int generation;
+
 		int pointLimit;
 		double rangedPercent;
 		double meleePercent;
