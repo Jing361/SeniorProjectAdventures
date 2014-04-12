@@ -38,6 +38,8 @@ function EnemyShooterBullet::setupSprite( %this )
 	%this.setSpriteImage("GameAssets:shootershot", 0);
 	%this.setSpriteSize(2*%this.myWidth, 2*%this.myHeight);
 	%this.setAngle(%this.fireAngle);
+	%this.setVisible(false);
+	%this.mySchedule = schedule(110, 0, "EnemyShooterBullet::becomeVisible", %this);		//"comes out of barrel"
 }
 
 //-----------------------------------------------------------------------------
@@ -61,6 +63,13 @@ function EnemyShooterBullet::onCollision(%this, %object, %collisionDetails)
 	{
 		%this.safeDelete();
 	}
+}
+
+//-----------------------------------------------------------------------------
+
+function EnemyShooterBullet::becomeVisible( %this )
+{
+	%this.setVisible(true);
 }
 
 //-----------------------------------------------------------------------------
