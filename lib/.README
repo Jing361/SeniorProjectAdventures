@@ -1,4 +1,0 @@
-<project name>\lib\
-
-Contains a collection of folders for libraries necessary for, and created by the project.
-Each library is given its own folder.  Headers for this library will be put in <project name>\include\ and the binaries for the same will be in <project name>\bin\

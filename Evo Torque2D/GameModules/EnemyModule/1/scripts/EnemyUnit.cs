@@ -109,13 +109,10 @@ function EnemyUnit::setupBehaviors( %this )
 	%wanderMove.turnSpeed = %this.turnSpeed;
 	%this.addBehavior(%wanderMove);
 	
-	
 	%faceObj = FaceObjectBehavior.createInstance();
 	%faceObj.object = %this.mainTarget;
 	%faceObj.rotationOffset = 0;
 	%this.addBehavior(%faceObj);
-	
-	//%this.setAngle(0);
 }
 
 //-----------------------------------------------------------------------------

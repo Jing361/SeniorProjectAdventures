@@ -69,7 +69,8 @@ function EnemyShooterBullet::onCollision(%this, %object, %collisionDetails)
 
 function EnemyShooterBullet::becomeVisible( %this )
 {
-	%this.setVisible(true);
+	if(isObject(%this))
+		%this.setVisible(true);
 }
 
 //-----------------------------------------------------------------------------
