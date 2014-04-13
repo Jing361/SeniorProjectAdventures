@@ -224,15 +224,15 @@ function Arena::spawnEnemyUnit(%this, %localChromosome, %xPos, %yPos)
 
 //-----------------------------------------------------------------------------
 
+function Arena::playerDied(%this)
+{
+	%this.myManager.playerDies();
+	
+} 
+
+//-----------------------------------------------------------------------------
+
 function Arena::finishRoom(%this)
 {
-	%totalButtonCount = %this.player.rangedCount +
-		%this.player.meleeCount +
-		%this.player.blockCount + 
-		%this.player.dashCount;
-	
-	//sum up everything
-	//write file...
-	
-	
+	%this.myManager.endCurrentLevel();
 } 

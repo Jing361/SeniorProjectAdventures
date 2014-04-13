@@ -262,4 +262,6 @@ function Player::restoreSpeed( %this, %amt )
 function Player::onRemove( %this )
 {
 	%this.clearBehaviors();
+	
+	%this.myArena.playerDied();
 }

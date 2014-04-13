@@ -28,10 +28,6 @@ function RoomManager::create( %this )
 	
 	setRandomSeed(getRealTime());
 
-    new Scene(mainScene)
-	{
-		//class="defualtWindow";
-	};
 
     new SceneWindow(mainWindow)
 	{
@@ -57,7 +53,6 @@ function RoomManager::create( %this )
 	new ScriptObject(InputManager);
 	mainWindow.addInputListener(InputManager);
 
-    mainWindow.setScene(mainScene);
     mainWindow.setCameraPosition( 0, 0 );
 	
 	mainScene.layerSortMode0 = "Newest";
@@ -78,6 +73,23 @@ function RoomManager::create( %this )
 	exec("./scripts/behaviors/movement/shooterControls.cs");
 	exec("./scripts/behaviors/movement/drift.cs");
 	
+	%this.goToTitleScreen( );
+	
+	
+	//Lasting Variables
+	%this.CurrentLevel = 0;
+}
+    
+//-----------------------------------------------------------------------------
+  
+function RoomManager::goToTitleScreen( %this )
+{
+    new Scene(mainScene)
+	{
+		//class="defualtWindow";
+	};
+    mainWindow.setScene(mainScene);
+	
 	%gui_titleScreen = new SceneObject()
 	{
 		class = "TitleScreenGUI";
@@ -85,9 +97,6 @@ function RoomManager::create( %this )
 	};
 		 
 	%gui_titleScreen.openTitleScreen(mainScene);
-	
-	//Lasting Variables
-	%this.CurrentLevel = 0;
 }
     
 //-----------------------------------------------------------------------------
@@ -122,7 +131,7 @@ function RoomManager::endCurrentLevel( %this )
 	
 	%this.writeRoomSummationFile();
 
-	%this.currentArena.player.clearBehaviors();
+	//%this.currentArena.player.clearBehaviors();
 	%this.currentArena.getScene().remove(%this.currentArena.player);
 	
 	%this.currentArena.getScene().schedule(320, "clear");  
@@ -236,6 +245,11 @@ function RoomManager::endRoomCompleteScreen( %this )
 
 //-----------------------------------------------------------------------------
 
-function RoomManager::destroy( %this )
+function RoomManager::playerDies( %this )
 {
+	%this.currentArena.getScene().schedule(320, "clear");  
+	%this.goToTitleScreen();
+	%this.CurrentLevel = 0;
 }
+
+	

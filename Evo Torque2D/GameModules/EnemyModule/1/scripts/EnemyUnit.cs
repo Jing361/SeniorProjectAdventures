@@ -227,6 +227,6 @@ function EnemyUnit::onRemove( %this )
 	
 	if(%this.myArena.EnemyCount <= 0)
 	{
-		%this.myArena.myManager.endCurrentLevel();
+		%this.myArena.finishRoom();
 	}
 }
