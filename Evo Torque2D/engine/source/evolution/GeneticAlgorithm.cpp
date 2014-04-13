@@ -15,7 +15,8 @@ const int MAXGENS = 30;
 const int NTOOLS = 7;
 const double PXOVER = 0.8;
 const double PMUTATION = 0.15;
-const string PASTROOMINFO = ".\\utilities\\ga_input.txt";
+const string PREVIOUSROOMINFO = ".\\utilities\\ga_input.txt";
+const string PASTCASEINFO = ".\\caselist.txt";
 const double WEIGHTS[NTOOLS] = {1.25, 1.25, 1.25, 1.25, 1, 1, 0.5};
 
 ConsoleMethod(GeneticAlgorithm, run, const char *, 2, 2, "() Gets the object's position.\n"
@@ -96,23 +97,25 @@ string GeneticAlgorithm::run ( )
 	}
 
 
-	double tempSwing, tempShot;
+
 	fileOut << "\n";
-	fileOut << rangedPercent << "\n" << meleePercent << "\n" << blockPercent << "\n" << dashPercent << "\n" << tempSwing 
-		<< "\n" << tempShot << "\n";
-
-	if(tempShot ==0 && tempSwing == 0)
-	{
-		enemyDPShot = 0;
-		enemyDPSwing = 0;
-	}
-	else
-	{
-		enemyDPShot = tempShot/(tempShot + tempSwing);
-		enemyDPSwing = tempSwing/(tempShot + tempSwing);
-	}
+	fileOut << rangedPercent << "\n" << meleePercent << "\n" << blockPercent << "\n" << dashPercent << "\n" << enemyDPSwing 
+		<< "\n" << enemyDPShot << "\n";
 
 
+	ofstream caseList;
+	caseList.open(PASTCASEINFO.c_str(), ofstream::app);
+
+	caseList << pointLimit << "\t" << rangedPercent << "\t" << meleePercent << "\t" << blockPercent << "\t" 
+		<< dashPercent << "\t" << enemyDPSwing << "\t" << enemyDPShot << "\t";
+
+	for(geneIterator = population[population.size()-1].getGene()->begin(); 
+		geneIterator != population[population.size()-1].getGene()->end() - 1; 
+		++geneIterator)
+		{
+			caseList << *geneIterator << "  ";
+		}
+	caseList<< *geneIterator << "\n";
 
 	for(int j = 0; j < POPSIZE; ++j)
 	{
@@ -237,7 +240,7 @@ void GeneticAlgorithm::evaluate ( )
 
 		population[member].setFitness( 
 			( rangedPercent * tools[0] ) + ( meleePercent * tools[1] ) + ( blockPercent * tools[2] ) + ( dashPercent * tools[3] ) 
-			+ (enemyDPSwing * tools[4] ) + ( enemyDPShot * tools[5] )  
+			+ ((enemyDPSwing + meleePercent)/2 * tools[4] ) + ( (enemyDPShot + rangedPercent)/2 * tools[5] )  //Normalize it
 			+ (enemyCreationWeight(pointLimit) * tools[6]) + (enemyCreationWeight(pointLimit) * toolsSum/NTOOLS));
 	}
 	return;
@@ -245,7 +248,8 @@ void GeneticAlgorithm::evaluate ( )
 
 void GeneticAlgorithm::initialize (  )
 {
-	ifstream file_in;
+	ifstream previousRoom;
+	ifstream pastCases;
 
 	//shield parry acid tar blade projectile blob;
 
@@ -254,9 +258,10 @@ void GeneticAlgorithm::initialize (  )
 	ofstream fileOut;
 	fileOut.open(".\\utilities\\engineloginit.txt");
 
-	file_in.open ( PASTROOMINFO.c_str() );
+	previousRoom.open ( PREVIOUSROOMINFO.c_str() );
+	pastCases.open(PASTCASEINFO.c_str());
 
-	if ( !file_in )
+	if ( !previousRoom )
 	{
 		cerr << "\n";
 		cerr << "Initialize - Fatal error!\n";
@@ -272,21 +277,68 @@ void GeneticAlgorithm::initialize (  )
 
 	int current = 0;
 
-	file_in >> pointLimit >> rangedPercent >> meleePercent >> blockPercent >> dashPercent >> enemyDPSwing >> enemyDPShot;
+	double tempSwing, tempShot;
+
+	previousRoom >> pointLimit >> rangedPercent >> meleePercent >> blockPercent >> dashPercent >> tempSwing >> tempShot;
+	if(tempShot == 0 && tempSwing == 0)
+	{
+		enemyDPShot = 0;
+		enemyDPSwing = 0;
+	}
+	else
+	{
+		enemyDPShot = tempShot/(tempShot + tempSwing);
+		enemyDPSwing = tempSwing/(tempShot + tempSwing);
+	}
 
 	fileOut << pointLimit << endl << rangedPercent << endl << meleePercent << endl << blockPercent << endl << dashPercent << endl <<
 		 enemyDPSwing << endl << enemyDPShot << endl;
 
 	cout<< pointLimit << endl;
 
-	
+	int tempPoint;
+	double tempRanged, tempMelee, tempBlock, tempDash, tempDPSwing, tempDPShot;
+	double difference;
+	int chromosomeNum = 1;
 
-	file_in >> current;
-	while (!file_in.eof() && current >= 0)
+	while (!pastCases.eof())
+	{
+		pastCases >> tempPoint >> tempRanged >> tempMelee >> tempBlock >> tempDash >> tempSwing >> tempShot;
+		if(tempShot == 0 && tempSwing == 0)
+		{
+			tempDPShot = 0;
+			tempDPSwing = 0;
+		}
+		else
+		{
+			tempDPShot = tempShot/(tempShot + tempSwing);
+			tempDPSwing = tempSwing/(tempShot + tempSwing);
+		}
+
+		difference = euclideanDifference(tempRanged, tempMelee, tempBlock, tempDash, tempDPSwing, tempDPShot);
+
+		if(difference < .75 && pointLimit - tempPoint >=0)
+		{
+			pastCases >> current;
+			while (!previousRoom.eof() && pastCases.peek() != '\n')
+			{
+				pastCases >> current;
+				//fileOut << current << " ";
+				population[chromosomeNum].genePushBack(current);
+			}
+			++chromosomeNum;
+			
+		}
+	
+		
+	}
+
+	previousRoom >> current;
+	while (!previousRoom.eof() && current >= 0)
 	{
 		fileOut << current << " ";
 		population[0].genePushBack(current);
-		file_in >> current;
+		previousRoom >> current;
 	}
 
 	fileOut<< endl;
@@ -323,7 +375,8 @@ void GeneticAlgorithm::initialize (  )
 
 	}
 
-	file_in.close ( );
+	previousRoom.close ( );
+	pastCases.close();
 	fileOut.close();
 
 	return;
@@ -407,6 +460,17 @@ double GeneticAlgorithm::enemyCreationWeight(double d )
 		return (2/M_PI) * atan(d/150);
 	else
 		return d/(125*M_PI);
+}
+
+double GeneticAlgorithm::euclideanDifference (double r, double m, double b, double d, double sw, double sh)
+{
+	double diff = 0;
+
+	diff = sqrt(pow(r - rangedPercent, 2)/((r + rangedPercent)/2) + pow(m - meleePercent, 2)/((m + meleePercent)/2) 
+				+ pow(b - blockPercent, 2)/((b + blockPercent)/2) + pow(d - dashPercent, 2)/((d + dashPercent)/2) 
+				+ pow(sw - enemyDPSwing, 2)/((sw + enemyDPSwing)/2) + pow(sh - enemyDPShot, 2)/((sh + enemyDPShot)/2));
+
+	return diff;
 }
 
 void GeneticAlgorithm::selector ( )
@@ -558,7 +622,7 @@ void GeneticAlgorithm::Xover ( int a, int b )
 	//			A	  B
 	//point -- [XXX[P)XX)
 	//
-	if((pointLimit - 5) % 10 == 0 && generation == 0)
+	if((pointLimit - 5) % 10 == 0 && pointLimit != 5 && generation == 0)
 		for(int i = 0; i < NTOOLS; i++)
 		{
 			population[a].getGene()->insert(population[a].getGene()->end(), 0);
