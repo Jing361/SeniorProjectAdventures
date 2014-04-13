@@ -239,7 +239,7 @@ void GeneticAlgorithm::evaluate ( )
 
 		population[member].setFitness( 
 			( rangedPercent * tools[0] ) + ( meleePercent * tools[1] ) + ( blockPercent * tools[2] ) + ( dashPercent * tools[3] ) 
-			+ ((enemyDPSwing + meleePercent)/2 * tools[4] ) + ( (enemyDPShot + rangedPercent)/2 * tools[5] )  //Normalize it
+			+ ((enemyDPSwing + meleePercent)/2 * tools[4] ) + ( (enemyDPShot + rangedPercent)/2 * tools[5] )  
 			+ (enemyCreationWeight(pointLimit) * tools[6]) + (enemyCreationWeight(pointLimit) * toolsSum/NTOOLS));
 	}
 	return;
@@ -290,19 +290,20 @@ void GeneticAlgorithm::initialize (  )
 		enemyDPSwing = tempSwing/(tempShot + tempSwing);
 	}
 
-	fileOut << pointLimit << endl << rangedPercent << endl << meleePercent << endl << blockPercent << endl << dashPercent << endl <<
+	fileOut << "Current Room \n" << pointLimit << endl << rangedPercent << endl << meleePercent << endl << blockPercent << endl << dashPercent << endl <<
 		 enemyDPSwing << endl << enemyDPShot << endl;
-
-	cout<< pointLimit << endl;
 
 	int tempPoint;
 	double tempRanged, tempMelee, tempBlock, tempDash, tempDPSwing, tempDPShot;
 	double difference;
 	int chromosomeNum = 1;
 
+
 	while (!pastCases.eof())
 	{
 		pastCases >> tempPoint >> tempRanged >> tempMelee >> tempBlock >> tempDash >> tempSwing >> tempShot;
+		fileOut << "Current Case \n" << tempPoint << "\n" << tempRanged << "\n" << tempMelee << "\n" 
+			<< tempBlock << "\n" << tempDash << "\n" << tempSwing << "\n" << tempShot << "\n";
 		if(tempShot == 0 && tempSwing == 0)
 		{
 			tempDPShot = 0;
@@ -316,15 +317,18 @@ void GeneticAlgorithm::initialize (  )
 
 		difference = euclideanDifference(tempRanged, tempMelee, tempBlock, tempDash, tempDPSwing, tempDPShot);
 
-		if(difference < .75 && pointLimit - tempPoint >= 0)
+		fileOut<< "Difference:" << difference << "\n";
+
+		if(difference < .75 && pointLimit >= tempPoint)
 		{
 			pastCases >> current;
 			while (!previousRoom.eof() && pastCases.peek() != '\n')
 			{
 				pastCases >> current;
-				//fileOut << current << " ";
+				fileOut << current << " ";
 				population[chromosomeNum].genePushBack(current);
 			}
+			fileOut<< "\n";
 			++chromosomeNum;
 			
 		}
@@ -347,13 +351,12 @@ void GeneticAlgorithm::initialize (  )
 		fileOut << population[0].getGene()->at(i) << " ";
 	}
 	
-	int j = 1;
-	vector<int>::reverse_iterator geneIterator;
-	while(j < POPSIZE)
+	vector<int>::iterator geneIterator;
+	while(chromosomeNum < POPSIZE)
 	{
 		double points = 0;
 		
-		population[j].setGene(*population[0].getGene());
+		population[chromosomeNum].setGene(*population[0].getGene());
 
 		/*for(geneIterator = population[0].getGene()->rbegin(); geneIterator != population[0].getGene()->rend(); ++geneIterator)
 		{
@@ -362,15 +365,18 @@ void GeneticAlgorithm::initialize (  )
 
 		}*/
 		int currentTool = 0;
-		for(geneIterator = population[j].getGene()->rbegin(); geneIterator != population[j].getGene()->rend(); ++geneIterator)
+		fileOut<< "Gene " << chromosomeNum << " ---> ";
+		for(geneIterator = population[chromosomeNum].getGene()->begin(); 
+			geneIterator != population[chromosomeNum].getGene()->end(); ++geneIterator)
 		{
 			++currentTool;
 
 			points += *geneIterator * WEIGHTS[currentTool%NTOOLS];
+			fileOut<< *geneIterator << " ";
 
 		}
 		//if(points <= pointLimit)
-			++j;
+			++chromosomeNum;
 
 	}
 
@@ -465,9 +471,25 @@ double GeneticAlgorithm::euclideanDifference (double r, double m, double b, doub
 {
 	double diff = 0;
 
-	diff = sqrt(pow(r - rangedPercent, 2)/((r + rangedPercent)/2) + pow(m - meleePercent, 2)/((m + meleePercent)/2) 
-				+ pow(b - blockPercent, 2)/((b + blockPercent)/2) + pow(d - dashPercent, 2)/((d + dashPercent)/2) 
-				+ pow(sw - enemyDPSwing, 2)/((sw + enemyDPSwing)/2) + pow(sh - enemyDPShot, 2)/((sh + enemyDPShot)/2));
+	if(r != 0 || rangedPercent != 0)
+		diff += pow(r - rangedPercent, 2)/((r + rangedPercent)/2); 
+		
+	if(m != 0 || meleePercent != 0)
+		diff += pow(m - meleePercent, 2)/((m + meleePercent)/2); 
+
+	if(b != 0 || blockPercent != 0)
+		diff += pow(b - blockPercent, 2)/((b + blockPercent)/2);
+		
+	if(d != 0 || dashPercent != 0)
+		diff += pow(d - dashPercent, 2)/((d + dashPercent)/2);
+
+	if(sw != 0 || enemyDPSwing != 0)
+		diff += pow(sw - enemyDPSwing, 2)/((sw + enemyDPSwing)/2);
+				
+	if(sh != 0 || enemyDPShot != 0)
+		diff += pow(sh - enemyDPShot, 2)/((sh + enemyDPShot)/2);
+
+	diff = sqrt(diff);
 
 	return diff;
 }
