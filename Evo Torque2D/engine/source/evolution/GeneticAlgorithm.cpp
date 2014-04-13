@@ -17,21 +17,20 @@ const double PXOVER = 0.8;
 const double PMUTATION = 0.15;
 const string PREVIOUSROOMINFO = ".\\utilities\\ga_input.txt";
 const string PASTCASEINFO = ".\\caselist.txt";
-const double WEIGHTS[NTOOLS] = {1.25, 1.25, 1.25, 1.25, 1, 1, 0.5};
+const double WEIGHTS[NTOOLS] = {1.25, 1.25, 1, 1, 1, 1, 0.5};
 
 ConsoleMethod(GeneticAlgorithm, run, const char *, 2, 2, "() Gets the object's position.\n"
                                                               "@return chromosome.")
 {
-	char* pBuffer = Con::getReturnBuffer(256);
 	// Fetch result.  
     string result = object->run();
+	char* pBuffer = Con::getReturnBuffer(result.c_str());
 
 	//Con::printf("%d  %d" , (result.size(),sizeof(string)));
     // Create Returnable Buffer.  
 	//char* pBuffer = Con::getReturnBuffer(result.c_str());  
 
-	dSprintf(pBuffer, 256, "%s", result.c_str());  
-
+	dSprintf(pBuffer, result.size() + 1, "%s", result.c_str());  
 
 	return pBuffer; 
 }
@@ -317,7 +316,7 @@ void GeneticAlgorithm::initialize (  )
 
 		difference = euclideanDifference(tempRanged, tempMelee, tempBlock, tempDash, tempDPSwing, tempDPShot);
 
-		if(difference < .75 && pointLimit - tempPoint >=0)
+		if(difference < .75 && pointLimit - tempPoint >= 0)
 		{
 			pastCases >> current;
 			while (!previousRoom.eof() && pastCases.peek() != '\n')
@@ -622,7 +621,7 @@ void GeneticAlgorithm::Xover ( int a, int b )
 	//			A	  B
 	//point -- [XXX[P)XX)
 	//
-	if((pointLimit - 5) % 10 == 0 && pointLimit != 5 && generation == 0)
+	if((pointLimit - 5) % 10 == 0 && generation == 0)
 		for(int i = 0; i < NTOOLS; i++)
 		{
 			population[a].getGene()->insert(population[a].getGene()->end(), 0);
