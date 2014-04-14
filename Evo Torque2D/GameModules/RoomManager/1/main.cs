@@ -13,39 +13,13 @@ $pixelToWorldRatio = $roomWidth/1600;
 //---------------------------------------------------------------------
 
 function RoomManager::create( %this )
-{   
-/*
-	$UtilityObj = new SimObject()
-	{
-		class = "Utility";
-	};
-*/
-
-	//activateDirectInput();
-	//enableJoystick();
-	//enableXInput();
-	//$enableDirectInput=true;
-	
+{   	
 	setRandomSeed(getRealTime());
-
 
     new SceneWindow(mainWindow)
 	{
 		//useWindowMouseEvents = "1";
 	};
-	
-	/*
-	//Broken/delete me
-	mainWindow.UseObjectInputEvents = true;
-	
-	%inputter = new ScriptObject()  
-	{  
-	   class="ExampleListener";  
-	};  
-
-	mainWindow.addInputListener(%inputter);
-	*/
-	
 	
     mainWindow.profile = new GuiControlProfile();
     Canvas.setContent(mainWindow);
@@ -59,31 +33,33 @@ function RoomManager::create( %this )
 	
     mainWindow.setCameraSize( $roomWidth, $roomHeight );
     //mainWindow.setCameraSize( $roomWidth*1.2, $roomHeight*1.2 );	//zoomed out cam
-
-	/*
-	mainScene.enableXinput();
-	$enableDirectInput=true;
-	mainScene.activateDirectInput();
-	*/
 	
     // load some scripts and variables
     //exec("./scripts/arena.cs");
     exec("./titleScreenGUI.cs");
     exec("./roomCompleteGUI.cs");
-	exec("./scripts/behaviors/movement/shooterControls.cs");
-	exec("./scripts/behaviors/movement/drift.cs");
+    exec("./roomDefeatGUI.cs");
+    exec("./scripts/behaviors/menus/GlobalControls.cs");
+	
+    GlobalActionMap.bindObj("keyboard", "Escape", "exitGame", %this);
 	
 	%this.goToTitleScreen( );
 	
 	
 	//Lasting Variables
 	%this.CurrentLevel = 0;
+	
+	
+	echo("RoomManager.main: Creating GeneticAlgorithm instance");
+	$genAlg = new GeneticAlgorithm();
 }
     
 //-----------------------------------------------------------------------------
   
 function RoomManager::goToTitleScreen( %this )
 {
+	%this.CurrentLevel = 0;
+
     new Scene(mainScene)
 	{
 		//class="defualtWindow";
@@ -110,6 +86,7 @@ function RoomManager::startNextLevel( %this )
 		class = "Arena";
 		myManager = %this;
 		currLevel = %this.CurrentLevel;
+		currChromosome = %this.nextChromosome;
 	};
 	
 	%arenaScene = new Scene();
@@ -132,11 +109,10 @@ function RoomManager::endCurrentLevel( %this )
 	%this.writeRoomSummationFile();
 
 	//%this.currentArena.player.clearBehaviors();
-	%this.currentArena.getScene().remove(%this.currentArena.player);
+	//%this.currentArena.getScene().remove(%this.currentArena.player);
 	
 	%this.currentArena.getScene().schedule(320, "clear");  
-	
-	%this.goToRoomCompleteScreen();
+	%this.schedule(320, "goToRoomCompleteScreen");  
 }
 
 //-----------------------------------------------------------------------------
@@ -221,8 +197,22 @@ function RoomManager::writeRoomSummationFile( %this )
  
 //-----------------------------------------------------------------------------
   
+function RoomManager::runNextRoomGenAlg( %this )
+{
+	echo("RoomManager.main: GeneticAlgorithm.run()");
+	%chromosome = $genAlg.run();
+	
+	echo("RoomManager.main: GeneticAlgorithm. run successful!");
+	
+	return %chromosome;
+}
+ 
+//-----------------------------------------------------------------------------
+  
 function RoomManager::goToRoomCompleteScreen( %this )
 {	
+	//%this.nextChromosome = %this.runNextRoomGenAlg();
+
 	%completeRoomScene = new Scene();
 	%completeRoomScene.layerSortMode0 = "Newest";
 	mainWindow.setScene( %completeRoomScene );
@@ -242,14 +232,50 @@ function RoomManager::endRoomCompleteScreen( %this )
 {	
 	%this.startNextLevel();
 }
+ 
+//-----------------------------------------------------------------------------
+  
+function RoomManager::goToRoomDefeatScreen( %this, %furthestLevel, %killerChromosome, %killBodyRadius )
+{	
+	//%this.nextChromosome = %this.runNextRoomGenAlg();
+
+	echo("Main goToDefeat" SPC %killerChromosome);
+	
+	%defeatRoomScene = new Scene();
+	%defeatRoomScene.layerSortMode0 = "Newest";
+	mainWindow.setScene( %defeatRoomScene );
+	
+	%gui_roomDefeatScreen = new SceneObject()
+	{
+		class = "RoomDefeatGUI";
+		myManager = %this;
+		lastLevel = %furthestLevel;
+		killerChromosome = %killerChromosome;
+		killBodyRadius = %killBodyRadius;
+	};
+		 
+	%gui_roomDefeatScreen.openScreen(%defeatRoomScene);
+}   
 
 //-----------------------------------------------------------------------------
 
-function RoomManager::playerDies( %this )
-{
+function RoomManager::playerDies( %this, %killerChromosome, %killBodyRadius )
+{	
 	%this.currentArena.getScene().schedule(320, "clear");  
-	%this.goToTitleScreen();
+	%this.schedule(320, "goToRoomDefeatScreen", %this.CurrentLevel, %killerChromosome, %killBodyRadius);  
+	//%this.goToRoomDefeatScreen(%killerChromosome, %killBodyRadius);
 	%this.CurrentLevel = 0;
+}
+
+//-----------------------------------------------------------------------------
+
+function RoomManager::exitGame(%this, %val)
+{
+	if(%val == 1)
+	{
+		echo("RoomManager.exitGame()");
+		quit();
+	}
 }
 
 	

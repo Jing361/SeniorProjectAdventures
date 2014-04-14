@@ -36,8 +36,10 @@ function Arena::buildArena(%this)
 	
     //%this.setUpdateCallback(true);
 	
+	%this.dropPickupChance = 10;
+	
 	//Populate room
-	%this.player = %this.spawnPlayer(-25, 0);		//add player before Enemies!
+	%this.player = %this.spawnPlayer(0, 0);		//add player before Enemies!
 	
 	%this.roomChromosomes = "";
 	
@@ -54,31 +56,81 @@ function Arena::buildArena(%this)
 	%this.roomBladeAttackNums = 0;
 
 	//font 4 times for pseudo boldness
-	%this.addRoomFont(-$roomWidth/2 + 1, $roomHeight/2 - 0.2);
+	%this.addRoomFont(-$roomWidth/2 + 1, $roomHeight/2 - 0.5);
+	
+	$roomStartLag = 210;
+	//%this.getScene().setScenePause(true);
+	%this.getScene().schedule($roomStartLag, "setScenePause", true);
+	%this.schedule($roomStartLag, "addREADYFont", 0, 0);
 }
 
 //-----------------------------------------------------------------------------
 
 function Arena::addRoomFont(%this, %x, %y)
 {
-	%this.addRoomNumFont(%x, %y);
-	%this.addRoomNumFont(%x + 0.1, %y);
-	%this.addRoomNumFont(%x + 0.1, %y + 0.1);
-	%this.addRoomNumFont(%x, %y + 0.1);
+	%text = "Room:" @ %this.currLevel;
+	%this.addRoomNumFont(%x, %y, "3 3", %text, "Left", "1 1 0");
+	%this.addRoomNumFont(%x + 0.1, %y, "3 3", %text, "Left", "1 1 0");
+	%this.addRoomNumFont(%x + 0.1, %y + 0.1, "3 3", %text, "Left", "1 1 0");
+	%this.addRoomNumFont(%x, %y + 0.1, "3 3", %text, "Left", "1 1 0");
 }
 
 //-----------------------------------------------------------------------------
 
-function Arena::addRoomNumFont(%this, %x, %y)
+function Arena::addRoomNumFont(%this, %x, %y, %size, %text, %align, %colorBlend)
 {
 	%font = new ImageFont();
 	%font.Image = "GameAssets:font";
-	%font.Text = "Room:" @ %this.currLevel;
-	%font.FontSize = "3 3";
-	%font.setBlendColor(1, 1, 0);
+	%font.Text = %text;
+	%font.FontSize = %size;
 	%font.setPosition(%x, %y);
-	%font.TextAlignment = "Left";
+	%font.TextAlignment = %align;
+	%font.setBlendColor(%colorBlend);
 	%this.getScene().add( %font ); 
+	
+	return %font;
+}
+
+//-----------------------------------------------------------------------------
+
+function Arena::addREADYFont(%this, %x, %y)
+{
+	%text = "READY?";
+	%lifeSpan = 1000;
+	%this.addRoomNumFont(%x, %y, "5 5", %text, "Center", "1 0 0").schedule(%lifeSpan, "safeDelete");
+	%this.addRoomNumFont(%x + 0.1, %y, "5 5", %text, "Center", "1 0 0").schedule(%lifeSpan, "safeDelete");
+	%this.addRoomNumFont(%x + 0.1, %y + 0.1, "5 5", %text, "Center", "1 0 0").schedule(%lifeSpan, "safeDelete");
+	%this.addRoomNumFont(%x, %y + 0.1, %text, "5 5", "Center", "1 0 0").schedule(%lifeSpan, "safeDelete");
+	
+	%this.schedule(%lifeSpan, "addSETFont", %x, %y);
+}
+
+//-----------------------------------------------------------------------------
+
+function Arena::addSETFont(%this, %x, %y)
+{
+	%text = "SET";
+	%lifeSpan = 1000;
+	%this.addRoomNumFont(%x, %y, "5 5", %text, "Center", "1 1 0").schedule(%lifeSpan, "safeDelete");
+	%this.addRoomNumFont(%x + 0.1, %y, "5 5", %text, "Center", "1 1 0").schedule(%lifeSpan, "safeDelete");
+	%this.addRoomNumFont(%x + 0.1, %y + 0.1, "5 5", %text, "Center", "1 1 0").schedule(%lifeSpan, "safeDelete");
+	%this.addRoomNumFont(%x, %y + 0.1, %text, "5 5", "Center", "1 1 0").schedule(%lifeSpan, "safeDelete");
+	
+	%this.schedule(%lifeSpan, "addGOFont", %x, %y);
+}
+
+//-----------------------------------------------------------------------------
+
+function Arena::addGOFont(%this, %x, %y)
+{
+	%text = "FIGHT!";
+	%lifeSpan = 1000;
+	%this.addRoomNumFont(%x, %y, "5 5", %text, "Center", "0 1 0").schedule(%lifeSpan, "safeDelete");
+	%this.addRoomNumFont(%x + 0.1, %y, "5 5", %text, "Center", "0 1 0").schedule(%lifeSpan, "safeDelete");
+	%this.addRoomNumFont(%x + 0.1, %y + 0.1, "5 5", %text, "Center", "0 1 0").schedule(%lifeSpan, "safeDelete");
+	%this.addRoomNumFont(%x, %y + 0.1, %text, "5 5", "Center", "0 1 0").schedule(%lifeSpan, "safeDelete");
+	
+	%this.getScene().schedule(%lifeSpan + 250, "setScenePause", false);
 }
 
 
@@ -150,17 +202,25 @@ function Arena::processRoomChromosomes(%this)
 	
 	if(%this.currLevel > 1)
 	{
-		echo("Arena.Arena: Creating GeneticAlgorithm instance");
-		$genAlg = new GeneticAlgorithm();
-		
 		echo("Arena.Arena: GeneticAlgorithm.run()");
 		%chromosome = $genAlg.run();
 		
 		echo("Arena.Arena: GeneticAlgorithm. run successful!");
+		
+		//%chromosome = %this.currChromosome;
 	}
 	else
 	{
-		%chromosome = "0 0 0 0 1 0 1" SPC "0 0 0 0 0 1 1" SPC "0 0 0 0 1 0 1";
+		//%chromosome = "2 1 2 1 2 2 5";// SPC "0 0 0 0 0 1 1" SPC "0 0 0 0 1 0 1" SPC "0 0 0 0 0 1 1" SPC "0 0 0 0 1 0 1";
+		%chromosome = "0 0 0 0 0 0 2" SPC
+					  "0 0 0 0 0 0 2" SPC
+					  "0 0 0 0 0 0 2" SPC
+					  "0 0 0 0 0 0 2" SPC
+					  "0 0 0 0 0 0 2" SPC
+					  "0 0 0 0 0 0 1" SPC
+					  "0 0 0 0 0 0 1" SPC
+					  "0 0 0 0 0 0 1" SPC
+					  "0 0 0 0 0 0 1";
 	}
 	
 	echo("Chromosome:" SPC %chromosome);
@@ -174,7 +234,8 @@ function Arena::processRoomChromosomes(%this)
 		
 		echo("Arena.Arena: spawn enemy unit" SPC %i);
 
-		%this.spawnEnemyUnit(%subChromosome, getRandom(-$roomWidth/3, $roomWidth/3), getRandom(-$roomHeight/3, $roomHeight/3));
+		%spawnLoc = %this.findSpawnLocation();
+		%this.spawnEnemyUnit(%subChromosome, getWord(%spawnLoc, 0), getWord(%spawnLoc, 1));
 
 		echo("Arena.Arena: spawned enemy unit successfuly" SPC %i);
 		
@@ -189,14 +250,6 @@ function Arena::processRoomChromosomes(%this)
 	}
 	
 	echo("Chromosome done processing!");
-	
-	//add health pickup------------------------
-	%healthPickup = new CompositeSprite()
-	{
-		class = "Pickup";
-	};
-		
-	%this.getScene().add( %healthPickup );
 }
 
 //-----------------------------------------------------------------------------
@@ -224,10 +277,45 @@ function Arena::spawnEnemyUnit(%this, %localChromosome, %xPos, %yPos)
 
 //-----------------------------------------------------------------------------
 
-function Arena::playerDied(%this)
+function Arena::findSpawnLocation(%this)
 {
-	%this.myManager.playerDies();
+	%position = "0 0";
+	//$roomWidth/3), getRandom(-$roomHeight
 	
+	%zoneFrac = 5;
+	%noSpawnZon_pointA = -$roomWidth/%zoneFrac SPC $roomHeight/%zoneFrac;
+	%noSpawnZon_pointB = $roomWidth/%zoneFrac SPC -$roomHeight/%zoneFrac;
+	
+	%widthBorder = $roomWidth/8;
+	%heightBorder = $roomHeight/8;
+	
+	%quadrant = getRandom(0, 4);
+	
+	if(%quadrant < 1)
+	{
+		%position = getRandom(-$roomWidth/2+%widthBorder, getWord(%noSpawnZon_pointB, 0)) SPC getRandom(getWord(%noSpawnZon_pointA, 1), $roomHeight/2 - %heightBorder);
+	}
+	else if(%quadrant < 2)
+	{
+		%position = getRandom(getWord(%noSpawnZon_pointB, 0), $roomWidth/2 - %widthBorder) SPC getRandom(getWord(%noSpawnZon_pointB, 1), $roomHeight/2 - %heightBorder);
+	}
+	else if(%quadrant < 3)
+	{
+		%position = getRandom(getWord(%noSpawnZon_pointA, 0), $roomWidth/2 - %widthBorder) SPC getRandom(-$roomHeight/2 + %heightBorder, getWord(%noSpawnZon_pointB, 1));
+	}
+	else
+	{
+		%position = getRandom(-$roomWidth/2 + %widthBorder, getWord(%noSpawnZon_pointA, 0)) SPC getRandom(-$roomHeight/2 + %heightBorder, getWord(%noSpawnZon_pointA, 1));
+	}
+
+	return %position;
+} 
+
+//-----------------------------------------------------------------------------
+
+function Arena::playerDied(%this, %murderer )
+{
+	%this.myManager.playerDies(%murderer.myChromosome, %murderer.maxBodySize);
 } 
 
 //-----------------------------------------------------------------------------

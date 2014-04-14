@@ -85,7 +85,7 @@ function EnemyAcidSpray::hit(%this, %player)
 	}
 	else
 	{
-		%player.takeDamage(%this.sprayDamage);
+		%player.takeDamage(%this.sprayDamage, %this.owner.owner);
 	}
 	%this.refresh = false;
 	%this.myRefreshSchedule = schedule(%this.refreshRate, 0, "EnemyAcidSpray::refreshThis", %this);

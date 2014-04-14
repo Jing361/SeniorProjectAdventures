@@ -31,11 +31,14 @@ function RoomCompleteControls::onBehaviorRemove(%this)
 
 function RoomCompleteControls::changeRoom(%this, %val)
 {
-	if(%this.owner.myManager != 0)
+	if(%val == 1)
 	{
-		%this.owner.myManager.endRoomCompleteScreen();
-		GlobalActionMap.unbindObj(getWord(%this.enterKey, 0), getWord(%this.enterKey, 1), %this);
-		
-		%mySchedule = schedule(10, 0, "RoomCompleteGUI::deleteThis", %this.owner);
+		if(%this.owner.myManager != 0)
+		{
+			%this.owner.myManager.endRoomCompleteScreen();
+			GlobalActionMap.unbindObj(getWord(%this.enterKey, 0), getWord(%this.enterKey, 1), %this);
+			
+			%mySchedule = schedule(10, 0, "RoomCompleteGUI::deleteThis", %this.owner);
+		}
 	}
 }

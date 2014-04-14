@@ -45,8 +45,12 @@ function EnemyUnit::initialize(%this)
 	
 	%this.sizeRatio = $pixelToWorldRatio;
 	
-	%this.setupBehaviors();
-
+	if(%this.noBehaviors != 1)
+	{
+		%this.setAngle(getRandom(360));
+		%this.setupBehaviors();
+	}
+	
 	%this.setSceneLayer(10);
     %this.setCollisionGroups( Utility.getCollisionGroup("Player") SPC Utility.getCollisionGroup("Wall")  SPC Utility.getCollisionGroup("Enemies") );
 	%this.setCollisionCallback(true);
@@ -60,7 +64,6 @@ function EnemyUnit::initialize(%this)
 		class = "Healthbar";
 		owner = %this;
 		xOffset = 0;
-		//yOffset = 80*%this.sizeRatio;
 		yOffset = (%this.maxBodySize + 1)*%this.myBodyContainer.getObject(0).myHeight;
 	};
 
@@ -77,7 +80,6 @@ function EnemyUnit::setupSprite( %this )
 	
 	%obj = new T2dShapeVector()   
     {   
-	
         scenegraph = %this;   
     };    
     %obj.setPolyPrimitive( 4 );  
@@ -121,7 +123,7 @@ function EnemyUnit::onCollision(%this, %object, %collisionDetails)
 {
 	if(%object.getSceneGroup() == Utility.getCollisionGroup("Player"))
 	{
-		%object.takeDamage(1);
+		%object.hit(1, %this);
 	}
 }
 
@@ -142,7 +144,7 @@ function EnemyUnit::takeDamage( %this, %dmgAmount, %dmgType )
 	{
 		%rollRand = getRandom();
 		
-		echo("EnemyUnit.Parry: roll:" SPC %rollRand  SPC "<" SPC %this.parryChance);
+		//echo("EnemyUnit.Parry: roll:" SPC %rollRand  SPC "<" SPC %this.parryChance);
 		
 		if(%rollRand < %this.parryChance)
 		{
@@ -197,7 +199,19 @@ function EnemyUnit::kill( %this )
 		%currTool.safeDelete();
 	}
 	
-	echo("EnemyMod.EnemyUnit: end kill");
+	
+	if(getRandom(100) < %this.myArena.dropPickupChance)
+	{
+		//add health pickup------------------------
+		%healthPickup = new CompositeSprite()
+		{
+			class = "Pickup";
+		};
+			
+			
+		%healthPickup.setPosition(%this.getPosition());
+		%this.getScene().add( %healthPickup );
+	}
 	
 	%this.safeDelete();
 }
@@ -227,6 +241,6 @@ function EnemyUnit::onRemove( %this )
 	
 	if(%this.myArena.EnemyCount <= 0)
 	{
-		%this.myArena.finishRoom();
+		%this.myArena.schedule(3000, "finishRoom");
 	}
 }

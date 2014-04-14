@@ -13,7 +13,7 @@ if (!isObject(ShooterToolBehavior))
 
 function ShooterToolBehavior::onBehaviorAdd(%this)
 {
-	%this.mySchedule = schedule(getRandom(%this.owner.reloadTime), 0, "ShooterToolBehavior::doShoot", %this);
+	%this.mySchedule = schedule(getRandom(%this.owner.reloadTime) + $roomStartLag, 0, "ShooterToolBehavior::doShoot", %this);
 }
 
 function ShooterToolBehavior::doShoot(%this)

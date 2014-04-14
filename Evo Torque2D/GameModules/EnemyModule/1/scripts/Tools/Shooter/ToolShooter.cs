@@ -114,7 +114,6 @@ function ToolShooter::setupBehaviors( %this )
 
 function ToolShooter::onUpdate( %this )
 {
-	echo("ToolShooter Still here");
 }
 
 //-----------------------------------------------------------------------------
@@ -146,6 +145,5 @@ function ToolShooter::onRemove( %this )
 	if(isObject(%this.myTurret))
 	{
 		%this.myTurret.safeDelete();
-		echo("shooter: turret removed");
 	}
 }

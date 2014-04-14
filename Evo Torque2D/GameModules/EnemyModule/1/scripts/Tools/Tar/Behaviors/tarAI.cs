@@ -13,7 +13,7 @@ if (!isObject(TarToolBehavior))
 
 function TarToolBehavior::onBehaviorAdd(%this)
 {
-	%this.mySchedule = schedule(getRandom(%this.owner.reloadTime), 0, "TarToolBehavior::doShoot", %this);
+	%this.mySchedule = schedule(getRandom(%this.owner.reloadTime) + $roomStartLag, 0, "TarToolBehavior::doShoot", %this);
 }
 
 function TarToolBehavior::doShoot(%this)

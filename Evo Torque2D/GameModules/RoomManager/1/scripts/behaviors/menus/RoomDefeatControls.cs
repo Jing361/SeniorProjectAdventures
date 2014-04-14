@@ -2,9 +2,9 @@
 // Basic menu controls and listeners
 //-----------------------------------------------------------------------------
 
-if (!isObject(MenuControlBehavior))
+if (!isObject(RoomDefeatControls))
 {
-    %template = new BehaviorTemplate(MenuControlBehavior);
+    %template = new BehaviorTemplate(RoomDefeatControls);
 
     %template.friendlyName = "Menu Controls";
     %template.behaviorType = "Input";
@@ -13,7 +13,7 @@ if (!isObject(MenuControlBehavior))
     %template.addBehaviorField(enterKey, "Key to bind to next room", keybind, "keyboard enter");
 }
 
-function MenuControlBehavior::onBehaviorAdd(%this)
+function RoomDefeatControls::onBehaviorAdd(%this)
 {
     if (!isObject(GlobalActionMap))
        return;
@@ -21,25 +21,26 @@ function MenuControlBehavior::onBehaviorAdd(%this)
     GlobalActionMap.bindObj(getWord(%this.enterKey, 0), getWord(%this.enterKey, 1), "changeRoom", %this);
 }
 
-function MenuControlBehavior::onBehaviorRemove(%this)
+function RoomDefeatControls::onBehaviorRemove(%this)
 {
     if (!isObject(GlobalActionMap))
        return;
 
-    %this.owner.disableUpdateCallback();
-
     GlobalActionMap.unbindObj(getWord(%this.enterKey, 0), getWord(%this.enterKey, 1), %this);
 }
 
-function MenuControlBehavior::changeRoom(%this, %val)
+function RoomDefeatControls::changeRoom(%this, %val)
 {
 	if(%val == 1)
 	{
 		if(%this.owner.myManager != 0)
 		{
-			%this.owner.myManager.startNextLevel();
+			
+			%this.owner.myScene.schedule(320, "clear");  
+			%this.owner.myManager.goToTitleScreen();
 			GlobalActionMap.unbindObj(getWord(%this.enterKey, 0), getWord(%this.enterKey, 1), %this);
-			//%this.owner.safeDelete();
+			
+			%mySchedule = schedule(10, 0, "RoomDefeatGUI::deleteThis", %this.owner);
 		}
 	}
 }

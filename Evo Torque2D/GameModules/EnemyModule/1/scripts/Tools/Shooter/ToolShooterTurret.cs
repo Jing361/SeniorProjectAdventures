@@ -39,8 +39,11 @@ function ToolShooterTurret::onUpdate( %this )
 	}
 	else
 	{
-		%targetRotation = Vector2AngleToPoint(%this.owner.getWorldPosistion(), %this.owner.owner.mainTarget.getPosition()) - 90;
-		%this.rotateTo(%targetRotation, %this.turnSpeed);
+		if(isObject(%this.owner.owner.mainTarget))
+		{
+			%targetRotation = Vector2AngleToPoint(%this.owner.getWorldPosistion(), %this.owner.owner.mainTarget.getPosition()) - 90;
+			%this.rotateTo(%targetRotation, %this.turnSpeed);
+		}
 		%this.setPosition(%this.owner.getWorldPosistion());
 	}
 }

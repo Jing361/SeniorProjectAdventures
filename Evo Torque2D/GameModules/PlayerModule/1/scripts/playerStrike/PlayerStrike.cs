@@ -57,10 +57,15 @@ function PlayerStrike::onCollision(%this, %object, %collisionDetails)
 	{
 		if(%object.getSceneGroup() ==  Utility.getCollisionGroup("Enemies"))
 		{
-			//%object.recycle(%object.side);
-			
-			%object.takeDamage(%this.strikeDamage, "Melee");
-			%this.fresh = false;
+			if(%object.hitByStrike != %this)
+			{
+				//%object.recycle(%object.side);
+				
+				%object.takeDamage(%this.strikeDamage, "Melee");
+				//%this.fresh = false;
+				%object.hitByStrike = %this;
+				%this.setSpriteBlendColor(1, 1, 0);
+			}
 		}
 	}
 }

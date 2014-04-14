@@ -55,7 +55,7 @@ function EnemyBladeStrikeEffect::onCollision(%this, %object, %collisionDetails)
 		if(%object.getSceneGroup() ==  Utility.getCollisionGroup("Player"))
 		{			
 			
-			%this.owner.owner.bladeDamage += %object.hit(%this.strikeDamage);
+			%this.owner.owner.bladeDamage += %object.hit(%this.strikeDamage, %this.owner.owner);
 			%this.fresh = false;
 			%this.setSpriteBlendColor(1, 0, 0, 0.75);
 		}

@@ -49,6 +49,19 @@ function PlayerBullet::onCollision(%this, %object, %collisionDetails)
 	if(%object.getSceneGroup() == Utility.getCollisionGroup("Enemies"))
 	{
 		%object.takeDamage(%this.shotDamage, "Ranged");
+		
+		// add a PlayerBulletHit to the arena
+		%newHit = new CompositeSprite()
+		{
+			class = "PlayerBulletHit";
+			fireAngle = %this.fireAngle;
+			owner = %this.owner;
+		};
+		
+		%this.owner.getScene().add( %newHit );
+		%newHit.setPosition(%this.getPosition());
+		
+		
 		%this.safeDelete();
 	}
 	else if(%object.getSceneGroup() == Utility.getCollisionGroup("Wall"))

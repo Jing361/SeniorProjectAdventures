@@ -64,6 +64,17 @@ function initializeCanvas(%windowName)
     {
         setScreenMode( %resolution._0, %resolution._1, %resolution._2, false );
     }
+	
+	if( $pref::Video::fullScreen )  
+    {  
+		%goodres = $pref::Video::FullScreenResolution;  
+		setScreenMode( GetWord( %goodres, 0), GetWord( %goodres,1), GetWord( %goodres,2), true );  
+    }  
+    else  
+    {  
+		%goodres = $pref::Video::windowedRes;  
+		setScreenMode( GetWord( %goodres, 0), GetWord( %goodres,1), GetWord( %goodres,2), false );  
+    }  
 
     $canvasCreated = true;
 }

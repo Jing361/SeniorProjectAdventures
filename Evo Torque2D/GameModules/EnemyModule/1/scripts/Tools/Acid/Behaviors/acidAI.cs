@@ -13,7 +13,7 @@ if (!isObject(AcidToolBehavior))
 
 function AcidToolBehavior::onBehaviorAdd(%this)
 {
-	%this.mySchedule = schedule(getRandom(%this.owner.reloadTime), 0, "AcidToolBehavior::doShoot", %this);
+	%this.mySchedule = schedule(getRandom(%this.owner.reloadTime) + $roomStartLag, 0, "AcidToolBehavior::doShoot", %this);
 }
 
 function AcidToolBehavior::doShoot(%this)

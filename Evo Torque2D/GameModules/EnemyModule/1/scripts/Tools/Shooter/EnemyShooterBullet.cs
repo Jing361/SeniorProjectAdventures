@@ -48,7 +48,7 @@ function EnemyShooterBullet::onCollision(%this, %object, %collisionDetails)
 {
 	if(%object.getSceneGroup() == Utility.getCollisionGroup("Player"))
 	{
-		%this.owner.owner.shooterDamage += %object.hit(%this.shotDamage);
+		%this.owner.owner.shooterDamage += %object.hit(%this.shotDamage, %this.owner.owner);
 		%this.safeDelete();
 	}
 	else if(%object.getSceneGroup() == Utility.getCollisionGroup("PlayerBlock"))

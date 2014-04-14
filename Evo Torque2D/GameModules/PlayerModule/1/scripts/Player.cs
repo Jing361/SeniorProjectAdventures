@@ -12,6 +12,8 @@ function Player::onAdd( %this )
 function Player::initialize(%this)
 {
 	exec("./playerBullet/PlayerBullet.cs");
+	exec("./playerBullet/PlayerBulletMuzzleFlash.cs");
+	exec("./playerBullet/PlayerBulletHit.cs");
 	exec("./playerStrike/PlayerStrike.cs");
 	exec("./playerDash/PlayerDash.cs");
 	exec("./playerBlock/PlayerBlock.cs");
@@ -36,7 +38,10 @@ function Player::initialize(%this)
 	%this.fireCooldown = 1000/%this.fireRate;			//ms
 	
 	%this.strikeRate = 2;				//per second
-	%this.strikeCooldown = 1000/%this.strikeRate;		//ms
+	%this.strikeCooldown = 1000/%this.strikeRate;		//
+	
+	%this.blockTickRate = 2;				//per second
+	%this.blockTickTime = 1000/%this.strikeRate;		//ms
 	
 	//Dash
 	%this.isDashing = false;
@@ -73,7 +78,7 @@ function Player::initialize(%this)
 	
 	%this.getScene().add( %this.myHealthbar );
 	
-	echo("Player id: " SPC %this.getId());
+	echo("Player.initialize(): id: " SPC %this.getId());
 }
 
 //-----------------------------------------------------------------------------
@@ -106,6 +111,7 @@ function Player::setupCollisionShape( %this )
 
 function Player::setupSprite( %this )
 {
+	%this.clearSprites();
 	%this.addSprite("0 0");
 	%this.setSpriteAnimation("GameAssets:playerbaseAnim", 0);
 	%this.setSpriteName("BodyAnim");
@@ -172,7 +178,7 @@ function Player::onUpdate( %this )
 
 //-----------------------------------------------------------------------------
 
-function Player::hit(%this, %damage)
+function Player::hit(%this, %damage, %dmgObject)
 {
 	if(isObject(%this.blocker))
 	{
@@ -181,21 +187,25 @@ function Player::hit(%this, %damage)
 	}
 	else
 	{
-		%this.takeDamage(%damage);
-		return %damage;
+		return %this.takeDamage(%damage, %dmgObject);
 	}
 }
 	
 //-----------------------------------------------------------------------------
 
-function Player::takeDamage( %this, %dmgAmount )
+function Player::takeDamage( %this, %dmgAmount, %dmgObject )
 {
+	if(%this.isDashing)
+	{
+		return 0;
+	}
+
 	%this.health -= %dmgAmount;
 	%this.splashScreenDamage(%dmgAmount);
 	
 	if( %this.health <= 0)
 	{
-		%this.safeDelete();
+		%this.kill(%dmgObject);
 	}
 	else if( %this.health > %this.fullHealth)
 	{
@@ -204,6 +214,7 @@ function Player::takeDamage( %this, %dmgAmount )
 	
 
 	%this.myHealthbar.assessDamage();
+	return %dmgAmount;
 }
 
 //-----------------------------------------------------------------------------
@@ -241,7 +252,8 @@ function Player::tar( %this, %slowEffect, %duration )
 		%this.walkSpeed = %this.baseWalkSpeed/3;
 	}
 	
-	schedule(%duration, 0, "Player::restoreSpeed", %this, %slowEffect);
+	//schedule(%duration, 0, "Player::restoreSpeed", %this, %slowEffect);
+	%this.schedule(%duration, "restoreSpeed", %slowEffect);
 }
 
 //-----------------------------------------------------------------------------
@@ -253,8 +265,16 @@ function Player::restoreSpeed( %this, %amt )
 	if(%this.walkSpeed >= %this.baseWalkSpeed )
 	{
 		%this.tarred = false;
-		//%this.removeSprite();
+		%this.walkSpeed = %this.baseWalkSpeed;
 	}
+}
+
+//-----------------------------------------------------------------------------
+
+function Player::kill( %this, %murderer )
+{
+	%this.myArena.playerDied(%murderer);
+	%this.safeDelete();
 }
 
 //-----------------------------------------------------------------------------
@@ -262,6 +282,4 @@ function Player::restoreSpeed( %this, %amt )
 function Player::onRemove( %this )
 {
 	%this.clearBehaviors();
-	
-	%this.myArena.playerDied();
 }

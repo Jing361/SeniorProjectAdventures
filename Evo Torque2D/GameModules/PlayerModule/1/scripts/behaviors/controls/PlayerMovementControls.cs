@@ -6,19 +6,19 @@ if (!isObject(PlayerMovementControlsBehavior))
 {
     %template = new BehaviorTemplate(PlayerMovementControlsBehavior);
 
-  %template.friendlyName = "Shooter Controls";
-  %template.behaviorType = "Input";
-  %template.description  = "Shooter style movement control";
+	%template.friendlyName = "Shooter Controls";
+	%template.behaviorType = "Input";
+	%template.description  = "Shooter style movement control";
 
-  %template.addBehaviorField(upKey, "Key to bind to upward movement", keybind, "keyboard up");
-  %template.addBehaviorField(downKey, "Key to bind to downward movement", keybind, "keyboard down");
-  %template.addBehaviorField(leftKey, "Key to bind to left movement", keybind, "keyboard left");
-  %template.addBehaviorField(rightKey, "Key to bind to right movement", keybind, "keyboard right");
+	%template.addBehaviorField(upKey, "Key to bind to upward movement", keybind, "keyboard up");
+	%template.addBehaviorField(downKey, "Key to bind to downward movement", keybind, "keyboard down");
+	%template.addBehaviorField(leftKey, "Key to bind to left movement", keybind, "keyboard left");
+	%template.addBehaviorField(rightKey, "Key to bind to right movement", keybind, "keyboard right");
 
-  %template.addBehaviorField(fireKey, "", keybind, "keyboard space");
-  %template.addBehaviorField(meleeKey, "", keybind, "keyboard E");
-  %template.addBehaviorField(dashKey, "", keybind, "keyboard Q");
-  %template.addBehaviorField(blockKey, "", keybind, "keyboard F");
+	%template.addBehaviorField(fireKey, "", keybind, "keyboard space");
+	%template.addBehaviorField(meleeKey, "", keybind, "keyboard E");
+	%template.addBehaviorField(dashKey, "", keybind, "keyboard Q");
+	%template.addBehaviorField(blockKey, "", keybind, "keyboard F");
 }
 
 //------------------------------------------------------------------------------------
@@ -28,15 +28,15 @@ function PlayerMovementControlsBehavior::onBehaviorAdd(%this)
     if (!isObject(GlobalActionMap))
        return;
 
-  GlobalActionMap.bindObj(getWord(%this.upKey, 0), getWord(%this.upKey, 1), "moveUp", %this);
-  GlobalActionMap.bindObj(getWord(%this.downKey, 0), getWord(%this.downKey, 1), "moveDown", %this);
-  GlobalActionMap.bindObj(getWord(%this.leftKey, 0), getWord(%this.leftKey, 1), "moveLeft", %this);
-  GlobalActionMap.bindObj(getWord(%this.rightKey, 0), getWord(%this.rightKey, 1), "moveRight", %this);
+	GlobalActionMap.bindObj(getWord(%this.upKey, 0), getWord(%this.upKey, 1), "moveUp", %this);
+	GlobalActionMap.bindObj(getWord(%this.downKey, 0), getWord(%this.downKey, 1), "moveDown", %this);
+	GlobalActionMap.bindObj(getWord(%this.leftKey, 0), getWord(%this.leftKey, 1), "moveLeft", %this);
+	GlobalActionMap.bindObj(getWord(%this.rightKey, 0), getWord(%this.rightKey, 1), "moveRight", %this);
 
-  GlobalActionMap.bindObj("keyboard", %this.fireKey, "pressFire", %this);
-  GlobalActionMap.bindObj("keyboard", %this.meleeKey, "pressMelee", %this);
-  GlobalActionMap.bindObj("keyboard", %this.dashKey, "pressDash", %this);
-  GlobalActionMap.bindObj("keyboard", %this.blockKey, "pressBlock", %this);
+	GlobalActionMap.bindObj("keyboard", %this.fireKey, "pressFire", %this);
+	GlobalActionMap.bindObj("keyboard", %this.meleeKey, "pressMelee", %this);
+	GlobalActionMap.bindObj("keyboard", %this.dashKey, "pressDash", %this);
+	GlobalActionMap.bindObj("keyboard", %this.blockKey, "pressBlock", %this);
 
 	%this.up = 0;
 	%this.down = 0;
@@ -51,7 +51,7 @@ function PlayerMovementControlsBehavior::onBehaviorAdd(%this)
 	
 	//blade offset (instead of strike effect coming out of center of player)	
 	%this.bladeXoffset = 100*%this.owner.sizeRatio;
-	%this.bladeYoffset = 50*%this.owner.sizeRatio;
+	%this.bladeYoffset = 30*%this.owner.sizeRatio;
 	
 	%this.wallCheckDist = 2;
 	
@@ -128,50 +128,17 @@ function PlayerMovementControlsBehavior::updateMovement(%this)
 }
 
 //------------------------------------------------------------------------------------
-
-function PlayerMovementControlsBehavior::checkObjAtPoint(%this, %xPoint, %yPoint, %sceneGroup)
-{
-	%radius = 4;
-	
-	%checkPoint = %this.owner.getWorldPoint(%xPoint, %yPoint);
-
-	
-	%objList = %this.owner.getScene().pickCircle(%checkPoint, %radius, "-1", "-1", "collision");
-	
-	for(%i = 0; %i < getWordCount(%objList); %i++)
-	{
-		%currObjID = getWord(%objList, %i);
-		if(%currObjID.getSceneGroup() == %sceneGroup)
-		{
-			
-			return true;
-		}
-	}
-	
-	return false;
-}
-
-//------------------------------------------------------------------------------------
   
 function PlayerMovementControlsBehavior::moveUp(%this, %val)
 {
 	if(%val == 1)
 	{
-		if( ! %this.checkObjAtPoint(0, %this.wallCheckDist, 15) )
-		{
-			%this.up = 1;
-		}
-		else
-		{
-			%this.up = 0;
-		}
+		%this.up = 1;
 	}
 	else
 	{
 		%this.up = 0;
 	}
-	
-    //%this.updateMovement();
 }
 
 //------------------------------------------------------------------------------------
@@ -180,20 +147,12 @@ function PlayerMovementControlsBehavior::moveDown(%this, %val)
 {
     if(%val == 1)
 	{
-		if( ! %this.checkObjAtPoint(0, -%this.wallCheckDist, 15) )
-		{
-			%this.down = 1;
-		}
-		else
-		{
-			%this.down = 0;
-		}
+		%this.down = 1;
 	}
 	else
 	{
 		%this.down = 0;
 	}
-   // %this.updateMovement();
 }
 
 //------------------------------------------------------------------------------------
@@ -202,20 +161,12 @@ function PlayerMovementControlsBehavior::moveLeft(%this, %val)
 {
     if(%val == 1)
 	{
-		if( ! %this.checkObjAtPoint(-%this.wallCheckDist, 0, 15) )
-		{
-			%this.left = 1;
-		}
-		else
-		{
-			%this.left = 0;
-		}
+		%this.left = 1;
 	}
 	else
 	{
 		%this.left = 0;
 	}
-    //%this.updateMovement();
 }
 
 //------------------------------------------------------------------------------------
@@ -224,21 +175,12 @@ function PlayerMovementControlsBehavior::moveRight(%this, %val)
 {
     if(%val == 1)
 	{
-		if( ! %this.checkObjAtPoint(%this.wallCheckDist, 0, 15) )
-		{
-			%this.right = 1;
-		}
-		else
-		{
-			%this.right = 0;
-		}
+		%this.right = 1;
 	}
 	else
 	{
 		%this.right = 0;
 	}
-	
-    //%this.updateMovement();
 }
 
 //------------------------------------------------------------------------------------
@@ -264,15 +206,26 @@ function PlayerMovementControlsBehavior::tryFire(%this)
 		{
 			class = "PlayerBullet";
 			fireAngle = %this.owner.getAngle();
+			owner = %this.owner;
 		};
 		
 		%this.owner.rangedCount++;
 		%this.owner.getScene().add( %newBullet );
-		
-		
 		%newBullet.setPosition(%this.owner.getWorldPoint(%this.barrelXoffset, %this.barrelYoffset) );
 		
-		%this.fireCooldownTime = schedule(%this.owner.fireCooldown, 0, "", %this);
+		
+		// add a muzzle flash to the arena
+		%newFlash = new CompositeSprite()
+		{
+			class = "PlayerBulletMuzzleFlash";
+			fireAngle = %this.owner.getAngle();
+			owner = %this;
+		};
+		
+		%this.owner.getScene().add( %newFlash );
+		%newFlash.setPosition(%this.owner.getWorldPoint(%this.barrelXoffset + 23*%this.owner.sizeRatio, %this.barrelYoffset - 6*%this.owner.sizeRatio) );
+		
+		%this.fireCooldownTime = schedule(%this.owner.fireCooldown, 0, "PlayerMovementControlsBehavior::doNothing", %this);
 	}
 }
 
@@ -294,7 +247,6 @@ function PlayerMovementControlsBehavior::tryMelee(%this)
 {
 	if(getEventTimeLeft(%this.strikeCooldownTime) <= 0)
 	{
-		echo("press melee (plyCOntroles");
 		// add a strike effect to the arena
 		%newStriker = new CompositeSprite()
 		{
@@ -307,7 +259,12 @@ function PlayerMovementControlsBehavior::tryMelee(%this)
 		
 		%newStriker.setPosition(%this.owner.getWorldPoint(%this.bladeXoffset, %this.bladeYoffset) );
 		
-		%this.strikeCooldownTime = schedule(%this.owner.strikeCooldown, 0, "", %this);
+		%this.owner.setSpriteAnimation("GameAssets:playerStrikingAnim", 0);
+		%this.owner.setSpriteSize(320*%this.owner.sizeRatio, 164*%this.owner.sizeRatio);
+		%this.owner.setSpriteLocalPosition(0, 17*%this.owner.sizeRatio);
+		%this.owner.schedule(250, "setupSprite");
+		
+		%this.strikeCooldownTime = schedule(%this.owner.strikeCooldown, 0, "PlayerMovementControlsBehavior::doNothing", %this);
 	}
 }
 
@@ -338,6 +295,7 @@ function PlayerMovementControlsBehavior::pressDash(%this, %val)
 			
 			%this.owner.dashCount++;
 		
+			%this.owner.setSpriteBlendAlpha(0.8);
 		}
 	}
 } 
@@ -346,6 +304,7 @@ function PlayerMovementControlsBehavior::endDash(%this)
 {
 	%this.owner.isDashing = false;	
 	%this.owner.setLinearVelocityPolar(0, 0);	
+	%this.owner.setSpriteBlendAlpha(1);
 }
 
 //------------------------------------------------------------------------------------
@@ -369,6 +328,9 @@ function PlayerMovementControlsBehavior::pressBlock(%this, %val)
 			%this.owner.getScene().add( %this.owner.blocker );
 			
 			%this.owner.blocker.takeDamage( %this.owner.blockCooldown );
+			
+			%this.blockTickSchedule = schedule(%this.owner.blockTickTime, 0, "PlayerMovementControlsBehavior::blockTick", %this);
+			
 		}
 		else
 		{
@@ -387,3 +349,19 @@ function PlayerMovementControlsBehavior::pressBlock(%this, %val)
 		}
 	}
 } 
+
+function PlayerMovementControlsBehavior::blockTick(%this)
+{
+	if(isObject(%this.owner.blocker))
+	{
+		%this.owner.blockCount++;
+		%this.blockTickSchedule = schedule(%this.owner.blockTickTime, 0, "PlayerMovementControlsBehavior::blockTick", %this);
+	}
+}
+
+//------------------------------------------------------------------------------------
+
+function PlayerMovementControlsBehavior::doNothing(%this)
+{
+	//Empty function for timer calls
+}

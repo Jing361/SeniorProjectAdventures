@@ -26,8 +26,6 @@ function Pickup::initialize(%this)
 	%this.myWidth = 1.5 * 32 * %this.sizeRatio;
 	%this.myHeight = 1.5 * 32 * %this.sizeRatio;
 	
-	
-	%this.setPosition(30, -30);
 	%this.setAngularVelocity(%this.spinSpeed);
 	
 	%this.setupSprite();
