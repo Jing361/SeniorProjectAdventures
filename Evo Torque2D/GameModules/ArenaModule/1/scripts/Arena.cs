@@ -58,7 +58,7 @@ function Arena::buildArena(%this)
 	//font 4 times for pseudo boldness
 	%this.addRoomFont(-$roomWidth/2 + 1, $roomHeight/2 - 0.5);
 	
-	$roomStartLag = 210;
+	$roomStartLag = 300;
 	//%this.getScene().setScenePause(true);
 	%this.getScene().schedule($roomStartLag, "setScenePause", true);
 	%this.schedule($roomStartLag, "addREADYFont", 0, 0);
@@ -211,9 +211,8 @@ function Arena::processRoomChromosomes(%this)
 	}
 	else
 	{
-		//%chromosome = "2 1 2 1 2 2 5";// SPC "0 0 0 0 0 1 1" SPC "0 0 0 0 1 0 1" SPC "0 0 0 0 0 1 1" SPC "0 0 0 0 1 0 1";
-		%chromosome = "0 0 0 0 1 0 1" SPC
-					  "0 0 0 0 0 1 1";
+		%chromosome = "0 0 0 0 0 0 1" SPC
+					  "0 0 0 0 0 0 1";
 	}
 	
 	echo("Chromosome:" SPC %chromosome);
