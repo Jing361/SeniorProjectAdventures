@@ -24,14 +24,14 @@ ConsoleMethod(GeneticAlgorithm, run, const char *, 2, 2, "() Gets the object's p
 {
 	// Fetch result.  
     string result = object->run();
-	char* pBuffer = Con::getReturnBuffer(result.c_str());
+	char* pBuffer = Con::getReturnBuffer(result.size() + 1);
 
 	//Con::printf("%d  %d" , (result.size(),sizeof(string)));
     // Create Returnable Buffer.  
 	//char* pBuffer = Con::getReturnBuffer(result.c_str());  
 
 	dSprintf(pBuffer, result.size() + 1, "%s", result.c_str());  
-
+	
 	return pBuffer; 
 }
 
@@ -50,8 +50,9 @@ void GeneticAlgorithm::onRemove()
 
 string GeneticAlgorithm::run ( )
 {
+	Con::printf("Run");
 	ofstream fileOut;
-	fileOut.open(".\\utilities\\enginelogfinal.txt");
+	fileOut.open(".\\utilities\\enginelogfinal.txt" );
 	
 	vector<int>::iterator geneIterator;
 
@@ -167,7 +168,7 @@ string GeneticAlgorithm::run ( )
 
 void GeneticAlgorithm::crossover ( )
 {
-	int one;
+	int one = 0;
 	int numParents = 0;
 	double x;
 
@@ -271,6 +272,9 @@ void GeneticAlgorithm::initialize (  )
 	//  Initialize variables within the bounds 
 	//
 
+	population.clear();
+	newPopulation.clear();
+
 	population.resize(POPSIZE);
 	newPopulation.resize(POPSIZE);
 
@@ -299,7 +303,7 @@ void GeneticAlgorithm::initialize (  )
 	int chromosomeNum = 1;
 
 
-	while (!pastCases.eof())
+	/*while (!pastCases.eof())
 	{
 		pastCases >> tempPoint >> tempRanged >> tempMelee >> tempBlock >> tempDash >> tempSwing >> tempShot;
 		fileOut << "Current Case \n" << tempPoint << "\n" << tempRanged << "\n" << tempMelee << "\n" 
@@ -334,7 +338,7 @@ void GeneticAlgorithm::initialize (  )
 		}
 	
 		
-	}
+	}*/
 
 	previousRoom >> current;
 	while (!previousRoom.eof() && current >= 0)
@@ -415,6 +419,7 @@ void GeneticAlgorithm::mutate ( )
 ///////////////////
 // finds two values for tools and increments or decrements them
 ///////////////////
+			first = 0;
 			if ( x < PMUTATION )
 			{
 				++transfer;
@@ -579,7 +584,7 @@ void GeneticAlgorithm::verifyAndPush( Genotype g )
 {
 	vector<int>::iterator geneIterator;
 	double points = 0;
-	int currentTool;
+	int currentTool = 0;
 	int blobRec = 1;
 	int toolSlots = 0;
 	int toolTypes = 0;

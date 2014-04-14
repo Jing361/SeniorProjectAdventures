@@ -212,14 +212,7 @@ function Arena::processRoomChromosomes(%this)
 	else
 	{
 		//%chromosome = "2 1 2 1 2 2 5";// SPC "0 0 0 0 0 1 1" SPC "0 0 0 0 1 0 1" SPC "0 0 0 0 0 1 1" SPC "0 0 0 0 1 0 1";
-		%chromosome = "0 0 0 0 0 0 2" SPC
-					  "0 0 0 0 0 0 2" SPC
-					  "0 0 0 0 0 0 2" SPC
-					  "0 0 0 0 0 0 2" SPC
-					  "0 0 0 0 0 0 2" SPC
-					  "0 0 0 0 0 0 1" SPC
-					  "0 0 0 0 0 0 1" SPC
-					  "0 0 0 0 0 0 1" SPC
+		%chromosome = "0 0 0 0 0 0 1" SPC
 					  "0 0 0 0 0 0 1";
 	}
 	
