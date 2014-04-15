@@ -15,6 +15,9 @@ $pixelToWorldRatio = $roomWidth/1600;
 function RoomManager::create( %this )
 {   	
 	setRandomSeed(getRealTime());
+	
+	OpenALInitDriver();							//for audio
+	
 
     new SceneWindow(mainWindow)
 	{
@@ -48,6 +51,7 @@ function RoomManager::create( %this )
 	
 	//Lasting Variables
 	%this.CurrentLevel = 0;
+	%this.CurrentChromosome = 0;
 	
 	
 	echo("RoomManager.main: Creating GeneticAlgorithm instance");
@@ -59,6 +63,7 @@ function RoomManager::create( %this )
 function RoomManager::goToTitleScreen( %this )
 {
 	%this.CurrentLevel = 0;
+	%this.addTitleMusic();
 
     new Scene(mainScene)
 	{
@@ -73,6 +78,17 @@ function RoomManager::goToTitleScreen( %this )
 	};
 		 
 	%gui_titleScreen.openTitleScreen(mainScene);
+}
+
+//-----------------------------------------------------------------------------
+
+function RoomManager::addTitleMusic(%this)
+{
+	%musicAsset = "GameAssets:mainMenuMusic";
+	
+	$musicHandle = alxPlay(%musicAsset);	
+	
+	%this.schedule(alxGetAudioLength(%musicAsset), "addTitleMusic");
 }
     
 //-----------------------------------------------------------------------------
@@ -106,7 +122,7 @@ function RoomManager::endCurrentLevel( %this )
 {
 	echo("RoomManager.main: Room finished!");
 	
-	%this.writeRoomSummationFile();
+	%this.writeRoomSummationFile();	
 
 	//%this.currentArena.player.clearBehaviors();
 	//%this.currentArena.getScene().remove(%this.currentArena.player);
@@ -211,7 +227,7 @@ function RoomManager::runNextRoomGenAlg( %this )
   
 function RoomManager::goToRoomCompleteScreen( %this )
 {	
-	//%this.nextChromosome = %this.runNextRoomGenAlg();
+	%this.nextChromosome = %this.runNextRoomGenAlg();
 
 	%completeRoomScene = new Scene();
 	%completeRoomScene.layerSortMode0 = "Newest";
@@ -226,6 +242,14 @@ function RoomManager::goToRoomCompleteScreen( %this )
 	%gui_roomCompleteScreen.openScreen(%completeRoomScene);
 }   
 
+//-----------------------------------------------------------------------------
+
+function RoomManager::endRoomTitleScreen( %this )
+{	
+	alxStopAll();
+	%this.startNextLevel();
+}
+ 
 //-----------------------------------------------------------------------------
   
 function RoomManager::endRoomCompleteScreen( %this )
@@ -261,6 +285,7 @@ function RoomManager::goToRoomDefeatScreen( %this, %furthestLevel, %killerChromo
 
 function RoomManager::playerDies( %this, %killerChromosome, %killBodyRadius )
 {	
+	alxStopAll();
 	%this.currentArena.getScene().schedule(320, "clear");  
 	%this.schedule(320, "goToRoomDefeatScreen", %this.CurrentLevel, %killerChromosome, %killBodyRadius);  
 	//%this.goToRoomDefeatScreen(%killerChromosome, %killBodyRadius);
@@ -276,6 +301,13 @@ function RoomManager::exitGame(%this, %val)
 		echo("RoomManager.exitGame()");
 		quit();
 	}
+}
+
+//-----------------------------------------------------------------------------
+
+function RoomManager::destroy(%this)
+{
+	OpenALShutdownDriver();
 }
 
 	

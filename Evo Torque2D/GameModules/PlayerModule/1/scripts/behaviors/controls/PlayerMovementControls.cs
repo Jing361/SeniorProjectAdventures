@@ -14,6 +14,11 @@ if (!isObject(PlayerMovementControlsBehavior))
 	%template.addBehaviorField(downKey, "Key to bind to downward movement", keybind, "keyboard down");
 	%template.addBehaviorField(leftKey, "Key to bind to left movement", keybind, "keyboard left");
 	%template.addBehaviorField(rightKey, "Key to bind to right movement", keybind, "keyboard right");
+	
+	%template.addBehaviorField(upRightKey, "Key to bind to upward movement", keybind, "keyboard U");	//diagonal (for joy to key)
+	%template.addBehaviorField(upLeftKey, "Key to bind to downward movement", keybind, "keyboard Y");
+	%template.addBehaviorField(downLeftKey, "Key to bind to left movement", keybind, "keyboard B");
+	%template.addBehaviorField(downRightKey, "Key to bind to right movement", keybind, "keyboard N");
 
 	%template.addBehaviorField(fireKey, "", keybind, "keyboard space");
 	%template.addBehaviorField(meleeKey, "", keybind, "keyboard E");
@@ -32,6 +37,11 @@ function PlayerMovementControlsBehavior::onBehaviorAdd(%this)
 	GlobalActionMap.bindObj(getWord(%this.downKey, 0), getWord(%this.downKey, 1), "moveDown", %this);
 	GlobalActionMap.bindObj(getWord(%this.leftKey, 0), getWord(%this.leftKey, 1), "moveLeft", %this);
 	GlobalActionMap.bindObj(getWord(%this.rightKey, 0), getWord(%this.rightKey, 1), "moveRight", %this);
+	
+	GlobalActionMap.bindObj(getWord(%this.upRightKey, 0), getWord(%this.upRightKey, 1), "moveUpRight", %this);
+	GlobalActionMap.bindObj(getWord(%this.upLeftKey, 0), getWord(%this.upLeftKey, 1), "moveUpLeft", %this);
+	GlobalActionMap.bindObj(getWord(%this.downLeftKey, 0), getWord(%this.downLeftKey, 1), "moveDownLeft", %this);
+	GlobalActionMap.bindObj(getWord(%this.downRightKey, 0), getWord(%this.downRightKey, 1), "moveDownRight", %this);
 
 	GlobalActionMap.bindObj("keyboard", %this.fireKey, "pressFire", %this);
 	GlobalActionMap.bindObj("keyboard", %this.meleeKey, "pressMelee", %this);
@@ -42,6 +52,11 @@ function PlayerMovementControlsBehavior::onBehaviorAdd(%this)
 	%this.down = 0;
 	%this.left = 0;
 	%this.right = 0;
+	
+	%this.upRight = 0;
+	%this.upLeft = 0;
+	%this.downLeft = 0;
+	%this.downRight = 0;
 	
    // %this.setUpdateCallback(true);
 	
@@ -57,6 +72,45 @@ function PlayerMovementControlsBehavior::onBehaviorAdd(%this)
 	
 	%this.fireHeld = false;
 	%this.strikeHeld = false;
+	
+	/*
+	//Print directional input
+	%this.fontUp = new ImageFont();
+	%this.fontUp.Image = "GameAssets:font";
+	%this.fontUp.Text = %this.up;
+	%this.fontUp.FontSize = "3 3";
+	%this.fontUp.setPosition("0 16");
+	%this.fontUp.TextAlignment = "Center";
+	%this.fontUp.setBlendColor("1 1 0");
+	%this.owner.getScene().add( %this.fontUp ); 
+	
+	%this.fontRight = new ImageFont();
+	%this.fontRight.Image = "GameAssets:font";
+	%this.fontRight.Text = %this.right;
+	%this.fontRight.FontSize = "3 3";
+	%this.fontRight.setPosition("16 0");
+	%this.fontRight.TextAlignment = "Center";
+	%this.fontRight.setBlendColor("1 1 0");
+	%this.owner.getScene().add( %this.fontRight );
+	
+	%this.fontDown = new ImageFont();
+	%this.fontDown.Image = "GameAssets:font";
+	%this.fontDown.Text = %this.down;
+	%this.fontDown.FontSize = "3 3";
+	%this.fontDown.setPosition("0 -16");
+	%this.fontDown.TextAlignment = "Center";
+	%this.fontDown.setBlendColor("1 1 0");
+	%this.owner.getScene().add( %this.fontDown );
+	
+	%this.fontLeft = new ImageFont();
+	%this.fontLeft.Image = "GameAssets:font";
+	%this.fontLeft.Text = %this.left;
+	%this.fontLeft.FontSize = "3 3";
+	%this.fontLeft.setPosition("-16 0");
+	%this.fontLeft.TextAlignment = "Center";
+	%this.fontLeft.setBlendColor("1 1 0");
+	%this.owner.getScene().add( %this.fontLeft );
+	*/
 }
 
 //------------------------------------------------------------------------------------
@@ -68,15 +122,20 @@ function PlayerMovementControlsBehavior::onBehaviorRemove(%this)
 
 	//%this.owner.setUpdateCallback(true);
 
-  GlobalActionMap.unbindObj(getWord(%this.upKey, 0), getWord(%this.upKey, 1), %this);
-  GlobalActionMap.unbindObj(getWord(%this.downKey, 0), getWord(%this.downKey, 1), %this);
-  GlobalActionMap.unbindObj(getWord(%this.leftKey, 0), getWord(%this.leftKey, 1), %this);
-  GlobalActionMap.unbindObj(getWord(%this.rightKey, 0), getWord(%this.rightKey, 1), %this);
+	GlobalActionMap.unbindObj(getWord(%this.upKey, 0), getWord(%this.upKey, 1), %this);
+	GlobalActionMap.unbindObj(getWord(%this.downKey, 0), getWord(%this.downKey, 1), %this);
+	GlobalActionMap.unbindObj(getWord(%this.leftKey, 0), getWord(%this.leftKey, 1), %this);
+	GlobalActionMap.unbindObj(getWord(%this.rightKey, 0), getWord(%this.rightKey, 1), %this);
+	
+	GlobalActionMap.unbindObj(getWord(%this.upRightKey, 0), getWord(%this.upRightKey, 1), %this);
+	GlobalActionMap.unbindObj(getWord(%this.upLeftKey, 0), getWord(%this.upLeftKey, 1), %this);
+	GlobalActionMap.unbindObj(getWord(%this.downLeftKey, 0), getWord(%this.downLeftKey, 1), %this);
+	GlobalActionMap.unbindObj(getWord(%this.downRightKey, 0), getWord(%this.downRightKey, 1), %this);
 
-  GlobalActionMap.unbindObj("keyboard", %this.fireKey, %this);
-  GlobalActionMap.unbindObj("keyboard", %this.meleeKey, %this);
-  GlobalActionMap.unbindObj("keyboard", %this.dashKey, %this);
-  GlobalActionMap.unbindObj("keyboard", %this.blockKey, %this);
+	GlobalActionMap.unbindObj("keyboard", %this.fireKey, %this);
+	GlobalActionMap.unbindObj("keyboard", %this.meleeKey, %this);
+	GlobalActionMap.unbindObj("keyboard", %this.dashKey, %this);
+	GlobalActionMap.unbindObj("keyboard", %this.blockKey, %this);
 
 	%this.up = 0;
 	%this.down = 0;
@@ -114,16 +173,66 @@ function PlayerMovementControlsBehavior::updateMovement(%this)
 {	 
 	if(! %this.owner.isDashing)
 	{	
-		%this.owner.setLinearVelocityX((%this.right - %this.left) * %this.owner.walkSpeed);
-		%this.owner.setLinearVelocityY((%this.up - %this.down) * %this.owner.walkSpeed);
-	}
-	else
-	{
-		%this.right = 0;
-		%this.left = 0;
-		%this.up = 0;
-		%this.down = 0;
-	}
+		
+		%tempUp = %this.up;
+		%tempDown = %this.down;
+		%tempLeft = %this.left;
+		%tempRight = %this.right;
+			
+		if(%this.upRight == 1)
+		{
+			%tempUp = 1;
+			%tempDown = 0;
+			%tempLeft = 0;
+			%tempRight = 1;
+		}
+		else if(%this.upLeft == 1)
+		{
+			%tempUp = 1;
+			%tempDown = 0;
+			%tempLeft = 1;
+			%tempRight = 0;
+		}
+		else if(%this.downLeft == 1)
+		{
+			%tempUp = 0;
+			%tempDown = 1;
+			%tempLeft = 1;
+			%tempRight = 0;
+		}
+		else if(%this.downRight == 1)
+		{
+			%tempUp = 0;
+			%tempDown = 1;
+			%tempLeft = 0;
+			%tempRight = 1;
+		}
+		
+		if((mAbs(%tempRight - %tempLeft) + mAbs(%tempUp - %tempDown)) >= 2)		//combine (angle) movement scaled so its not faster
+		{
+			%cosRatio = 0.707;
+			%goSpeed = %this.owner.walkSpeed * %cosRatio;
+		}
+		else
+		{
+			%goSpeed = %this.owner.walkSpeed;
+		}
+		
+		if(isObject(%this.owner.blocker))
+		{
+			%goSpeed = %goSpeed*0.5;
+		}
+	
+		%this.owner.setLinearVelocityX((%tempRight - %tempLeft) * %goSpeed);
+		%this.owner.setLinearVelocityY((%tempUp - %tempDown) * %goSpeed);
+	}	
+	
+	/*
+	%this.fontUp.Text = %this.up;
+	%this.fontRight.Text = %this.right;
+	%this.fontDown.Text = %this.down;
+	%this.fontLeft.Text = %this.left;
+	*/
 	
 }
 
@@ -183,6 +292,63 @@ function PlayerMovementControlsBehavior::moveRight(%this, %val)
 	}
 }
 
+//------------------------------------------------------------------------------------
+  
+function PlayerMovementControlsBehavior::moveUpRight(%this, %val)
+{
+	if(%val == 1)
+	{
+		%this.upRight = 1;
+	}
+	else
+	{
+		%this.upRight = 0;
+	}
+}
+
+//------------------------------------------------------------------------------------
+
+function PlayerMovementControlsBehavior::moveUpLeft(%this, %val)
+{
+    if(%val == 1)
+	{
+		%this.upLeft = 1;
+	}
+	else
+	{
+		%this.upLeft = 0;
+	}
+}
+
+//------------------------------------------------------------------------------------
+
+function PlayerMovementControlsBehavior::moveDownLeft(%this, %val)
+{
+    if(%val == 1)
+	{
+		%this.downLeft = 1;
+	}
+	else
+	{
+		%this.downLeft = 0;
+	}
+}
+
+//------------------------------------------------------------------------------------
+
+function PlayerMovementControlsBehavior::moveDownRight(%this, %val)
+{
+    if(%val == 1)
+	{
+		%this.downRight = 1;
+	}
+	else
+	{
+		%this.downRight = 0;
+	}
+}
+
+//------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------
 
 function PlayerMovementControlsBehavior::pressFire(%this, %val)

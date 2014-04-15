@@ -83,9 +83,9 @@ function ToolShooter::addTurret( %this )
 		turnSpeed = %this.turnSpeed;
 	};
 	
+	%this.myTurret.setPosition(%this.getWorldPosistion());
 	%this.owner.getMyScene().add( %this.myTurret );
 	
-	%this.myTurret.setPosition(%this.getWorldPosistion());
 }
 
 //-----------------------------------------------------------------------------
