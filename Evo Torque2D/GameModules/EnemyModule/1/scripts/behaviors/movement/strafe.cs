@@ -3,35 +3,49 @@
 // Copyright (C) GarageGames.com, Inc.
 //-----------------------------------------------------------------------------
 
-if (!isObject(WanderAroundBehavior))
+if (!isObject(StrafeBehavior))
 {
-  %template = new BehaviorTemplate(WanderAroundBehavior);
-   
-  %template.friendlyName = "Face Object";
+  %template = new BehaviorTemplate(StrafeBehavior);
+
+  %template.friendlyName = "Maximum Distance";
   %template.behaviorType = "AI";
   %template.description  = "Set the object to face another object";
 
-  %template.addBehaviorField(turnDelay, "When to change direction. (s)", int, 1);
-  %template.addBehaviorField(numDires, "Number of directions allowed.", int, 4);
-  %template.addBehaviorField(moveSpeed, "Mob move speed.", int, 10);
-  %template.addBehaviorField(turnSpeed, "Mob turn speed.", int, 0);
+  %template.addBehaviorField(distance, "", int, 70);
+  //%template.addBehaviorField(distance, "", int, 50);
+  %template.addBehaviorField(scaled, "", bool, false);
+  %template.addBehaviorField(moveSpeed, "", int, 10);
+  %template.addBehaviorField(honcho, "", bool, false);
 }
 
-function WanderAroundBehavior::onBehaviorAdd(%this)
+function StrafeBehavior::onBehaviorAdd(%this)
 {
-  %this.changeDir();
+  %this.owner.moveBehaviorCount++;
+  if(%this.owner.moveBehaviorCount == 1)
+    %this.honcho = true;
+  %this.owner.setUpdateCallback(true);
 }
 
-function WanderAroundBehavior::changeDir(%this)
+function StrafeBehavior::onUpdate( %this )
 {
-  %targetRotation = (getRandom(0, %this.numDires) * (360/%this.numDires));
-/*
-  if (%this.turnSpeed == 0)
-    %this.owner.setAngle(%targetRotation);
-  else
-    %this.owner.rotateTo(%targetRotation, %this.turnSpeed);
-*/
-  %this.owner.setLinearVelocityPolar(%targetRotation + 90, %this.moveSpeed);
-    
-  %this.schedule(%this.turnDelay * 1000, "changeDir");
+  if(%this.honcho == true){
+    %this.owner.specialX = 0;
+    %this.owner.specialY = 0;
+  }
+
+	if(!isObject(%this.owner))
+	{
+		%this.safeDelete();
+	}
+	else
+	{
+    %startVelocity = %this.owner.specialX SPC %this.owner.specialY;
+    %targetRotation = Vector2AngleToPoint (%this.owner.getPosition(), %this.owner.mainTarget.getPosition()) + 90;
+
+    %xcomponent = %this.moveSpeed * mSin(mDegToRad(%targetRotation)) / %this.owner.moveBehaviorCount;
+    %ycomponent = %this.moveSpeed * mCos(mDegToRad(%targetRotation)) / %this.owner.moveBehaviorCount;
+
+    %this.owner.specialX = getWord(%startVelocity, 0) + %xcomponent;
+    %this.owner.specialY = getWord(%startVelocity, 1) - %ycomponent;
+  }
 }

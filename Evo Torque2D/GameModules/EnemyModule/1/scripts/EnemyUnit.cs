@@ -22,6 +22,7 @@ function EnemyUnit::initialize(%this)
 	exec("./Tools/Blade/ToolBlade.cs");
 	exec("./Tools/Shooter/ToolShooter.cs");
 	
+  %this.setUpdateCallback(true);
 
 	//-Stats---
 	%this.fullHealth = 100;
@@ -45,6 +46,10 @@ function EnemyUnit::initialize(%this)
 	
 	%this.sizeRatio = $pixelToWorldRatio;
 	
+  %this.moveBehaviorCount = 0;
+  %this.specialX = 0;
+  %this.specialY = 0;
+  
 	if(%this.noBehaviors != 1)
 	{
 		%this.setAngle(getRandom(360));
@@ -67,7 +72,7 @@ function EnemyUnit::initialize(%this)
 		yOffset = (%this.maxBodySize + 1)*%this.myBodyContainer.getObject(0).myHeight;
 	};
 
-    %this.getScene().add( %this.myHealthbar );
+  %this.getScene().add( %this.myHealthbar );
 }
 
 //-----------------------------------------------------------------------------
@@ -99,6 +104,9 @@ function EnemyUnit::setupBehaviors( %this )
 	exec("./behaviors/movement/Drift.cs");
 	exec("./behaviors/movement/wanderAround.cs");
 	exec("./behaviors/ai/faceObject.cs");
+  exec("./behaviors/movement/minDistance.cs");
+  exec("./behaviors/movement/maxDistance.cs");
+  exec("./behaviors/movement/strafe.cs");
 	/*
 	%driftMove = DriftBehavior.createInstance();
 	%driftMove.speed = %this.walkSpeed;
@@ -115,6 +123,15 @@ function EnemyUnit::setupBehaviors( %this )
 	%faceObj.object = %this.mainTarget;
 	%faceObj.rotationOffset = 0;
 	%this.addBehavior(%faceObj);
+  
+  %minDistance = MinDistanceBehavior.createInstance();
+	%this.addBehavior(%minDistance);
+  
+  %maxDistance = MaxDistanceBehavior.createInstance();
+	%this.addBehavior(%maxDistance);
+  
+  %strafe = StrafeBehavior.createInstance();
+	%this.addBehavior(%strafe);
 }
 
 //-----------------------------------------------------------------------------
@@ -127,6 +144,14 @@ function EnemyUnit::onCollision(%this, %object, %collisionDetails)
 	}
 }
 
+//-----------------------------------------------------------------------------
+
+function EnemyUnit::onUpdate( %this )
+{
+  %temp = %this.specialX SPC %this.specialY;
+  %temp = VectorScale(VectorNormalize(%temp), %this.walkSpeed);
+  %this.setLinearVelocity(getWord(%temp, 0), getWord(%temp, 1));
+}
 //-----------------------------------------------------------------------------
 
 function EnemyUnit::takeDamage( %this, %dmgAmount, %dmgType )

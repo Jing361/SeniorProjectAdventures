@@ -14,6 +14,11 @@ if (!isObject(PlayerAimControlsBehavior))
   %template.addBehaviorField(dwnKey, "", keybind, "keyboard down");
   %template.addBehaviorField(lftKey, "", keybind, "keyboard left");
   %template.addBehaviorField(rgtKey, "", keybind, "keyboard right");
+  
+  %template.addBehaviorField(ulKey, "", keybind, "keyboard U");
+  %template.addBehaviorField(urKey, "", keybind, "keyboard O");
+  %template.addBehaviorField(drKey, "", keybind, "keyboard Comma");
+  %template.addBehaviorField(dlKey, "", keybind, "keyboard M");
 }
 
 function PlayerAimControlsBehavior::onBehaviorAdd(%this)
@@ -28,10 +33,10 @@ function PlayerAimControlsBehavior::onBehaviorAdd(%this)
     GlobalActionMap.bindObj("keyboard", %this.lftKey, "faceLeft", %this);
 	
 	//diagonal
-    GlobalActionMap.bindObj("keyboard", "U", "faceUL", %this);
-    GlobalActionMap.bindObj("keyboard", "O", "faceUR", %this);
-    GlobalActionMap.bindObj("keyboard", "Comma", "faceDR", %this);
-    GlobalActionMap.bindObj("keyboard", "M", "faceDL", %this);
+    GlobalActionMap.bindObj("keyboard", %this.ulKey, "faceUL", %this);
+    GlobalActionMap.bindObj("keyboard", %this.urKey, "faceUR", %this);
+    GlobalActionMap.bindObj("keyboard", %this.drKey, "faceDR", %this);
+    GlobalActionMap.bindObj("keyboard", %this.dlKey, "faceDL", %this);
 }
 
 function PlayerAimControlsBehavior::onBehaviorRemove(%this)
@@ -44,10 +49,10 @@ function PlayerAimControlsBehavior::onBehaviorRemove(%this)
     GlobalActionMap.unbindObj("keyboard", %this.dwnKey, %this);
     GlobalActionMap.unbindObj("keyboard", %this.lftKey, %this);
 
-    GlobalActionMap.unbindObj("keyboard", "U", %this);
-    GlobalActionMap.unbindObj("keyboard", "O", %this);
-    GlobalActionMap.unbindObj("keyboard", "Comma", %this);
-    GlobalActionMap.unbindObj("keyboard", "M", %this);
+    GlobalActionMap.unbindObj("keyboard", %this.ulKey, %this);
+    GlobalActionMap.unbindObj("keyboard", %this.urKey, %this);
+    GlobalActionMap.unbindObj("keyboard", %this.drKey, %this);
+    GlobalActionMap.unbindObj("keyboard", %this.dlKey, %this);
 }
 
 //------------------------------------------------------------------------------------
