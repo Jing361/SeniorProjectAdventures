@@ -36,7 +36,9 @@ function Player::initialize(%this)
 	
 	%this.myShotsContainer = new SimSet();
 	
-	%this.fireRate = 3;					//per second
+	
+	%this.base_fireRate = 3;
+	%this.fireRate = %this.base_fireRate;					//per second
 	%this.fireCooldown = 1000/%this.fireRate;			//ms
 	
 	%this.strikeRate = 2;				//per second
@@ -270,6 +272,15 @@ function Player::restoreSpeed( %this, %amt )
 		%this.walkSpeed = %this.baseWalkSpeed;
 	}
 }
+
+//-----------------------------------------------------------------------------
+
+function Player::updateFireRate( %this, %rate )
+{
+	%this.fireRate = %rate;
+	%this.fireCooldown = 1000/%this.fireRate;			//ms
+}
+
 
 //-----------------------------------------------------------------------------
 

@@ -32,7 +32,7 @@ function Arena::buildArena(%this)
 	
     //%this.setUpdateCallback(true);
 	
-	%this.dropPickupChance = 10;
+	%this.dropPickupChance = 15;
 	
 	//Populate room
 	%this.player = %this.spawnPlayer(0, 0);		//add player before Enemies!
