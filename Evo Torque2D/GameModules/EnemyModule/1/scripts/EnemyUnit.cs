@@ -141,7 +141,7 @@ function EnemyUnit::onCollision(%this, %object, %collisionDetails)
 {
 	if(%object.getSceneGroup() == Utility.getCollisionGroup("Player"))
 	{
-		%object.hit(1, %this);
+		%object.hit(5, %this);
 	}
 }
 
