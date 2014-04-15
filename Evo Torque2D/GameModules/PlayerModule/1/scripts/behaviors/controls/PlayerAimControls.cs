@@ -15,7 +15,7 @@ if (!isObject(PlayerAimControlsBehavior))
   %template.addBehaviorField(lftKey, "", keybind, "keyboard left");
   %template.addBehaviorField(rgtKey, "", keybind, "keyboard right");
   
-  %template.addBehaviorField(ulKey, "", keybind, "keyboard U");
+  %template.addBehaviorField(ulKey, "", keybind, "keyboard I");
   %template.addBehaviorField(urKey, "", keybind, "keyboard O");
   %template.addBehaviorField(drKey, "", keybind, "keyboard Comma");
   %template.addBehaviorField(dlKey, "", keybind, "keyboard M");

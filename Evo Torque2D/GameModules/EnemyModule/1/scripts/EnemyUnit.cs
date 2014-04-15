@@ -227,15 +227,30 @@ function EnemyUnit::kill( %this )
 	
 	if(getRandom(100) < %this.myArena.dropPickupChance)
 	{
-		//add health pickup------------------------
-		%healthPickup = new CompositeSprite()
+		if(getRandom(100) < 70)
 		{
-			class = "Pickup";
-		};
-			
-			
-		%healthPickup.setPosition(%this.getPosition());
-		%this.getScene().add( %healthPickup );
+			//add health pickup------------------------
+			%healthPickup = new CompositeSprite()
+			{
+				class = "Pickup";
+			};
+				
+				
+			%healthPickup.setPosition(%this.getPosition());
+			%this.getScene().add( %healthPickup );
+		}
+		else
+		{
+			//add speedshot pickup------------------------
+			%speedPickup = new CompositeSprite()
+			{
+				class = "SpeedShotPickup";
+			};
+				
+				
+			%speedPickup.setPosition(%this.getPosition());
+			%this.getScene().add( %speedPickup );
+		}
 	}
 	
 	%this.safeDelete();

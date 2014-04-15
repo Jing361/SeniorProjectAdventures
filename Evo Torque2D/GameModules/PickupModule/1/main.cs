@@ -5,6 +5,7 @@
 function PickupModule::create( %this )
 {
     exec("./scripts/Pickup.cs");
+    exec("./scripts/SpeedShotPickup.cs");
 }
 
 //-----------------------------------------------------------------------------
