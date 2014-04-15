@@ -202,12 +202,8 @@ function Arena::processRoomChromosomes(%this)
 	
 	if(%this.currLevel > 1)
 	{
-		echo("Arena.Arena: GeneticAlgorithm.run()");
-		%chromosome = $genAlg.run();
 		
-		echo("Arena.Arena: GeneticAlgorithm. run successful!");
-		
-		//%chromosome = %this.currChromosome;
+		%chromosome = %this.currChromosome;
 	}
 	else
 	{

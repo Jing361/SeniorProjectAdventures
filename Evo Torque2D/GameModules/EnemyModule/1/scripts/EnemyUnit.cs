@@ -241,6 +241,6 @@ function EnemyUnit::onRemove( %this )
 	
 	if(%this.myArena.EnemyCount <= 0)
 	{
-		%this.myArena.schedule(3000, "finishRoom");
+		%this.myArena.schedule(1000, "finishRoom");
 	}
 }

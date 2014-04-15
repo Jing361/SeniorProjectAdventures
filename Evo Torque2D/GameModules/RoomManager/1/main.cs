@@ -48,6 +48,7 @@ function RoomManager::create( %this )
 	
 	//Lasting Variables
 	%this.CurrentLevel = 0;
+	%this.CurrentChromosome = 0;
 	
 	
 	echo("RoomManager.main: Creating GeneticAlgorithm instance");
@@ -106,7 +107,7 @@ function RoomManager::endCurrentLevel( %this )
 {
 	echo("RoomManager.main: Room finished!");
 	
-	%this.writeRoomSummationFile();
+	%this.writeRoomSummationFile();	
 
 	//%this.currentArena.player.clearBehaviors();
 	//%this.currentArena.getScene().remove(%this.currentArena.player);
@@ -211,7 +212,7 @@ function RoomManager::runNextRoomGenAlg( %this )
   
 function RoomManager::goToRoomCompleteScreen( %this )
 {	
-	//%this.nextChromosome = %this.runNextRoomGenAlg();
+	%this.nextChromosome = %this.runNextRoomGenAlg();
 
 	%completeRoomScene = new Scene();
 	%completeRoomScene.layerSortMode0 = "Newest";

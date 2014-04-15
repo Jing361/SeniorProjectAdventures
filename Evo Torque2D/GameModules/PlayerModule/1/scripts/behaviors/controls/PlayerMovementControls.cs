@@ -114,17 +114,20 @@ function PlayerMovementControlsBehavior::updateMovement(%this)
 {	 
 	if(! %this.owner.isDashing)
 	{	
-		%this.owner.setLinearVelocityX((%this.right - %this.left) * %this.owner.walkSpeed);
-		%this.owner.setLinearVelocityY((%this.up - %this.down) * %this.owner.walkSpeed);
-	}
-	else
-	{
-		%this.right = 0;
-		%this.left = 0;
-		%this.up = 0;
-		%this.down = 0;
-	}
+		
+		if((mAbs(%this.right - %this.left) + mAbs(%this.up - %this.down)) >= 2)		//combine (angle) movement scaled so its not faster
+		{
+			%cosRatio = 0.707;
+			%goSpeed = %this.owner.walkSpeed * %cosRatio;
+		}
+		else
+		{
+			%goSpeed = %this.owner.walkSpeed;
+		}
 	
+		%this.owner.setLinearVelocityX((%this.right - %this.left) * %goSpeed);
+		%this.owner.setLinearVelocityY((%this.up - %this.down) * %goSpeed);
+	}	
 }
 
 //------------------------------------------------------------------------------------

@@ -17,7 +17,7 @@ function DamageSplashScreen::initialize(%this)
 	%this.setCollisionSuppress();
 	%this.setSceneGroup( Utility.getCollisionGroup("") );
 	
-	%this.lifeSpan = %this.initDamage*15;
+	%this.lifeSpan = %this.initDamage*15 + 100;
 	%this.dmgSplashSchedule = schedule(%this.lifeSpan, 0, "DamageSplashScreen::damageSplashRemove", %this);
 }
 //-----------------------------------------------------------------------------
