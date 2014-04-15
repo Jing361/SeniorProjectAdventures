@@ -34,6 +34,8 @@ function Player::initialize(%this)
 	%this.tarred = false;
 	%this.setPosition(0, 25);
 	
+	%this.myShotsContainer = new SimSet();
+	
 	%this.fireRate = 3;					//per second
 	%this.fireCooldown = 1000/%this.fireRate;			//ms
 	

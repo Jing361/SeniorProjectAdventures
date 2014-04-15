@@ -377,6 +377,7 @@ function PlayerMovementControlsBehavior::tryFire(%this)
 		
 		%this.owner.rangedCount++;
 		%this.owner.getScene().add( %newBullet );
+		%this.owner.myShotsContainer.add( %newBullet );
 		%newBullet.setPosition(%this.owner.getWorldPoint(%this.barrelXoffset, %this.barrelYoffset) );
 		
 		

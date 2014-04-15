@@ -1,4 +1,5 @@
 //-----------------------------------------------------------------------------
+
 function PlayerBulletHit::onAdd( %this )
 {
 	%this.initialize();
@@ -19,6 +20,7 @@ function PlayerBulletHit::initialize(%this)
 	
 	%this.setupSprite();
 }
+
 //-----------------------------------------------------------------------------
 
 function PlayerBulletHit::setupSprite( %this )
