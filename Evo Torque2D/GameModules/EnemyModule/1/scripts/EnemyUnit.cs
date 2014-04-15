@@ -27,7 +27,7 @@ function EnemyUnit::initialize(%this)
 	//-Stats---
 	%this.fullHealth = 100;
 	%this.health = %this.fullHealth;
-	%this.walkSpeed = 10;
+	%this.walkSpeed = 15;
 	%this.turnSpeed = 60;
 	
 	%this.armorValue = 0;
@@ -111,14 +111,15 @@ function EnemyUnit::setupBehaviors( %this )
 	%driftMove = DriftBehavior.createInstance();
 	%driftMove.speed = %this.walkSpeed;
 	%this.addBehavior(%driftMove);
-	*/
+	
+	
 	%wanderMove = WanderAroundBehavior.createInstance();
 	%wanderMove.turnDelay = 1;
 	%wanderMove.numDires = 8;
 	%wanderMove.moveSpeed = %this.walkSpeed;
 	%wanderMove.turnSpeed = %this.turnSpeed;
 	%this.addBehavior(%wanderMove);
-	
+	*/
 	%faceObj = FaceObjectBehavior.createInstance();
 	%faceObj.object = %this.mainTarget;
 	%faceObj.rotationOffset = 0;
