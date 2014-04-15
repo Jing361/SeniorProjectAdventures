@@ -26,8 +26,6 @@ function MenuControlBehavior::onBehaviorRemove(%this)
     if (!isObject(GlobalActionMap))
        return;
 
-    %this.owner.disableUpdateCallback();
-
     GlobalActionMap.unbindObj(getWord(%this.enterKey, 0), getWord(%this.enterKey, 1), %this);
 }
 
@@ -37,7 +35,7 @@ function MenuControlBehavior::changeRoom(%this, %val)
 	{
 		if(%this.owner.myManager != 0)
 		{
-			%this.owner.myManager.startNextLevel();
+			%this.owner.myManager.endRoomTitleScreen();
 			GlobalActionMap.unbindObj(getWord(%this.enterKey, 0), getWord(%this.enterKey, 1), %this);
 			//%this.owner.safeDelete();
 		}

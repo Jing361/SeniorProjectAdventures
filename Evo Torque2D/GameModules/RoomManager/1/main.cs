@@ -15,6 +15,9 @@ $pixelToWorldRatio = $roomWidth/1600;
 function RoomManager::create( %this )
 {   	
 	setRandomSeed(getRealTime());
+	
+	OpenALInitDriver();							//for audio
+	
 
     new SceneWindow(mainWindow)
 	{
@@ -60,6 +63,7 @@ function RoomManager::create( %this )
 function RoomManager::goToTitleScreen( %this )
 {
 	%this.CurrentLevel = 0;
+	%this.addTitleMusic();
 
     new Scene(mainScene)
 	{
@@ -74,6 +78,17 @@ function RoomManager::goToTitleScreen( %this )
 	};
 		 
 	%gui_titleScreen.openTitleScreen(mainScene);
+}
+
+//-----------------------------------------------------------------------------
+
+function RoomManager::addTitleMusic(%this)
+{
+	%musicAsset = "GameAssets:mainMenuMusic";
+	
+	$musicHandle = alxPlay(%musicAsset);	
+	
+	%this.schedule(alxGetAudioLength(%musicAsset), "addTitleMusic");
 }
     
 //-----------------------------------------------------------------------------
@@ -228,6 +243,14 @@ function RoomManager::goToRoomCompleteScreen( %this )
 }   
 
 //-----------------------------------------------------------------------------
+
+function RoomManager::endRoomTitleScreen( %this )
+{	
+	alxStopAll();
+	%this.startNextLevel();
+}
+ 
+//-----------------------------------------------------------------------------
   
 function RoomManager::endRoomCompleteScreen( %this )
 {	
@@ -262,6 +285,7 @@ function RoomManager::goToRoomDefeatScreen( %this, %furthestLevel, %killerChromo
 
 function RoomManager::playerDies( %this, %killerChromosome, %killBodyRadius )
 {	
+	alxStopAll();
 	%this.currentArena.getScene().schedule(320, "clear");  
 	%this.schedule(320, "goToRoomDefeatScreen", %this.CurrentLevel, %killerChromosome, %killBodyRadius);  
 	//%this.goToRoomDefeatScreen(%killerChromosome, %killBodyRadius);
@@ -277,6 +301,13 @@ function RoomManager::exitGame(%this, %val)
 		echo("RoomManager.exitGame()");
 		quit();
 	}
+}
+
+//-----------------------------------------------------------------------------
+
+function RoomManager::destroy(%this)
+{
+	OpenALShutdownDriver();
 }
 
 	

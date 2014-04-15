@@ -8,8 +8,6 @@ function PlayerBulletHit::onAdd( %this )
 
 function PlayerBulletHit::initialize(%this)
 {
-	echo("bullHit");
-	
 	%this.setSceneLayer(4);
 	%this.fixedAngle = true;
 		

@@ -4,10 +4,6 @@
 
 function Arena::buildArena(%this)
 {
-    // A pre-built Arena of size 100x75, with background.
-    // Triggers will be provide around the edges to let the developer know when objects in the
-    // arena have reached the edges.
-
     // Background
     %background = new Sprite() {class="backgroundObj";};
     %background.setBodyType( "static" );
@@ -45,9 +41,7 @@ function Arena::buildArena(%this)
 	
 	// Enemy Info
 	%this.EnemyCount = 0;
-	
-	%this.processRoomChromosomes();
-	
+	%this.toolVarietyCount = 7;		//number of different tools available, length of local chromosomes
 	
 	//-RoomDamageTracking---
 	%this.roomShooterDamage = 0;
@@ -58,10 +52,39 @@ function Arena::buildArena(%this)
 	//font 4 times for pseudo boldness
 	%this.addRoomFont(-$roomWidth/2 + 1, $roomHeight/2 - 0.5);
 	
-	$roomStartLag = 300;
+	$roomStartLag = 1;
 	//%this.getScene().setScenePause(true);
-	%this.getScene().schedule($roomStartLag, "setScenePause", true);
+	//%this.getScene().schedule($roomStartLag, "setScenePause", true);
 	%this.schedule($roomStartLag, "addREADYFont", 0, 0);
+	
+	%this.addBackgroundMusic();
+	
+	if(%this.currLevel == 1)
+	{
+		%this.currChromosome = "0 0 0 0 0 0 1" SPC
+					  "0 0 0 0 0 0 1";
+	}
+	
+	//gather spawn points
+	%enemyUnitCount = mFloor(getWordCount(%this.currChromosome)/%this.toolVarietyCount);
+	for(%i = 0; %i < %enemyUnitCount; %i++)
+	{
+		%this.spawnPoints[%i] = %this.findSpawnLocation();
+	}
+}
+
+//-----------------------------------------------------------------------------
+
+function Arena::addBackgroundMusic(%this)
+{
+	echo("arena: audio");		
+	
+	%musicAsset = "GameAssets:roomMusic";
+	//%musicAsset = "GameAssets:arrowStrike";
+	
+	$musicHandle = alxPlay(%musicAsset);	
+	
+	%this.schedule(alxGetAudioLength(%musicAsset), "addBackgroundMusic");
 }
 
 //-----------------------------------------------------------------------------
@@ -96,11 +119,27 @@ function Arena::addRoomNumFont(%this, %x, %y, %size, %text, %align, %colorBlend)
 function Arena::addREADYFont(%this, %x, %y)
 {
 	%text = "READY?";
-	%lifeSpan = 1000;
+	%lifeSpan = 1500;
 	%this.addRoomNumFont(%x, %y, "5 5", %text, "Center", "1 0 0").schedule(%lifeSpan, "safeDelete");
 	%this.addRoomNumFont(%x + 0.1, %y, "5 5", %text, "Center", "1 0 0").schedule(%lifeSpan, "safeDelete");
 	%this.addRoomNumFont(%x + 0.1, %y + 0.1, "5 5", %text, "Center", "1 0 0").schedule(%lifeSpan, "safeDelete");
 	%this.addRoomNumFont(%x, %y + 0.1, %text, "5 5", "Center", "1 0 0").schedule(%lifeSpan, "safeDelete");
+	
+	//spawn shadow dusts
+	%enemyUnitCount = mFloor(getWordCount(%this.currChromosome)/%this.toolVarietyCount);
+	for(%i = 0; %i < %enemyUnitCount; %i++)
+	{
+		%shadowDust = new CompositeSprite()
+		{
+			class = "shadowDust";
+			myArena = %this;
+			lifeSpan = (%lifeSpan*2)/1000;
+		};
+		
+		%this.getScene().add( %shadowDust );
+		
+		%shadowDust.setPosition(%this.spawnPoints[%i]);
+	}
 	
 	%this.schedule(%lifeSpan, "addSETFont", %x, %y);
 }
@@ -110,13 +149,14 @@ function Arena::addREADYFont(%this, %x, %y)
 function Arena::addSETFont(%this, %x, %y)
 {
 	%text = "SET";
-	%lifeSpan = 1000;
-	%this.addRoomNumFont(%x, %y, "5 5", %text, "Center", "1 1 0").schedule(%lifeSpan, "safeDelete");
-	%this.addRoomNumFont(%x + 0.1, %y, "5 5", %text, "Center", "1 1 0").schedule(%lifeSpan, "safeDelete");
-	%this.addRoomNumFont(%x + 0.1, %y + 0.1, "5 5", %text, "Center", "1 1 0").schedule(%lifeSpan, "safeDelete");
-	%this.addRoomNumFont(%x, %y + 0.1, %text, "5 5", "Center", "1 1 0").schedule(%lifeSpan, "safeDelete");
+	%lifeSpan = 1500;
+	%this.addRoomNumFont(%x, %y, "6 6", %text, "Center", "1 1 0").schedule(%lifeSpan, "safeDelete");
+	%this.addRoomNumFont(%x + 0.1, %y, "6 6", %text, "Center", "1 1 0").schedule(%lifeSpan, "safeDelete");
+	%this.addRoomNumFont(%x + 0.1, %y + 0.1, "6 6", %text, "Center", "1 1 0").schedule(%lifeSpan, "safeDelete");
+	%this.addRoomNumFont(%x, %y + 0.1, %text, "6 6", "Center", "1 1 0").schedule(%lifeSpan, "safeDelete");
 	
 	%this.schedule(%lifeSpan, "addGOFont", %x, %y);
+	%this.schedule(%lifeSpan, "processRoomChromosomes");
 }
 
 //-----------------------------------------------------------------------------
@@ -124,13 +164,11 @@ function Arena::addSETFont(%this, %x, %y)
 function Arena::addGOFont(%this, %x, %y)
 {
 	%text = "FIGHT!";
-	%lifeSpan = 1000;
-	%this.addRoomNumFont(%x, %y, "5 5", %text, "Center", "0 1 0").schedule(%lifeSpan, "safeDelete");
-	%this.addRoomNumFont(%x + 0.1, %y, "5 5", %text, "Center", "0 1 0").schedule(%lifeSpan, "safeDelete");
-	%this.addRoomNumFont(%x + 0.1, %y + 0.1, "5 5", %text, "Center", "0 1 0").schedule(%lifeSpan, "safeDelete");
-	%this.addRoomNumFont(%x, %y + 0.1, %text, "5 5", "Center", "0 1 0").schedule(%lifeSpan, "safeDelete");
-	
-	%this.getScene().schedule(%lifeSpan + 250, "setScenePause", false);
+	%lifeSpan = 1500;
+	%this.addRoomNumFont(%x, %y, "7 7", %text, "Center", "0 1 0").schedule(%lifeSpan, "safeDelete");
+	%this.addRoomNumFont(%x + 0.1, %y, "7 7", %text, "Center", "0 1 0").schedule(%lifeSpan, "safeDelete");
+	%this.addRoomNumFont(%x + 0.1, %y + 0.1, "7 7", %text, "Center", "0 1 0").schedule(%lifeSpan, "safeDelete");
+	%this.addRoomNumFont(%x, %y + 0.1, %text, "7 7", "Center", "0 1 0").schedule(%lifeSpan, "safeDelete");	
 }
 
 
@@ -197,37 +235,25 @@ function Arena::spawnPlayer(%this, %xPos, %yPos)
 ///ordering: armor/parry/acid/tar/blade/shooter/blob
 
 function Arena::processRoomChromosomes(%this)
-{
-	%toolVarietyCount = 7;		//number of different tools available, length of local chromosomes
-	
-	if(%this.currLevel > 1)
-	{
-		
-		%chromosome = %this.currChromosome;
-	}
-	else
-	{
-		%chromosome = "0 0 0 0 0 0 1" SPC
-					  "0 0 0 0 0 0 1";
-	}
-	
+{		
 	echo("Chromosome:" SPC %chromosome);
+	%chromosome = %this.currChromosome;
 	
-	for(%i = 0; %i < mFloor(getWordCount(%chromosome)/%toolVarietyCount); %i++)
+	for(%i = 0; %i < mFloor(getWordCount(%chromosome)/%this.toolVarietyCount); %i++)
 	{
 	
-		%subChromosome = getWords(%chromosome, %i*%toolVarietyCount, (%toolVarietyCount - 1) + %i*%toolVarietyCount);
+		%subChromosome = getWords(%chromosome, %i*%this.toolVarietyCount, (%this.toolVarietyCount - 1) + %i*%this.toolVarietyCount);
 		
 		echo("  sub" SPC %subChromosome);
 		
 		echo("Arena.Arena: spawn enemy unit" SPC %i);
 
-		%spawnLoc = %this.findSpawnLocation();
+		%spawnLoc = %this.spawnPoints[%i];
 		%this.spawnEnemyUnit(%subChromosome, getWord(%spawnLoc, 0), getWord(%spawnLoc, 1));
 
 		echo("Arena.Arena: spawned enemy unit successfuly" SPC %i);
 		
-		if(%i >= (getWordCount(%chromosome)/%toolVarietyCount) - 1)
+		if(%i >= (getWordCount(%chromosome)/%this.toolVarietyCount) - 1)
 		{
 			%this.roomChromosomes = %this.roomChromosomes @ %subChromosome;
 		}
