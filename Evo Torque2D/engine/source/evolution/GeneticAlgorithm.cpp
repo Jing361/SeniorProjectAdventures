@@ -17,7 +17,7 @@ const double PXOVER = 0.8;
 const double PMUTATION = 0.15;
 const string PREVIOUSROOMINFO = ".\\utilities\\ga_input.txt";
 const string PASTCASEINFO = ".\\caselist.txt";
-const double WEIGHTS[NTOOLS] = {1.25, 1.25, 1, 1, 1, 1, 0.5};
+const double WEIGHTS[NTOOLS] = {1.25, 1.25, 1, 1, 1, 1, 1};
 
 ConsoleMethod(GeneticAlgorithm, run, const char *, 2, 2, "() Gets the object's position.\n"
                                                               "@return chromosome.")
@@ -106,16 +106,17 @@ string GeneticAlgorithm::run ( )
 	ofstream caseList;
 	caseList.open(PASTCASEINFO.c_str(), ofstream::app);
 
-	caseList << pointLimit << "\t" << rangedPercent << "\t" << meleePercent << "\t" << blockPercent << "\t" 
-		<< dashPercent << "\t" << enemyDPSwing << "\t" << enemyDPShot << "\t";
+	caseList << pointLimit << " " << rangedPercent << " " << meleePercent << " " << blockPercent << " " << dashPercent << " " << enemyDPSwing << " " << enemyDPShot << " start:";
 
-	for(geneIterator = population[population.size()-1].getGene()->begin(); 
-		geneIterator != population[population.size()-1].getGene()->end() - 1; 
+	for(geneIterator = population[population.size()-1].getGene()->begin();
+		geneIterator != population[population.size()-1].getGene()->end() - 1;
 		++geneIterator)
-		{
-			caseList << *geneIterator << "  ";
-		}
-	caseList<< *geneIterator << "\n";
+	{
+			caseList << *geneIterator << " ";
+	}
+	caseList << *geneIterator << endl;
+
+	caseList.close();
 
 	for(int j = 0; j < POPSIZE; ++j)
 	{
@@ -201,6 +202,8 @@ void GeneticAlgorithm::elitist ( Genotype oldBest )
 
 void GeneticAlgorithm::evaluate ( )
 {
+
+
 	int tools[NTOOLS];
 	vector<int>::iterator geneIterator;
 
@@ -253,7 +256,8 @@ void GeneticAlgorithm::initialize (  )
 
 	//shield parry acid tar blade projectile blob;
 
-	srand (time(0));								//Warning
+	srand (time(0));
+	//Warning
 
 	ofstream fileOut;
 	fileOut.open(".\\utilities\\engineloginit.txt");
@@ -275,7 +279,7 @@ void GeneticAlgorithm::initialize (  )
 	population.clear();
 	newPopulation.clear();
 
-	population.resize(POPSIZE);
+	//population.resize(POPSIZE);
 	newPopulation.resize(POPSIZE);
 
 	int current = 0;
@@ -294,101 +298,165 @@ void GeneticAlgorithm::initialize (  )
 		enemyDPSwing = tempSwing/(tempShot + tempSwing);
 	}
 
-	fileOut << "Current Room \n" << pointLimit << endl << rangedPercent << endl << meleePercent << endl << blockPercent << endl << dashPercent << endl <<
-		 enemyDPSwing << endl << enemyDPShot << endl;
+fileOut << "Current Room \n" << pointLimit << endl << rangedPercent << endl << meleePercent << endl << blockPercent << endl << dashPercent << endl <<
+enemyDPSwing << endl << enemyDPShot << endl;
+/*Con::printf("Current Room");
+Con::printf("Point %d", pointLimit);
+Con::printf("Ranged %f",rangedPercent);
+Con::printf("Melee %f",meleePercent);
+Con::printf("Block %f",blockPercent);
+Con::printf("Dash %f",dashPercent);
+Con::printf("Swing %f",enemyDPSwing);
+Con::printf("Shot %f",enemyDPShot);*/
 
-	int tempPoint;
-	double tempRanged, tempMelee, tempBlock, tempDash, tempDPSwing, tempDPShot;
-	double difference;
-	int chromosomeNum = 1;
+Genotype genotype;
+population.push_back(genotype);
 
+previousRoom >> current;
+while (!previousRoom.eof() && current >= 0)
+{
+fileOut << current << " ";
+population[0].genePushBack(current);
+previousRoom >> current;
+}
 
-	/*while (!pastCases.eof())
-	{
-		pastCases >> tempPoint >> tempRanged >> tempMelee >> tempBlock >> tempDash >> tempSwing >> tempShot;
-		fileOut << "Current Case \n" << tempPoint << "\n" << tempRanged << "\n" << tempMelee << "\n" 
-			<< tempBlock << "\n" << tempDash << "\n" << tempSwing << "\n" << tempShot << "\n";
-		if(tempShot == 0 && tempSwing == 0)
-		{
-			tempDPShot = 0;
-			tempDPSwing = 0;
-		}
-		else
-		{
-			tempDPShot = tempShot/(tempShot + tempSwing);
-			tempDPSwing = tempSwing/(tempShot + tempSwing);
-		}
-
-		difference = euclideanDifference(tempRanged, tempMelee, tempBlock, tempDash, tempDPSwing, tempDPShot);
-
-		fileOut<< "Difference:" << difference << "\n";
-
-		if(difference < .75 && pointLimit >= tempPoint)
-		{
-			pastCases >> current;
-			while (!previousRoom.eof() && pastCases.peek() != '\n')
-			{
-				pastCases >> current;
-				fileOut << current << " ";
-				population[chromosomeNum].genePushBack(current);
-			}
-			fileOut<< "\n";
-			++chromosomeNum;
-			
-		}
-	
-		
-	}*/
-
-	previousRoom >> current;
-	while (!previousRoom.eof() && current >= 0)
-	{
-		fileOut << current << " ";
-		population[0].genePushBack(current);
-		previousRoom >> current;
-	}
-
-	fileOut<< endl;
+fileOut<< endl;
 
 	for(int i = 0; i < population[0].getGene()->size(); ++i)
 	{
 		fileOut << population[0].getGene()->at(i) << " ";
 	}
-	
-	vector<int>::iterator geneIterator;
-	while(chromosomeNum < POPSIZE)
+
+int tempPoint;
+double tempRanged, tempMelee, tempBlock, tempDash, tempDPSwing, tempDPShot;
+double difference;
+int chromosomeNum = 1;
+string currentCase;
+
+
+	while (std::getline(pastCases,currentCase) && chromosomeNum < POPSIZE-1)
 	{
-		double points = 0;
-		
-		population[chromosomeNum].setGene(*population[0].getGene());
+		string token = "";
+		size_t pos = 0;
+		pos = currentCase.find(' ',0);
+		token = currentCase.substr(0, pos);
+		tempPoint = std::atoi(token.c_str());
+		currentCase.erase(0, pos + 1);
 
-		/*for(geneIterator = population[0].getGene()->rbegin(); geneIterator != population[0].getGene()->rend(); ++geneIterator)
+		if(pointLimit >= tempPoint)
 		{
+			std::stringstream c(currentCase);
+			c >> tempRanged >> tempMelee >> tempBlock >> tempDash >> tempSwing >> tempShot;
 
-			population[j].genePushBack(randval(*geneIterator));
+			fileOut << "Current Case \n" << tempPoint << "\n" << tempRanged << "\n" << tempMelee << "\n" 
+			<< tempBlock << "\n" << tempDash << "\n" << tempSwing << "\n" << tempShot << "\n";
+	/*Con::printf("Current Case");
+	Con::printf("Point %d", tempPoint);
+	Con::printf("Ranged %f",tempRanged);
+	Con::printf("Melee %f",tempMelee);
+	Con::printf("Block %f",tempBlock);
+	Con::printf("Dash %f",tempDash);
+	Con::printf("Swing %f",tempSwing);
+	Con::printf("Shot %f",tempShot);*/
 
-		}*/
-		int currentTool = 0;
-		fileOut<< "Gene " << chromosomeNum << " ---> ";
-		for(geneIterator = population[chromosomeNum].getGene()->begin(); 
-			geneIterator != population[chromosomeNum].getGene()->end(); ++geneIterator)
-		{
-			++currentTool;
-
-			points += *geneIterator * WEIGHTS[currentTool%NTOOLS];
-			fileOut<< *geneIterator << " ";
-
-		}
-		//if(points <= pointLimit)
-			++chromosomeNum;
-
+	if(tempShot == 0 && tempSwing == 0)
+	{
+	tempDPShot = 0;
+	tempDPSwing = 0;
+	}
+	else
+	{
+	tempDPShot = tempShot/(tempShot + tempSwing);
+	tempDPSwing = tempSwing/(tempShot + tempSwing);
 	}
 
-	previousRoom.close ( );
-	pastCases.close();
-	fileOut.close();
+	difference = euclideanDifference(tempRanged, tempMelee, tempBlock, tempDash, tempDPSwing, tempDPShot);
 
-	return;
+	fileOut<< "Difference:" << difference << "\n";
+	Con::printf("diff: %f", difference);
+
+	if(difference < .75 )
+	{
+		population.push_back(genotype);
+		//Con::printf("Inside \n");
+		//fileOut<< "Inside" << endl;
+		std::getline(c, currentCase);
+		//string delimiter = " ";
+		//size_t pos = 0;
+		//string token = "";
+		//fileOut<< currentCase << endl;
+		currentCase = currentCase.erase(0,7);
+		//fileOut<< currentCase << endl;
+		while ((pos = currentCase.find(' ',0)) != string::npos) 
+		{
+			//Con::printf("Pos %d \n", pos);
+			//fileOut << "Pos " << pos << endl;
+			//fileOut << "substr " << currentCase.substr(0, pos) << endl;
+			token = currentCase.substr(0, pos);
+			//Con::printf("Token %s \n", token.c_str());
+			//fileOut << "Token " << token << endl;
+			//fileOut << "Token atoi " << atoi(token.c_str()) << endl;
+			population[chromosomeNum].genePushBack(std::atoi(token.c_str()));
+			//Con::printf("Token %d \n", std::atoi(token.c_str()));
+			currentCase.erase(0, pos + 1);
+			//Con::printf("Case %s \n", currentCase.c_str());
+		}
+		population[chromosomeNum].genePushBack(std::atoi(currentCase.c_str()));
+		//Con::printf("Case after while %s \n", currentCase.c_str());
+
+		/*while (!previousRoom.eof() && pastCases.peek() != '\n')
+		{
+		pastCases >> current;
+		fileOut << current << " ";
+		population[chromosomeNum].genePushBack(current);
+		}
+		fileOut<< "\n";*/
+		++chromosomeNum;
+	}
+}
+}
+
+pastCases.close();
+
+while(chromosomeNum < POPSIZE)
+{
+population.push_back(genotype);
+//double points = 0;
+population[chromosomeNum].setGene(*population[0].getGene());
+
+/*for(geneIterator = population[0].getGene()->rbegin(); geneIterator != population[0].getGene()->rend(); ++geneIterator)
+{
+
+population[j].genePushBack(randval(*geneIterator));
+
+}*/
+++chromosomeNum;
+
+}
+
+vector<int>::iterator geneIterator;
+chromosomeNum = 0;
+while(chromosomeNum < POPSIZE)
+{
+//int currentTool = 0;
+fileOut<< "Gene " << chromosomeNum << " ---> ";
+for(geneIterator = population[chromosomeNum].getGene()->begin(); 
+geneIterator != population[chromosomeNum].getGene()->end(); ++geneIterator)
+{
+//++currentTool;
+
+//points += *geneIterator * WEIGHTS[currentTool%NTOOLS];
+fileOut<< *geneIterator << " ";
+
+}
+++chromosomeNum;
+fileOut<< endl;
+}
+
+previousRoom.close ( );
+fileOut.close();
+
+return;
 }
 
 void GeneticAlgorithm::sortPopulation ( )
@@ -405,9 +473,9 @@ void GeneticAlgorithm::mutate ( )
 	int first;
 	double x;
 	vector<int>::iterator geneIterator;
+	int currentPopulation = population.size();
 
-
-	for (int i = 0; i < population.size(); i++ )
+	for (int i = 0; i < currentPopulation; i++ )
 	{
 		transfer = 0;
 		Genotype g;
@@ -444,11 +512,13 @@ void GeneticAlgorithm::mutate ( )
 						++g.getGene()->at(first);
 						++*geneIterator;
 					}
+					first = 0;
 				}
 			}
 		}
 
-		verifyAndPush(g);
+		if(transfer > 1)
+			verifyAndPush(g);
 
 	}
 
@@ -594,7 +664,7 @@ void GeneticAlgorithm::verifyAndPush( Genotype g )
 			++currentTool;
 			
 			//On blob count
-			if(currentTool%NTOOLS < 6)
+			if(currentTool%NTOOLS > 0)
 			{
 				if(*geneIterator > 0)
 				{
@@ -613,7 +683,8 @@ void GeneticAlgorithm::verifyAndPush( Genotype g )
 				if(*geneIterator < blobRec)
 					*geneIterator = blobRec;
 
-				points += (--toolTypes) * 2;
+				if(toolTypes > 0)
+					points += (--toolTypes) * 2;
 				
 				blobRec = 1;
 				toolTypes = 0;
@@ -625,7 +696,8 @@ void GeneticAlgorithm::verifyAndPush( Genotype g )
 
 		}
 
-	//Con::printf("%d mutate" ,pointLimit);
+	Con::printf("%f / %f mutate" , points, pointLimit);
+
 
 	if(points <= pointLimit)
 		population.push_back(g);
@@ -648,7 +720,8 @@ void GeneticAlgorithm::Xover ( int a, int b )
 	//			A	  B
 	//point -- [XXX[P)XX)
 	//
-	if((pointLimit - 5) % 10 == 0 && generation == 0)
+	int p = pointLimit;
+	if((p - 5) % 10 == 0 && generation == 0)
 		for(int i = 0; i < NTOOLS; i++)
 		{
 			population[a].getGene()->insert(population[a].getGene()->end(), 0);

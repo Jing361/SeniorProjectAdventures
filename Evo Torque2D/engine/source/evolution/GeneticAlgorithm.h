@@ -7,9 +7,11 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <sstream>
 #include <cmath>
 #include <ctime>
 #include <cstring>
+#include <string>
 #include <list>
 #include <iterator>
 #include <math.h>
@@ -50,7 +52,7 @@ namespace Evolution {
 
 		int generation;
 
-		int pointLimit;
+		double pointLimit;
 		double rangedPercent;
 		double meleePercent;
 		double blockPercent;
